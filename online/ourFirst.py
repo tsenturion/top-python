@@ -242,7 +242,7 @@ for i in range(5):
         break
 
 str1 = '123'"""
-print('frffr', 'ererferfer', 'erfr')
+'''print('frffr', 'ererferfer', 'erfr')
 print()
 print()
 print('frffr', 'ererferfer', 'erfr', sep='0123')
@@ -252,4 +252,6 @@ print('frffr', 'ererferfer', 'erfr', sep='??')
 print('frffr', 'ererferfer', 'erfr', end='\n')
 print('frffr', 'ererferfer', 'erfr', end='\t')
 print('frffr', 'ererferfer', 'erfr', end=' ')
-print('frffr', 'ererferfer', 'erfr', end='??')
+print('frffr', 'ererferfer', 'erfr', end='??')'''
+
+
