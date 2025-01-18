@@ -253,5 +253,14 @@ print('frffr', 'ererferfer', 'erfr', end='\n')
 print('frffr', 'ererferfer', 'erfr', end='\t')
 print('frffr', 'ererferfer', 'erfr', end=' ')
 print('frffr', 'ererferfer', 'erfr', end='??')'''
+keyboard_input = input(int('Введите число от 1 до 100: ')
+try:
+    number = int(keyboard_input)
 
-
+if number % 3 == 0 and number % 5 == 0:
+        print("Fizz Buzz")
+elif number % 3 == 0:
+    print("Fizz")
+elif number % 5 == 0:
+    print("Buzz")
+else: print(number)

@@ -20,14 +20,13 @@ for sentence in split_sentences:
     count +=1
 print(f'Количество предложений: {count}')'''
 # Задание 4
-keyboard_input = input(int('Введите число от 1 до 100: ')
-if keyboard_input / 3:
+keyboard_input = input('Введите число от 1 до 100: ')
+try:
+    number = int(keyboard_input):
+if number % 3 == 0 and number % 5 == 0:
+        print("Fizz Buzz")
+elif number % 3 == 0:
     print("Fizz")
-elif keyboard_input / 5:
+elif number % 5 == 0:
     print("Buzz")
-elif  keyboard_input / 5 and keyboard_input / 3:
-    print("Fizz Buzz")
-    else: keyboard_input =/ 5 and keyboard_input =/ 3:
-    print("keyboard_input")
-
-keyboard_input = input(int('Введите число от 1 до 100: ')
+else: print(number)
