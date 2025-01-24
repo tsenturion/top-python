@@ -9,3 +9,4 @@ for i in text:
 print(sentences.__str__() + " предложений")
 
 
+
