@@ -4,4 +4,3 @@ print(f'В тексте "{text}"')
 print(text.count('.', 0, len(text)), "предложений")
 
 
-
