@@ -5,3 +5,4 @@ print(text.count('.', 0, len(text)), "предложений")
 
 
 
+
