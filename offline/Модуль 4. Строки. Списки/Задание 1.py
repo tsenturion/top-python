@@ -4,7 +4,6 @@ from re import findall
 arithmetic_expression = "23+12"
 result = 0
 
-
 numbers = findall(r'\d+', arithmetic_expression)
 number1 = int(numbers[0])
 number2 = int(numbers[1])
