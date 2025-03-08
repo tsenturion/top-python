@@ -15,6 +15,7 @@ from functools import reduce
 
 from fontTools.misc.cython import returns
 
+from offline.strs import sorted1
 from offline.tuple import result
 
 """qwd

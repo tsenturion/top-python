@@ -1,3 +1,6 @@
+"""1 -> 2 -> 3 -> 4 -> None
+4 <-> 5 <-> 6 -> None"""
+
 """
 сделать двусвязный
 """
@@ -105,7 +108,7 @@ class LinkedList:
             raise IndexError("Index out of range")
 
     def __str__(self):
-        return " -> ".join(str(item) for item in self) + " -> None"
+        return " <-> ".join(str(item) for item in self) + " -> None"
 
     def __len__(self):
         return sum(1 for _ in self)
@@ -141,8 +144,145 @@ class LinkedList:
     def __bool__(self):
         return self.head is not None
 
+    def bubble_sort(self):
+        if not self.head or not self.head.next:
+            return
+
+        swapped = True
+        while swapped:
+            swapped = False
+            current = self.head
+            while current.next:
+                if current.data > current.next.data:
+                    current.data, current.next.data = current.next.data, current.data
+                    swapped = True
+                current = current.next
+
+    def insertion_sort(self):
+        if not self.head or not self.head.next:
+            return
+
+        sorted_head = None
+        current = self.head
+
+        while current:
+            next_node = current.next
+            if not sorted_head or sorted_head.data >= current.data:
+                current.next = sorted_head
+                if sorted_head:
+                    sorted_head.prev = current
+                sorted_head = current
+                sorted_head.prev = None
+            else:
+                temp = sorted_head
+                while temp.next and temp.next.data < current.data:
+                    temp = temp.next
+                current.next = temp.next
+                if temp.next:
+                    temp.next.prev = current
+                temp.next = current
+                current.prev = temp
+
+            current = next_node
+
+        self.head = sorted_head
+        self.tail = sorted_head
+        while self.tail and self.tail.next:
+            self.tail = self.tail.next
+
+    def merge_sort(self):
+        if not self.head or not self.head.next:
+            return
+
+        def split(head):
+            if not head or not head.next:
+                return head, None
+            slow, fast = head, head
+            while fast.next and fast.next.next:
+                slow = slow.next
+                fast = fast.next.next
+
+            middle = slow
+            second_half = middle.next
+            middle.next = None
+
+            if second_half:
+                second_half.prev = None
+
+            return head, second_half
+
+        def merge(left, right):
+            if not left: return right
+            if not right: return left
+            dummy = Node(0)
+            current = dummy
+
+            while left and right:
+                if left.data < right.data:
+                    current.next, left.prev, left = left, current, left.next
+                else:
+                    current.next, right.prev, right = right, current, right.next
+                current = current.next
+
+                if left:
+                    current.next, left.prev = left, current
+                elif right:
+                    current.next, right.prev = right, current
+
+                head = dummy.next
+                head.prev = None
+                return head
+
+        def merge_sort_recursive(node):
+            if not node or not node.next:
+                return node
+            left, right = split(node)
+            left = merge_sort_recursive(left)
+            right = merge_sort_recursive(right)
+
+            return merge(left, right)
+
+        self.head = merge_sort_recursive(self.head)
+
+        current = self.head
+        while current.next:
+            current = current.next
+        self.tail = current
+
+
+    def binary_search(self, target):
+        if not self.head:
+            return None
+
+        length = len(self)
+        left = self.head
+        right = self.tail
+
+        while left != right:
+            mid = left
+            steps = (length // 2) - 1
+            for _ in range(steps):
+                mid = mid.next
+
+            if mid.data == target:
+                return mid
+            elif mid.data < target:
+                left = mid.next
+            else:
+                right = mid.prev
+
+            length = length // 2
+
+        return None
 
 ll1 = LinkedList()
+ll1.add_to_tail(30)
+ll1.add_to_tail(20)
+ll1.add_to_tail(10)
+ll1.merge_sort()
+print(ll1)
+
+"""ll1 = LinkedList()
 ll1.add_to_tail(10)
 ll1.add_to_tail(20)
 ll1.add_to_tail(30)
@@ -169,4 +309,4 @@ print("Список 1 пуст?", not ll1)
 
 ll1.clear()
 print("Список 1 после очистки:", ll1)
-print("Список 1 пуст?", not ll1)
+print("Список 1 пуст?", not ll1)"""

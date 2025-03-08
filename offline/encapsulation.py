@@ -9,8 +9,9 @@ class BankAccount:
 
     def print_bal(self):
         print(self.__balance)
+
+
 MyAcc = BankAccount('matvey')
 MyAcc.income(1)
 MyAcc.print_bal()
-
 # сделать длину MClass приватной

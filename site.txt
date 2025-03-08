@@ -5,10 +5,7 @@ power shell
 https://github.com/tsenturion/top-python
 
 https://code-basics.com/ru/languages/python
-все
-
 pythontutor.ru
-кроме 10 и 11
 
 https://leetcode.com/studyplan/
 

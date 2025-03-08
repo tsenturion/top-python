@@ -2,6 +2,8 @@
 print(pow(2, 3))
 from math import pow
 """
+import time
+from typing import final
 
 """print(1, 2, 3, 4, '123' + '123', 5 % 2, 5 // 2, 2 ** 3)
 number = input()  # ввод str с консоли
@@ -770,7 +772,6 @@ def make_multiplier(factor):
 
 multiply_by_2 = make_multiplier(2)
 print(multiply_by_2(5))
-# ----------------------------------------------------------------
 
 
 def outer():
@@ -910,7 +911,7 @@ print_info(name='alice', age=30, job='student')"""
         print(f"{key}: {value}")
 
 display_info('alice', 25, 'student', location='new york', houbbies='programming')"""
-
+"""
 def greet(greeting, *names, **options):
     print(greeting)
     for name in names:
@@ -923,3 +924,757 @@ def greet(greeting, *names, **options):
 greet('доброе утро', 'alice', 'bob', punctuatioin='!!!')
 
 
+fruits = ('1', '2', '3', '4', '5', '5')
+fruit_name = input()
+print(fruits.count(fruit_name))
+# ----------------------------------------------------------------
+print(sum(fruit_name in fruit for fruit in fruits))
+# ----------------------------------------------------------------
+car_brands = ('123', '1234', '12345')
+brand_to_replace = input()
+replacement_word = input()
+new_car_brands = tuple(replacement_word if brand == brand_to_replace else brand for brand in car_brands)
+# result = tuple(map(lambda x : to_replace if x == title else x, data))
+print(new_car_brands)
+
+
+# ----------------------------------------------------------------
+dictionary = {}
+
+def add_word():
+    eng = input()
+    fch = input()
+    dictionary[eng] = fch
+
+def del_word():
+    eng = input()
+    if eng in dictionary:
+        del dictionary[eng]
+    else:
+        raise Exception('')
+
+def find_word():
+    eng = input()
+    if eng in dictionary:
+        print(eng, dictionary[eng])
+    else:
+        print(None)
+
+def update_word():
+    eng = input()
+    if eng in dictionary:
+        fch = input()
+        dictionary[eng] = fch
+    else:
+        print(None)
+
+# ----------------------------------------------------------------
+employees = {}
+
+def add_employee():
+    name = input()
+    phone = input()
+    email = input()
+    position = input()
+    office = input()
+    skype = input()
+
+    employees[name] = {
+        "Телефон": phone,
+        "Email": email,
+        'Должность': position,
+        "Кабинет": office,
+        'Skype': skype
+    }
+
+def del_emp():
+    name = input()
+    if name in employees:
+        del employees[name]
+    else:
+        raise Exception("")
+
+def find_emp():
+    name = input()
+    if name in employees:
+        for key, value in employees[name].items():
+            print(f"{key}, {value}")
+    else:
+        print(None)
+
+def update_emp():
+    name = input()
+    if name in employees:
+        phone = input()
+        email = input()
+        position = input()
+        office = input()
+        skype = input()
+
+        employees[name] = {
+            "Телефон": phone,
+            "Email": email,
+            'Должность': position,
+            "Кабинет": office,
+            'Skype': skype
+        }
+    else:
+        raise Exception("")
+
+# ----------------------------------------------------------------
+
+book_collectioin = {}
+
+def add_book():
+    author = input()
+    title = input()
+    genre = input()
+    year = input()
+    pages = input()
+    publisher = input()
+
+    book_collectioin[title] = {
+        "Автор": author,
+        'Жанр': genre,
+        "Год выпуска": year,
+        "Количество страниц": pages,
+        "Издательство": publisher
+    }"""
+"""class Person:
+
+    health = 100
+
+    @classmethod
+    def print_health(cls):
+        print(cls.health)
+
+    def __init__(self, name, age, is_student=False):
+        self.name = name
+        self.age = age
+        self.is_student = is_student
+        self.__gender = None
+
+    def invert_is_student(self):
+        self.is_student = not self.is_student
+
+    @staticmethod
+    def to_learn():
+        print('im learning')
+
+Matvey = Person('name', 18, is_student=True)
+Matvey2 = Person('name', 18)
+Matvey2 = Person('name', 18)
+print(Matvey.is_student)
+Matvey.invert_is_student()
+print(Matvey.is_student)
+Matvey.to_learn()
+
+Person.print_health()
+print(Person.health)"""
+"""
+class A:
+    @classmethod
+    def df(cls):
+        print(1)
+    pass
+
+class B(A):
+    @classmethod
+    def df(cls):
+        print(1)
+    pass
+
+class C1(B):
+    pass
+
+class C2(B):
+    @classmethod
+    def df(cls):
+        print(1)
+
+class D(C1, C2):
+    pass
+
+
+D.df()
+print(D.mro())"""
+
+"""
+адание 1 Реализуйте класс «Человек». Необходимо хранить в поляхкласса:ФИО,датурождения,контактныйтелефон, город, 
+страну,домашнийадрес.Реализуйтеметодыкласса для ввода данных, вывода данных, реализуйте доступ к отдельным полям
+ через методы класса."""
+"""
+class Person:
+    def __init__(self, name=None, date=None, phone=None, town=None, country=None, address=None):
+        self.__name = name
+        self.__date = date
+        self.__phone = phone
+        self.__town = town
+        self.__country = country
+        self.__address = address
+
+    def inp(self):
+        self.__name = input()
+        self.__date = input()
+        self.__phone = input()
+        self.__town = input()
+        self.__country = input()
+        self.__address = input()
+
+    def prnt(self):
+        print(self.__name, self.__date, self.__phone, self.__town, self.__country, self.__address)
+        
+    def get_name(self):
+        return self.__name"""
+
+"""class A:
+    def __init__(self, first, second):
+        self.first = first
+        self.second = second
+    def print_first(self):
+        print(self.first)
+
+class B(A):
+    def __init__(self, first, second, third):
+        super().__init__(first, second)
+        self.third = third
+
+    def bprint(self):
+        super().print_first()
+        """
+#super(класс, объект)
+"""
+class A:
+    def method(self):
+        print('А')
+
+    def greet(self):
+        return "привет из A"
+
+    def greet2(self):
+        return "привет из A"
+
+class B(A):
+    def method(self):
+        print("B")
+        super(B, self).method()
+
+    def greet(self):
+        return super().greet() + "и привет из B"
+
+    def greet2(self):
+        return super().greet()
+b = B()
+b.method()
+
+
+class LoggingMixin:
+    def log(self, message):
+        print(f"лог: {message}")
+
+class DataProcessor(LoggingMixin):
+    def process(self, data):
+        self.log("обработка данных")
+        return data.upper()
+
+processor = DataProcessor()
+print(processor.process("hello"))"""
+
+"""Задание 3 Создать базовыйкласс«Домашнееживотное»ипро изводныеклассы
+«Собака»,«Кошка»,«Попугай»,«Хомяк». 
+Спомощью конструктора установить имя каждого жи вотного и его характеристики. 
+Реализуйте для каждого из классов методы: 
+■ Sound — издает звук животного (пишем текстом в консоль); 
+■ Show — отображает имя животного; 
+■ Type — отображает название его подвида;"""
+"""
+from abc import ABC, abstractmethod
+
+class HomeAnimal(ABC):
+    @abstractmethod
+    def __init__(self, name, species):
+        self.name = name
+        self.species = species
+
+    @abstractmethod
+    def sound(self):
+        raise NotImplementedError
+
+    def show(self):
+        print(f"имя: {self.name}")
+
+    def type(self):
+        print(f"Вид: {self.species}")
+
+class Cat(HomeAnimal):
+    def __init__(self, name):
+        super().__init__(name, 'Cat')
+
+    def sound(self):
+        print('Cat')
+
+class Dog(HomeAnimal):
+    def __init__(self, name):
+        super().__init__(name, 'Dog')
+
+    def sound(self):
+        print('Dog')
+
+class Parrot(HomeAnimal):
+    def __init__(self, name):
+        super().__init__(name, 'Parrot')
+
+    def sound(self):
+        print('Parrot')
+
+class Hamster(HomeAnimal):
+    def __init__(self, name):
+        super().__init__(name, 'Hamster')
+
+    def sound(self):
+        print('Hamster')
+
+class A:
+    def __init__(self):
+        self.__hidden = 'secret'
+
+    def get_hidden(self):
+        return self.__hidden
+
+a = A()
+print(a._A__hidden)
+
+class B(A):
+    def reveal(self):
+        return self._A__hidden
+
+b = B()
+print(b.reveal())
+
+class C(A):
+    def __init__(self):
+        super().__init__()
+        self.__hidden = 'child secret'
+
+c = C()
+print(c._C__hidden)
+print(c._A__hidden)"""
+"""
+class Parent:
+    @final
+    def show(self):
+        print('родительский')
+
+    def __init_subclass__(cls, **kwargs):
+        if 'show' in cls.__dict__:
+            raise TypeError("нельзя переопределить show")
+        super().__init_subclass__(**kwargs)
+
+
+class Child(Parent):
+    def show(self):
+        super().show()
+        print('дочерний')
+
+print(Child.mro())
+
+c = Child()
+c.show()
+"""
+"""
+print(type(object))
+print(type(type))
+
+MyClass = type("MyClass", (object,), {'attr': 42})
+
+obj = MyClass()
+print(obj.attr)
+
+
+class MyMeta(type):
+    def __new__(cls, name, bases, dct):
+        print(f"создаем {name}")
+        dct['new_attr'] = 100
+        return super().__new__(cls, name, bases, dct)
+
+class MyClass(metaclass=MyMeta):
+    new_attr = None
+
+print(MyClass.new_attr)
+
+class Base:
+    def __init_subclass__(cls, **kwargs):
+        if "forbidden" in cls.__name__.lower():
+            raise TypeError("нельзя наследовать")
+        super().__init_subclass__(**kwargs)
+
+class ForbiddenClass(Base):
+    pass
+
+
+class AutoMethodsMeta(type):
+    def __new__(cls, name, bases, dct):
+        dct['greet'] = lambda self: print(f"hello from {name}")
+        return super().__new__(cls, name, bases, dct)
+
+class MyClass(metaclass=AutoMethodsMeta):
+    def greet(self):
+        pass
+
+obj = MyClass()
+obj.greet()"""
+
+
+"""class Point:
+    def __init__(self, x=None, y=None):
+        self._x = x
+        self._y = y
+
+    def point_print(self):
+        print(f'Point x={self._x}, y={self._y}')
+
+    def __str__(self):
+        return f'Point x={self._x}, y={self._y}'
+
+a = Point(1, 2)
+a.point_print()
+str_result = str(a)
+print(str_result)
+print(str(a))
+
+class Number:
+    def __init__(self, value):
+        if not isinstance(value, (int, float)):
+            raise TypeError("NaN")
+        self.value = value"""
+# ----------------------------------------------------------------
+
+"""from time import *
+
+current_time = time()
+print(current_time)
+
+local_time = localtime()
+print(local_time)
+
+utc_time = gmtime()
+print(utc_time)
+
+time_tuple = (2023, 10, 10, 14, 30, 0, 0, 0, 0)
+seconds = mktime(time_tuple)
+print(seconds)
+
+formatted_time = strftime("%Y-%m-%d %H:%M:%S", tuple(localtime()))
+print(formatted_time)
+
+time_string = "2025-03-01 12:37:17"
+time_struct = strptime(time_string ,"%Y-%m-%d %H:%M:%S")
+print(time_struct)"""
+
+#sleep(1)
+# ----------------------------------------------------------------
+#kiss
+"""def add(a, b):
+    return a + b
+
+result = add(5, 6)
+
+result = 5 + 6
+
+x = 10
+y = x >> 1
+y = x // 2"""
+# ----------------------------------------------------------------
+#dry
+"""
+print("enter")
+name = input("имя")
+print(f"привет, {name}")
+
+print("enter")
+surname = input("имя")
+print(f"привет, {surname}")
+
+def greet_user():
+    print("enter")
+    name = input("имя")
+    print(f"привет, {name}")
+
+greet_user()
+greet_user()
+
+class Dog:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        return f"{self.name} гав"
+
+class Cat:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        return f"{self.name} мяу"
+
+
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        raise NotImplemented
+
+
+class Dog(Animal):
+    def speak(self):
+        return f"{self.name} гав"
+
+class Cat(Animal):
+    def speak(self):
+        return f"{self.name} мяу"
+"""
+# ----------------------------------------------------------------
+#yagni
+
+"""class Calculator:
+    def __init__(self):
+        pass
+
+    def add(self, a, b):
+        pass
+
+    def subtract(self, a, b):
+        pass # не используется
+
+    def multiply(self, a, b):
+        pass # не используется
+
+
+class Calculator2:
+    def __init__(self):
+        pass
+
+    def add(self, a, b):
+        pass
+
+class BaseUser:
+    def __init__(self, name):
+        self.name = name
+
+    def get_name(self):
+        return  self.name
+
+class AdminUser(BaseUser):
+    def __init__(self, name, permissions):
+        super().__init__(name)
+        self.permissions = permissions
+
+class RegularUser(BaseUser):
+    def __init__(self, name):
+        super().__init__(name)
+
+
+class User:
+    def __init__(self, name):
+        self.name = name"""
+
+# ----------------------------------------------------------------
+#slap
+"""
+def process_user():
+    name = input("введите имя")
+    if not name.strip():
+        print("ошибка - пустое")
+        return
+    print(f"привет, {name}")
+
+def get_user_input():
+    return input("введите имя")
+
+def validate_name(name):
+    return bool(name.strip())
+
+def greet_user(name):
+    print(f"привет, {name}")
+
+def process_user():
+    name = get_user_input()
+    if not validate_name(name):
+        print("ошибка - пустое")
+        return
+    greet_user(name)
+
+
+class DataProcessor:
+    def process_data(self, filename):
+        with open(filename, "r") as file:
+            data = file.read()
+
+        processed_data = data.upper()
+
+        with open("output.txt", "w") as file:
+            file.write(processed_data)
+
+
+class DataProcessor2:
+    def read_file(self, filename):
+        with open(filename, "r") as file:
+            data = file.read()
+
+    def process_data(self, data):
+        processed_data = data.upper()
+
+    def save_file(self, filename, data):
+        with open(filename, "w") as file:
+            file.write(data)
+
+    def run(self, input_file, output_file):
+        data = self.read_file(input_file)
+        processed_data = self.process_data(data)
+        self.save_file(output_file, processed_data)"""
+# ----------------------------------------------------------------
+#solid
+#s - srp
+
+class Report:
+    def __init__(self, data):
+        self.data = data
+
+    def calculate_statistics(self):
+        return sum(self.data) / len (self.data)
+
+    def save_to_file(self, filename):
+        with open(filename, "w") as file:
+            file.write(str(self.data))
+
+class Statistics:
+    def __init__(self, data):
+        self.data = data
+
+    def calculate_average(self):
+        return sum(self.data) / len (self.data)
+
+
+class FileManager:
+    def save_to_file(selfself, filename, data):
+        with open(filename, "w") as file:
+            file.write(str(data))
+
+#o - ocp
+
+class Discount:
+    def __init__(self, price):
+        self.price = price
+
+    def get_discounted_price(self, customer_type):
+        if customer_type == "VIP":
+            return self.price * 0.8
+        elif customer_type == "Regular":
+            return self.price * 0.9
+        else:
+            return self.price
+
+
+class Discount:
+    def __init__(self, price):
+        self.price = price
+
+    def get_discounted_price(self):
+            return self.price
+
+class VIPDiscount(Discount):
+    def get_discounted_price(self):
+        return self.price * 0.8
+
+class RegularDiscount(Discount):
+    def get_discounted_price(self):
+        return self.price * 0.9
+
+#l - lsp
+
+class Bird:
+    def fly(self):
+        print("птица летит")
+
+class Penguin(Bird):
+    def fly(self):
+        return Exception("пингвины не летают")
+
+class Bird:
+    pass
+
+class FlyingBird:
+    def fly(self):
+        print("птица летит")
+
+class Penguin(Bird):
+    def swim(self):
+        return Exception("пингвин плавает")
+
+#i - isp
+
+class Worker:
+    def work(self):
+        pass
+    def eat(self):
+        pass
+
+
+class Workable:
+    def work(self):
+        pass
+
+class Eatable:
+    def work(self):
+        pass
+
+class Human(Workable, Eatable):
+    def work(self):
+        print("Человек работает")
+
+    def eat(self):
+        print("Человек ест")
+
+
+class Robot(Workable):
+    def work(self):
+        print("Робот работает")
+
+
+#d - dip
+
+class MySQLDatabse:
+    def connect(self):
+        print("подключение..")
+
+class Application:
+    def __init__(self):
+        self.database = MySQLDatabse()
+
+    def run(self):
+        self.database.connect()
+
+class Database:
+    def connect(self):
+        pass
+
+class MySQLDatabse(Database):
+    def connect(self):
+        print("подключение к MySQL")
+
+class PostgreSQLDatabase(Database):
+    def connect(self):
+        print("подключение к PostgreSQL")
+
+
+class Application:
+    def __init__(self, database: Database):
+        self.database = database
+
+    def run(self):
+        self.database.connect()
+
+db = PostgreSQLDatabase()
+app = Application(db)
+app.run()

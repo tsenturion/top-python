@@ -3,6 +3,11 @@ from abc import ABC, abstractmethod
 # в другом файле импортировать его и реализовать в наследнике
 class Animal(ABC):
     info = 'animal'
+
+    @abstractmethod
+    def __init__(self):
+        pass
+
     @abstractmethod
     def make_voice(self):
         pass
@@ -12,8 +17,6 @@ class Animal(ABC):
         pass
 
 class MClass(ABC):
-
-
     @classmethod
     @abstractmethod
     def add(cls):

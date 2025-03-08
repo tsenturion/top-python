@@ -23,8 +23,7 @@ class CoordinateDescriptor:
         self.name = name
 
 
-@total_ordering
-@dataclass
+
 class Point(CoordinateDescriptor):
     x = CoordinateDescriptor()
     y = CoordinateDescriptor()
@@ -43,15 +42,15 @@ class Point(CoordinateDescriptor):
             return False
         return Point(self._x + other._x, self._y + other._y)
 
-    def __eq__(self, other):
-        if not isinstance(other, Point):
-            return False
-        return self._x == other._x and self._y == other._y
-
     def __sub__(self, other):
         if not isinstance(other, Point):
             return False
         return Point(self._x - other._x, self._y - other._y)
+
+    def __eq__(self, other):
+        if not isinstance(other, Point):
+            return False
+        return self._x == other._x and self._y == other._y
 
     def __mul__(self, scalar):
         if not isinstance(scalar, (int, float)):
@@ -93,4 +92,6 @@ p2 = Point(1, 2)
 p1 += p2
 print(p1)
 print(p1 == Point(6, 10))
+print(p1[0])
+print(p1[1])
 p3 = Point()

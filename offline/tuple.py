@@ -1,12 +1,13 @@
 tuple1 = tuple([1, 2, 3, 4]) # приводит к неизменияемому типу данных
 print(tuple1)
-"""tup = (1, 2, 4, '123')
+tup = (1, 2, 4, '123')
+zero_tuple = tuple()
+zero_tuple = ()
 print(tup)
 print(type(tup).__name__)
 tup2 = ([], 1, 2, 4, '123')
 print(tup)
 tup2[0].append(1)
-
 print(tup * 2)
 
 print(tup[1:3])
@@ -15,9 +16,8 @@ print(tup + tup2)
 print(2 in tup)
 print(len(tup))
 for i in tup:
-    print(i)"""
+    print(i)
 from dict import value
-
 """to_search = input()
 data = ("banana", "apple", "bananamango", "mango", "strawberry-banana")
 amount = 0
