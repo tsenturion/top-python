@@ -1,13 +1,17 @@
 someStr = '123z121saf253'
-length1 = len([1, 2, 3])
-length2 = len(someStr)
 
 sorted1 = sorted(someStr)
 print(sorted1)
-print(''.join(sorted1))
-msg = ' 3 4 456  456456    6 5'
+
+list1 = ''.join(sorted1)
+print(list1)
+
+
+msg = ' 3 4 456  456456    6     5'
 print(msg.split())
 print(msg.strip())
+msg.replace('456', '')
+print(msg)
 """# 0x00 - 0
 someStr.replace()
 
@@ -31,6 +35,7 @@ msg.upper() # все в верхний регистр
 msg = 'все заглавные'
 
 print(msg.upper())
+msg = 'ВСЕ ЗАГЛАВНЫЕ'
 msg.lower()  # все в нижний регистр
 print(msg.upper().lower())
 
@@ -40,7 +45,7 @@ print(new_msg)
 msg = 'rt  rttt rttrrtrt куаукаук уккуак укукаку'
 
 print(msg.title()) # первые буквы слов в верхний регистр
-
+msg = 'Rt  Rttt Rttrrtrt Куаукаук Уккуак Укукаку'
 print(msg.swapcase()) # меняет в обе стороны
 
 print(msg.count('r', 5, 10))

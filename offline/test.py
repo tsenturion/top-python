@@ -1,39 +1,17 @@
-class Worker:
-    def work(self):
-        print("Человек работает")
+N = int(input())
+keys = [int(input()) for _ in range(N)]
+visited = [False] * (N + 1)
+count = 0
 
+for i in range(1, N + 1):
+    if not visited[i]:
+        cycle = []
+        current = i
+        while not visited[current]:
+            visited[current] = True
+            cycle.append(current)
+            current = keys[current - 1]
+        if current in cycle:
+            count += 1
 
-class RobotWorker:
-    def work(self):
-        print("Робот работает")
-
-
-class WorkerService:
-    def __init__(self, worker: Worker):
-        self.worker = worker
-
-    def manage(self):
-        self.worker.work()
-
-#d
-from abc import ABC, abstractmethod
-
-class IWorkable(ABC):
-    @abstractmethod
-    def work(self):
-        pass
-
-class Worker(IWorkable):
-    def work(self):
-        print("Человек работает")
-
-class RobotWorker(IWorkable):
-    def work(self):
-        print("Робот работает")
-
-class WorkerService:
-    def __init__(self, worker: IWorkable):
-        self.worker = worker
-
-    def manage(self):
-        self.worker.work()
+print(count)
