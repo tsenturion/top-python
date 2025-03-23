@@ -108,6 +108,3 @@ else:
 
 total = price * rat
 print(f'Разговор будет стоить {total}')"""
-
-
-
