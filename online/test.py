@@ -95,13 +95,13 @@ print("1. Оператор 1")
 print("2. Опертаор 2")
 print("3. Оператор 3")
 
-operat = int(input("Введите номер выбранного оператора:"))
+operator = int(input("Введите номер выбранного оператора:"))
 
-if operat == 1:
+if operator == 1:
     rat = 2.0
-elif operat == 2:
+elif operator == 2:
     rat = 4.0
-elif operat == 3:
+elif operator == 3:
     rat = 6.0
 else:
     print("Оператор был выбран неверно!")
