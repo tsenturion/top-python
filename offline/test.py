@@ -1,20 +1,20 @@
-import socket
+import requests
 
-"""s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect(("google.com", 80))
-s.send(b"GET / HTTP/1.1\r\nHost: google.com\r\n\r\n")
-respone = s.recv(4096)
-print(respone.decode())
-s.close()
-"""
-hostname = socket.gethostname()
-local_ip = socket.gethostbyname(hostname)
-print(local_ip)
+url = "https://api.openweathermap.org/data/2.5/weather"
 
-info = socket.getaddrinfo('localhost', 0)
-for entry in info:
-    print(entry[4][0])
+params = {
+    'q': 'Moscow',
+    'appid': "",
+    'units': 'metric',
+    'lang': 'ru'
+}
 
-import ipaddress
-addr = ipaddress.ip_address('192.168.0.34')
-print(addr.is_private)
+response = requests.get(url, params=params)
+
+if response.status_code == 200:
+    data = response.json()
+
+    print(data['name'], data['main']['temp'], data['weather'][0]['description'])
+
+else:
+    print('ошибка', response.status_code)

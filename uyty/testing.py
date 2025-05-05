@@ -7,12 +7,11 @@ def capitalize(text):
     rest_substring = text[1:]
     return f'{first_char}{rest_substring}'
 
-if capitalize('hello') != 'Hello':
-    raise Exception('test failed')
+assert capitalize('hello') == 'He2llo'
+
+assert capitalize('') == ''
 
 # пустая строка None int
 
-if capitalize('') != '':
-    raise Exception('test failed')
 
 print('test ok')

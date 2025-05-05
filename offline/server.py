@@ -1,25 +1,40 @@
-'''
-клиент узнает ip адрес сервера по имени хоста (DNS)
-сервер выводит ip адрес каждого подключившего клиента
-сообщения передаются по TCP
-логируется ip и порт всех входящих соединений
-socket
-'''
+"""
+добавьте в сообщение клиента уникальный идентификатор, например номер пакета
+сервер записывает, какие пакеты уже видел и не отвечает на повторные
+
+на клиенте
+время отправки и получения - измерять задержку
+ожидает разные ответы - OK / ERROR в зависимости от содержимого
+"""
 
 import socket
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+server_socket.bind(('localhost', 12345))
+processed_ids = set()
+print('запущен и ждет сообщений')
 
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+while True:
+    try:
+        data, client_address = server_socket.recvfrom(1024)
+        message = data.decode()
+        print(f'[{client_address}] => {message}')
 
-server_socket.bind(("0.0.0.0", 9000))
-server_socket.listen(1)
-print('("0.0.0.0", 9000)')
+        message_parts = message.split(':')
+        message_id = message_parts[0]
+        message_content = message_parts[1] if len(message_parts) > 1 else ''
 
-conn, addr = server_socket.accept()
-print(f'ip {addr[0]} порт {addr[1]}')
+        if message_id in processed_ids:
+            print(f"повторное сообщение с ID {message_id}. игнорируем")
+            continue
 
-data = conn.recv(1024)
-print('получено', data.decode())
-conn.send('принято'.encode())
+        processed_ids.add(message_id)
 
-conn.close()
-server_socket.close()
+        if 'ERROR' in message_content:
+            response = "ERROR"
+        else:
+            response = "OK"
+
+        server_socket.sendto(response.encode(), client_address)
+
+    except Exception as e:
+        print(f"ошибка на сервере {e}")
