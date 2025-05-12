@@ -2,7 +2,7 @@ import requests
 
 """url = 'https://httpbin.org/post'
 data = {'username': "alice", 'password': 'secret'}
-#username=alice&password=secret - application/x-www-form-urlencoded
+# username=alice&password=secret - application/x-www-form-urlencoded
 response = requests.post(url, data=data)
 print(response.text)
 
@@ -106,7 +106,7 @@ headers = {
 
 print(response.json()['headers'])"""
 
-url = 'https://reqres.in/api/register'
+"""url = 'https://reqres.in/api/register'
 data = {
     'email': 'evo.holt@reqres.in',
     'password': 'pistol'
@@ -118,3 +118,42 @@ response = requests.post(url, json=data, headers=headers)
 
 print(response.status_code)
 print(response.json())
+"""
+"""
+.post()
+data= - отправка формы
+data = {
+    'email': 'evo.holt@reqres.in',
+    'password': 'pistol'
+}
+resposne = requests.post(url, data=data)
+
+json=
+json_data = {'username': "alice", 'password': 'secret'}
+response = requests.post(url, json=data)
+
+headers= - кастомные заголовки
+Authorization - токен авторизации
+User-Agent - описание клиента
+Content-Type - тип тела запроса
+headers = {
+    'x-api-key': 'reqres-free-v1'
+}
+response = requests.post(url, json=data, headers=headers)
+
+files=
+files = {'file': open('example.txt', 'rb')}
+response = requests.post(url, files=files)
+multipart/form-data
+
+params= - если нужен url с параметрами
+timeout= - защита от зависания
+response.status_code 
+response.json()
+response.text
+try:
+    response.raise_for_status()
+except
+
+idempotency 
+"""

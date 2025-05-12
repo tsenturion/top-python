@@ -11,6 +11,7 @@ import socket
  
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server_socket.bind(("localhost", 12345))
+processed_ids = set()
 print("Сервер запущен. Ожидание сообщений...")
 while True:
     try:
@@ -18,7 +19,22 @@ while True:
         message = data.decode()
         print(f"Получено сообщение от {client_address}: {message}")
 
-        ack = "ACK"
-        server_socket.sendto(ack.encode(), client_address)
+        message_parts = message.split(":")
+        message_id = message_parts[0]
+        message_content = message_parts[1] if len(message_parts) > 1 else ""
+
+        if message_id in processed_ids:
+            print(f"получено повторное сообщение с идентификатором {message_id}. Пропускаем...")
+            continue
+        
+        processed_ids.add(message_id)
+
+        if "ERROR" in message_content:
+            response = "ERROR"
+        else:
+            response = "OK"
+        
+        server_socket.sendto(response.encode(), client_address)
+        
     except Exception as e:
         print(f"Ошибка на сервере: {e}")
