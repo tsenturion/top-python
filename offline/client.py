@@ -1,14 +1,43 @@
 import socket
+import time
 
-hostname = 'google.com'
-ip_address = socket.gethostbyname(hostname)
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+client_socket.settimeout(3)
 
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_socket.connect((ip_address, 80))
-request = "GET / HTTP/1.1\r\nHost: google.com\r\n\r\n"
-client_socket.send(request.encode())
+server_address = ('localhost', 12345)
+message_base = 'привет сервер'
+max_attempts = 3
 
-respone = client_socket.recv(4096)
-print("ответ сервера", respone.decode(errors='ignore'))
+for attempt in range(1, max_attempts + 1):
+    message_id = f"{attempt}"
+    message = f"{message_id}:{message_base} {attempt}"
+    try:
+        start_time = time.time()
 
-client_socket.close()
+        print(f"попытка {attempt}: отправка сообщения с ID {message_id}")
+        client_socket.sendto(message.encode(), server_address)
+
+        data, _ = client_socket.recvfrom(1024)
+
+        end_time = time.time()
+        delay = end_time - start_time
+
+        print(f"ответ от сервера: {data.decode()}")
+        print(f"задержка: {delay:.4f} с")
+
+        if data.decode() == 'OK':
+            print('успешно обработано сервером')
+            break
+        elif data.decode() == "ERROR":
+            print("ошибка при обработке сообщения на сервере")
+            break
+
+    except socket.timeout:
+        print("ответ от сервера не получен, пробуем снова")
+
+    except Exception as e:
+        print(f"ошибка клиента {e}")
+        break
+
+else:
+    print('сервер не ответил после 3 попыток')
