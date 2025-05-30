@@ -1,0 +1,43 @@
+Microsoft Windows [Version 10.0.17763.5458]
+(c) Корпорация Майкрософт (Microsoft Corporation), 2018. Все права защищены.
+
+C:\Users\22300457\top-python\uyty>python post_to_httpbin.py
+Статус-код: 503
+
+Ошибка при разборе JSON.
+<html>
+<head><title>503 Service Temporarily Unavailable</title></head>
+<body>
+<center><h1>503 Service Temporarily Unavailable</h1></center>
+</body>
+</html>
+
+
+C:\Users\22300457\top-python\uyty>python post_to_httpbin.py
+Статус-код: 200
+
+JSON-ответ:
+{
+    "args": {},
+    "data": "{\"username\": \"student\", \"exam\": \"http_test\"}",
+    "files": {},
+    "form": {},
+    "headers": {
+        "Accept-Encoding": "identity",
+        "Content-Length": "44",
+        "Content-Type": "application/json",
+        "Host": "httpbin.org",
+        "X-Amzn-Trace-Id": "Root=1-6839b290-6a71eec34616034523bf2ef8"
+    },
+    "json": {
+        "exam": "http_test",
+        "username": "student"
+    },
+    "origin": "95.78.163.247",
+    "url": "https://httpbin.org/post"
+}
+
+Подтверждение данных от сервера:
+{'exam': 'http_test', 'username': 'student'}
+
+C:\Users\22300457\top-python\uyty>
