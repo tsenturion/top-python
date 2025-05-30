@@ -1,0 +1,20 @@
+Статус-код ответа: 200
+
+Заголовки ответа:
+Date: Fri, 30 May 2025 13:21:57 GMT
+Expires: -1
+Cache-Control: private, max-age=0
+Content-Type: text/html; charset=ISO-8859-1
+Content-Security-Policy-Report-Only: object-src 'none';base-uri 'self';script-src 'nonce-hQAj7yCGn-YQ7bGBqd15KA' 'strict-dynamic' 'report-sample' 'unsafe-eval' 'unsafe-inline' https: http:;report-uri https://csp.withgoogle.com/csp/gws/other-hp
+Accept-CH: Sec-CH-Prefers-Color-Scheme
+P3P: CP="This is not a P3P policy! See g.co/p3phelp for more info."
+Content-Encoding: gzip
+Server: gws
+X-XSS-Protection: 0
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: AEC=AVh_V2iul-z0hWySIJtYOzyrKSnXFrBd56NnnL-Naa7hAJSNHhiE4VcvWvU; expires=Wed, 26-Nov-2025 13:21:57 GMT; path=/; domain=.google.com; Secure; HttpOnly; SameSite=lax, NID=524=Xqm-darPtNR-RU6EfX_hg8ZZiNgFKhrN49b5oizc1Ywu-57biqUhY7suE_ptmAVbHr6H-EMdFIXWer49NxkAjNdzvsWsO6eKKv5ZNnl24Y_jVwWd0DB49rwZvMy1AmlHWu8sgnGq37-NTG7RwXx1EfJcU7R3pkrxjfha8aQNCzPJMPfiaiICdbQCGUcDo5lBxQuaBtZRLkJQVBwGaSg; expires=Sat, 29-Nov-2025 13:21:57 GMT; path=/; domain=.google.com; HttpOnly
+Transfer-Encoding: chunked
+
+
+Первые 500 символов HTML-контента:
+<!doctype html><html itemscope="" itemtype="http://schema.org/WebPage" lang="zh-TW"><head><meta content="text/html; charset=UTF-8" http-equiv="Content-Type"><meta content="/images/branding/googleg/1x/googleg_standard_color_128dp.png" itemprop="image"><title>Google</title><script nonce="hQAj7yCGn-YQ7bGBqd15KA">(function(){var _g={kEI:'9bA5aPOPD_u8vr0PvNjo2QQ',kEXPI:'0,202792,25,23,14,2,609859,2887568,666,435,448528,104244,425603,247319,42725,5241681,36812643,25228681,119775,18493,14126,65156,6753
