@@ -1,0 +1,65 @@
+Microsoft Windows [Version 10.0.17763.5329]
+(c) Корпорация Майкрософт (Microsoft Corporation), 2018. Все права защищены.
+
+C:\Users\22300728\top-python\uyty\работа 7>python tvmaze_api_practice.py
+Введите название шоу для поиска: Friends
+
+Найдено 10 шоу(шоу):
+
+1. Friends (1994)
+   Жанры: Comedy, Romance
+   Описание: Six young (20-something) people from New York City (Manhattan), on their own and struggling to survive in the real world, find the companionship, comfort and support they get from each other to be the...
+
+2. Friends (2002)
+   Жанры: Drama, Romance
+   Описание: Left alone on a trip to Hong Kong, Tomoko finds herself the victim of a purse-snatching. The police arrest the man she points out, but it turns out to be the wrong person: a young Korean man named Ji ...
+
+3. Friends (1979)
+   Жанры: Drama, Comedy
+   Описание: A comedy-drama series as seen through the eyes of three 11-year-old children from different backgrounds with episodes focusing upon the trials and tribulations of adolescence, and involved subjects su...
+
+4. Friends (2021)
+   Жанры: -
+   Описание: Reuniting old friends and introducing new acquaintances, cast members from Heart Signal 2 &amp; 3 are back in a brand new variety series and sparks are sure to fly! Invited to spend a very special win...
+
+5. Smiling Friends (2020)
+   Жанры: Comedy
+   Описание: Smiling Friends is a hit animated comedy co-created and starring Michael Cusack and Zach Hadel that follows the employees of a small company dedicated to bringing happiness to a bizarre yet colorful w...
+
+6. Angel's Friends (2009)
+   Жанры: Adventure, Children, Fantasy
+   Описание: Special school for the Angels is full of secrets! What happens if at the same table will be angels and devils? Raf, Uri, Sweet and Mickey - a company of angels. But to become a real team, they do not ...
+
+7. Fat Friends (2000)
+   Жанры: Drama
+   Описание: Fat Friends is an ITV drama (made by Tiger Aspect and Yorkshire Television), following a group of overweight people, their laughter and pain and addresses the absurdities of dieting in our modern age....
+
+8. LEGO Friends (2012)
+   Жанры: Comedy, Children
+   Описание: As a way to make friends, new girl in town Olivia volunteers to work at the Heartlake City World Petacular with four other girls.
+
+9. Super Friends (1973)
+   Жанры: Action, Adventure, Science-Fiction
+   Описание: 1973's Super Friends' premise was for Superman to team up with other DC Comics superheroes (Aquaman, Batman and Robin, and Wonder Woman (Diana Prince) with her magic lasso, telepathy and invisible jet...
+
+10. Isshuukan Friends. (2014)
+   Жанры: Drama, Comedy, Anime
+   Описание: Begins with Yuki, a boy who wants to become friends with his classmate and desk neighbor Kaori. However, she gently declines his friendship, saying, "But, my... Memories of my friends disappear in a w...
+
+Выбери номер шоу (1-10): 5
+
+Выбрано шоу: Smiling Friends, ID = 47182
+
+Сезоны:
+  Сезон 1: 2020-04-01 — 2022-08-07
+  Сезон 2: 2024-05-12 — 2024-06-23
+
+Всего эпизодов: 17
+Первые 5 эпизодов:
+  Desmond's Big Day Out (2020-04-01)
+  Mr. Frog (2022-01-09)
+  Shrimp's Odyssey (2022-01-09)
+  A Silly Halloween Special (2022-01-09)
+  Who Violently Murdered Simon S. Salty? (2022-01-09)
+
+C:\Users\22300728\top-python\uyty\работа 7>

@@ -1,0 +1,26 @@
+Microsoft Windows [Version 10.0.17763.5329]
+(c) Êîðïîðàöèÿ Ìàéêðîñîôò (Microsoft Corporation), 2018. Âñå ïðàâà çàùèùåíû.
+
+C:\Users\22300728\top-python\uyty\ðàáîòà 6>python cbr_currency_parser.py
+Âàëþòû (îòñîðòèðîâàíû ïî êóðñó ê ðóáëþ):
+
+ID: R01035, NumCode: 826, CharCode: GBP, Name: Ð¤ÑƒÐ½Ñ‚ ÑÑ‚ÐµÑ€Ð»Ð¸Ð½Ð³Ð¾Ð², Nominal: 1, Value: 105.7433
+ID: R01239, NumCode: 978, CharCode: EUR, Name: Ð•Ð²Ñ€Ð¾, Nominal: 1, Value: 88.9481
+ID: R01235, NumCode: 840, CharCode: USD, Name: Ð”Ð¾Ð»Ð»Ð°Ñ€ Ð¡Ð¨Ð, Nominal: 1, Value: 78.497
+ID: R01010, NumCode: 036, CharCode: AUD, Name: Àâñòðàëèéñêèé äîëëàð, Nominal: 1, Value: 50.4029
+ID: R01020A, NumCode: 944, CharCode: AZN, Name: Àçåðáàéäæàíñêèé ìàíàò, Nominal: 1, Value: 46.1747
+ID: R01100, NumCode: 975, CharCode: BGN, Name: Ð‘Ð¾Ð»Ð³Ð°Ñ€ÑÐºÐ¸Ð¹ Ð»ÐµÐ², Nominal: 1, Value: 45.4207
+ID: R01150, NumCode: 704, CharCode: VND, Name: Ð”Ð¾Ð½Ð³Ð¾Ð², Nominal: 10000, Value: 31.4466
+ID: R01210, NumCode: 981, CharCode: GEL, Name: Ð›Ð°Ñ€Ð¸, Nominal: 1, Value: 28.702
+ID: R01090B, NumCode: 933, CharCode: BYN, Name: Ð‘ÐµÐ»Ð¾Ñ€ÑƒÑÑÐºÐ¸Ð¹ Ñ€ÑƒÐ±Ð»ÑŒ, Nominal: 1, Value: 26.1936
+ID: R01135, NumCode: 348, CharCode: HUF, Name: Ð¤Ð¾Ñ€Ð¸Ð½Ñ‚Ð¾Ð², Nominal: 100, Value: 21.8819
+ID: R01230, NumCode: 784, CharCode: AED, Name: Ð”Ð¸Ñ€Ñ…Ð°Ð¼ ÐžÐÐ­, Nominal: 1, Value: 21.3743
+ID: R01060, NumCode: 051, CharCode: AMD, Name: ÐÑ€Ð¼ÑÐ½ÑÐºÐ¸Ñ… Ð´Ñ€Ð°Ð¼Ð¾Ð², Nominal: 100, Value: 20.4339
+ID: R01240, NumCode: 818, CharCode: EGP, Name: Ð•Ð³Ð¸Ð¿ÐµÑ‚ÑÐºÐ¸Ñ… Ñ„ÑƒÐ½Ñ‚Ð¾Ð², Nominal: 10, Value: 15.7799
+ID: R01115, NumCode: 986, CharCode: BRL, Name: Ð‘Ñ€Ð°Ð·Ð¸Ð»ÑŒÑÐºÐ¸Ð¹ Ñ€ÐµÐ°Ð», Nominal: 1, Value: 13.7876
+ID: R01215, NumCode: 208, CharCode: DKK, Name: Ð”Ð°Ñ‚ÑÐºÐ°Ñ ÐºÑ€Ð¾Ð½Ð°, Nominal: 1, Value: 11.9101
+ID: R01200, NumCode: 344, CharCode: HKD, Name: Ð“Ð¾Ð½ÐºÐ¾Ð½Ð³ÑÐºÐ¸Ð¹ Ð´Ð¾Ð»Ð»Ð°Ñ€, Nominal: 1, Value: 10.0316
+
+Êóðñ äîëëàðà (USD) ê ðóáëþ: 78.497
+
+C:\Users\22300728\top-python\uyty\ðàáîòà 6>
