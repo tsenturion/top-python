@@ -1,0 +1,24 @@
+Microsoft Windows [Version 10.0.17763.5329]
+(c) Корпорация Майкрософт (Microsoft Corporation), 2018. Все права защищены.
+
+C:\Users\22300410\top-python\uyty>google_get.py
+Status Code: 200
+
+Headers:
+Date: Fri, 30 May 2025 13:23:50 GMT
+Expires: -1
+Cache-Control: private, max-age=0
+Content-Type: text/html; charset=ISO-8859-1
+Content-Security-Policy-Report-Only: object-src 'none';base-uri 'self';script-src 'nonce-sUfYMZjalGPPsa7DNYtmtA' 'strict-dynamic' 'report-sample' 'unsafe-eval' 'unsafe-inline' https: http:;report-uri https://csp.withgoogle.com/csp/gws/other-hp
+Accept-CH: Sec-CH-Prefers-Color-Scheme
+P3P: CP="This is not a P3P policy! See g.co/p3phelp for more info."
+Content-Encoding: gzip
+Server: gws
+X-XSS-Protection: 0
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: AEC=AVh_V2h8A5Hp0qwlXX_2veAY4j0fBg4KMVFUGX895liTOF--JNonkRzxSg8; expires=Wed, 26-Nov-2025 13:23:50 GMT; path=/; domain=.google.com; Secure; HttpOnly; SameSite=lax, NID=524=Hf-ki-uVmpjqA2WS6G_SxKoS4_euPWAjnClDDmp2boasW_EHnFt-RtPQhtjFCJhE8C0kRjgvWYlqMIblBpw893Wuu4_j1LuTIi8rpIblhNW2zWi1cc2id4YiiE1vpzWsIQCU8EYntK0PlWi3WpTIvz_RAeG0V8OXllwtRLQ0u8xoeOsaZLUpGqqP744CecVUS-pXVjAv35VFiY--jQc; expires=Sat, 29-Nov-2025 13:23:50 GMT; path=/; domain=.google.com; HttpOnly
+Alt-Svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+Transfer-Encoding: chunked
+
+First 500 characters of HTML:
+<!doctype html><html itemscope="" itemtype="http://schema.org/WebPage" lang="ru"><head><meta content="&#1055;&#1086;&#1080;&#1089;&#1082; &#1080;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1080;&#1080; &#1074; &#1080;&#1085;&#1090;&#1077;&#1088;&#1085;&#1077;&#1090;&#1077;: &#1074;&#1077;&#1073; &#1089;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1099;, &#1082;&#1072;&#1088;&#1090;&#1080;&#1085;&#1082;&#1080;, &#1074;&#1080;&#1076;&#1077;&#1086; &#1080; &#1084;&#1085;&#1086;&#1075;&#1086;&

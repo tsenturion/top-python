@@ -1,0 +1,30 @@
+C:\Users\22300410\top-python\uyty>post_to_httpbin.py
+Status Code: 200
+
+JSON Response:
+{
+  "args": {},
+  "data": "{\"username\": \"student\", \"exam\": \"http_test\", \"result\": \"excellent\"}",
+  "files": {},
+  "form": {},
+  "headers": {
+    "Accept": "*/*",
+    "Accept-Encoding": "gzip, deflate",
+    "Content-Length": "67",
+    "Content-Type": "application/json",
+    "Host": "httpbin.org",
+    "User-Agent": "python-requests/2.32.3",
+    "X-Amzn-Trace-Id": "Root=1-6839b33c-42583a0914ce5a465f90d913"
+  },
+  "json": {
+    "exam": "http_test",
+    "result": "excellent",
+    "username": "student"
+  },
+  "origin": "95.78.163.247",
+  "url": "https://httpbin.org/post"
+}
+
+Server successfully received our data!
+
+C:\Users\22300410\top-python\uyty>
