@@ -1,53 +1,40 @@
+"""
+Добавьте в сообщение клиента уникальный идентификатор (например, номер пакета).
+
+Пусть сервер записывает, какие пакеты он уже видел, и не отвечает на повторные.
+
+Добавьте на клиенте время отправки и получения, чтобы измерять задержку.
+
+Реализуйте механизм, при котором клиент ждет разные ответы — например, "OK" или "ERROR" в зависимости от содержимого.
+"""
 import socket
-import os
+ 
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+server_socket.bind(("localhost", 12345))
+processed_ids = set()
+print("Сервер запущен. Ожидание сообщений...")
+while True:
+    try:
+        data, client_address = server_socket.recvfrom(1024)
+        message = data.decode()
+        print(f"Получено сообщение от {client_address}: {message}")
 
-def read_line(conn):
-    line = b''
-    while True:
-        char = conn.recv(1)
-        if not char or char == b'\n':
-            break
-        line += char
-    return line.decode('utf-8')
+        message_parts = message.split(":")
+        message_id = message_parts[0]
+        message_content = message_parts[1] if len(message_parts) > 1 else ""
 
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.bind(('127.0.0.1', 9000))
-server_socket.listen(1)
-print("Сервер запущен, ожидаем подключение...")
+        if message_id in processed_ids:
+            print(f"получено повторное сообщение с идентификатором {message_id}. Пропускаем...")
+            continue
+        
+        processed_ids.add(message_id)
 
-conn, addr = server_socket.accept()
-print(f"Клиент подключился: {addr}")
-
-command = read_line(conn).strip()
-filename = read_line(conn).strip()
-
-print(f"Получена команда: {command}")
-print(f"Имя файла: {filename}")
-
-if command == "UPLOAD":
-    with open(filename, 'wb') as f:
-        while True:
-            data = conn.recv(1024)
-            if not data:
-                break
-            f.write(data)
-    print("Файл успешно принят.")
-    conn.sendall("Файл получен\n".encode('utf-8'))
-
-elif command == "DOWNLOAD":
-    if not os.path.exists(filename):
-        error_message = "ОШИБКА: файл не найден\n"
-        conn.sendall(error_message.encode('utf-8'))
-        print("Запрошенный файл не найден.")
-    else:
-        with open(filename, 'rb') as f:
-            while chunk := f.read(1024):
-                conn.sendall(chunk)
-        print("Файл отправлен клиенту.")
-
-else:
-    error_message = "ОШИБКА: неизвестная команда\n"
-    conn.sendall(error_message.encode('utf-8'))
-
-conn.close()
-server_socket.close()
+        if "ERROR" in message_content:
+            response = "ERROR"
+        else:
+            response = "OK"
+        
+        server_socket.sendto(response.encode(), client_address)
+        
+    except Exception as e:
+        print(f"Ошибка на сервере: {e}")
