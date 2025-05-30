@@ -1,0 +1,21 @@
+PS C:\Users\22300668\top-python> & C:/Users/22300668/AppData/Local/Programs/Python/Python313/python.exe c:/Users/22300668/top-python/uyty/graphql_countries.py
+Первые 10 стран:
+Andorra (AD) | Столица: Andorra la Vella | Валюта: EUR | Языки: Catalan
+United Arab Emirates (AE) | Столица: Abu Dhabi | Валюта: AED | Языки: Arabic
+Afghanistan (AF) | Столица: Kabul | Валюта: AFN | Языки: Pashto, Uzbek, Turkmen
+Antigua and Barbuda (AG) | Столица: Saint John's | Валюта: XCD | Языки: English
+Anguilla (AI) | Столица: The Valley | Валюта: XCD | Языки: English
+Albania (AL) | Столица: Tirana | Валюта: ALL | Языки: Albanian
+Armenia (AM) | Столица: Yerevan | Валюта: AMD | Языки: Armenian, Russian
+Angola (AO) | Столица: Luanda | Валюта: AOA | Языки: Portuguese
+Antarctica (AQ) | Столица: None | Валюта: None | Языки:
+Argentina (AR) | Столица: Buenos Aires | Валюта: ARS | Языки: Spanish, Guarani
+
+Статистика:
+Общее количество стран: 250
+Количество уникальных валют: 163
+Топ-3 самых популярных языка:
+English: 90
+French: 44
+Arabic: 25
+PS C:\Users\22300668\top-python>

@@ -1,0 +1,35 @@
+PS C:\Users\22300668\top-python> & C:/Users/22300668/AppData/Local/Programs/Python/Python313/python.exe c:/Users/22300668/top-python/uyty/google_get.py
+Статус-код: 200
+Заголовки ответа:
+Date: Fri, 30 May 2025 13:53:27 GMT
+Expires: -1
+Cache-Control: private, max-age=0
+Content-Type: text/html; charset=ISO-8859-1
+Content-Security-Policy-Report-Only: object-src 'none';base-uri 'self';script-src 'nonce-Th6k6Mvj3W7cSK_uZztPng' 'strict-dynamic' 'report-sample' 'unsafe-eval' 'unsafe-inline' https: http:;report-uri ht
+tps://csp.withgoogle.com/csp/gws/other-hp
+Accept-CH: Sec-CH-Prefers-Color-Scheme
+P3P: CP="This is not a P3P policy! See g.co/p3phelp for more info."
+Content-Encoding: gzip
+Server: gws
+X-XSS-Protection: 0
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: AEC=AVh_V2gV3vd1qX_LvY3_qcSTMSvVqbHy3kvu2eVVTdilvRjGneezEQmdzA; expires=Wed, 26-Nov-2025 13:53:27 GMT; path=/; domain=.google.com; Secure; HttpOnly; SameSite=lax, NID=524=YuFQy4P1FUcdmUMnNLy
+PAG-yU4Gtr3ety4uHsQMfz0_KL0C4O7Q2qhhIoy_KlzrY0hvnoiRLj07XpN0aYwFjdT3X2dVVyxOpigln2_FMvHFVLfi0AdgjTY3qJ1_HyP2S-7gBvs869hM4I_xX0gQ9PPudxkIzMSI7TpBkpTQQ12v9-s_qUPwOv_5YjY0Y0lJZmAcJqTYAlQyQDoaxukg; expires=
+Sat, 29-Nov-2025 13:53:27 GMT; path=/; domain=.google.com; HttpOnly
+Alt-Svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+Transfer-Encoding: chunked
+
+Первые 500 символов HTML-контента:
+<!doctype html><html itemscope="" itemtype="http://schema.org/WebPage" lang="ru"><head><meta content="&#1055;&#1086;&#1080;&#1089;&#1082; &#1080;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1080;&
+#1080; &#1074; &#1080;&#1085;&#1090;&#1077;&#1088;&#1085;&#1077;&#1090;&#1077;: &#1074;&#1077;&#1073; &#1089;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1099;, &#1082;&#1072;&#1088;&#1090;&#1080;&#1085;
+&#1082;&#1080;, &#1074;&#1080;&#1076;&#1077;&#1086; &#1080; &#1084;&#1085;&#1086;&#1075;&#1086;&
+PS C:\Users\22300668\top-python> & C:/Users/22300668/AppData/Local/Programs/Python/Python313/python.exe c:/Users/22300668/top-python/uyty/post_to_httpbin.py
+Статус-код: 200
+Ответ в формате JSON:
+{'args': {}, 'data': '', 'files': {}, 'form': {'exam': 'http_test', 'username': 'student'}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Content-Length': '31', 'Content-Type': 'appl
+ication/x-www-form-urlencoded', 'Host': 'httpbin.org', 'User-Agent': 'python-requests/2.32.3', 'X-Amzn-Trace-Id': 'Root=1-6839b85c-6294a6f271cc4f8c4cc56bf8'}, 'json': None, 'origin': '95.78.163.247', 'u
+rl': 'https://httpbin.org/post'}
+
+Данные, полученные сервером:
+{'exam': 'http_test', 'username': 'student'}
+PS C:\Users\22300668\top-python>

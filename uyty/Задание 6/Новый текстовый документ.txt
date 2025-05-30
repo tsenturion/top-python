@@ -1,0 +1,121 @@
+Microsoft Windows [Version 10.0.17763.3287]
+(c) Корпорация Майкрософт (Microsoft Corporation), 2018. Все права защищены.
+
+C:\Users\22300668>top-python\uyty\cbr_currency_parser
+"top-python\uyty\cbr_currency_parser" не является внутренней или внешней
+командой, исполняемой программой или пакетным файлом.
+
+C:\Users\22300668>
+C:\Users\22300668>top-python\uyty\cbr_currency_parser.py
+Traceback (most recent call last):
+  File "C:\Users\22300668\top-python\uyty\cbr_currency_parser.py", line 10, in <module>
+    soup = BeautifulSoup(xml_data, "xml")
+  File "C:\Users\22300668\AppData\Local\Programs\Python\Python313\Lib\site-packages\bs4\__init__.py", line 364, in __init__
+    raise FeatureNotFound(
+    ...<3 lines>...
+    )
+bs4.exceptions.FeatureNotFound: Couldn't find a tree builder with the features you requested: xml. Do you need to install a parser library?
+
+C:\Users\22300668>pip install lxml
+Collecting lxml
+  Downloading lxml-5.4.0-cp313-cp313-win_amd64.whl.metadata (3.6 kB)
+Downloading lxml-5.4.0-cp313-cp313-win_amd64.whl (3.8 MB)
+   ---------------------------------------- 3.8/3.8 MB 17.6 MB/s eta 0:00:00
+Installing collected packages: lxml
+Successfully installed lxml-5.4.0
+
+C:\Users\22300668>top-python\uyty\cbr_currency_parser.py
+Курсы валют на сегодня:
+ID: R01010, NumCode: 036, CharCode: AUD, Name: Австралийский доллар, Nominal: 1, Value: 50.4029
+ID: R01020A, NumCode: 944, CharCode: AZN, Name: Азербайджанский манат, Nominal: 1, Value: 46.1747
+ID: R01035, NumCode: 826, CharCode: GBP, Name: Фунт стерлингов, Nominal: 1, Value: 105.7433
+ID: R01060, NumCode: 051, CharCode: AMD, Name: Армянских драмов, Nominal: 100, Value: 20.4339
+ID: R01090B, NumCode: 933, CharCode: BYN, Name: Белорусский рубль, Nominal: 1, Value: 26.1936
+ID: R01100, NumCode: 975, CharCode: BGN, Name: Болгарский лев, Nominal: 1, Value: 45.4207
+ID: R01115, NumCode: 986, CharCode: BRL, Name: Бразильский реал, Nominal: 1, Value: 13.7876
+ID: R01135, NumCode: 348, CharCode: HUF, Name: Форинтов, Nominal: 100, Value: 21.8819
+ID: R01150, NumCode: 704, CharCode: VND, Name: Донгов, Nominal: 10000, Value: 31.4466
+ID: R01200, NumCode: 344, CharCode: HKD, Name: Гонконгский доллар, Nominal: 1, Value: 10.0316
+ID: R01210, NumCode: 981, CharCode: GEL, Name: Лари, Nominal: 1, Value: 28.702
+ID: R01215, NumCode: 208, CharCode: DKK, Name: Датская крона, Nominal: 1, Value: 11.9101
+ID: R01230, NumCode: 784, CharCode: AED, Name: Дирхам ОАЭ, Nominal: 1, Value: 21.3743
+ID: R01235, NumCode: 840, CharCode: USD, Name: Доллар США, Nominal: 1, Value: 78.497
+ID: R01239, NumCode: 978, CharCode: EUR, Name: Евро, Nominal: 1, Value: 88.9481
+ID: R01240, NumCode: 818, CharCode: EGP, Name: Египетских фунтов, Nominal: 10, Value: 15.7799
+ID: R01270, NumCode: 356, CharCode: INR, Name: Индийских рупий, Nominal: 100, Value: 91.8119
+ID: R01280, NumCode: 360, CharCode: IDR, Name: Рупий, Nominal: 10000, Value: 48.291
+ID: R01335, NumCode: 398, CharCode: KZT, Name: Тенге, Nominal: 100, Value: 15.3117
+ID: R01350, NumCode: 124, CharCode: CAD, Name: Канадский доллар, Nominal: 1, Value: 56.7749
+ID: R01355, NumCode: 634, CharCode: QAR, Name: Катарский риал, Nominal: 1, Value: 21.5651
+ID: R01370, NumCode: 417, CharCode: KGS, Name: Сомов, Nominal: 100, Value: 89.7621
+ID: R01375, NumCode: 156, CharCode: CNY, Name: Юань, Nominal: 1, Value: 10.894
+ID: R01500, NumCode: 498, CharCode: MDL, Name: Молдавских леев, Nominal: 10, Value: 45.4328
+ID: R01530, NumCode: 554, CharCode: NZD, Name: Новозеландский доллар, Nominal: 1, Value: 46.6233
+ID: R01535, NumCode: 578, CharCode: NOK, Name: Норвежских крон, Nominal: 10, Value: 77.2852
+ID: R01565, NumCode: 985, CharCode: PLN, Name: Злотый, Nominal: 1, Value: 20.8835
+ID: R01585F, NumCode: 946, CharCode: RON, Name: Румынский лей, Nominal: 1, Value: 17.4733
+ID: R01589, NumCode: 960, CharCode: XDR, Name: СДР (специальные права заимствования), Nominal: 1, Value: 106.4977
+ID: R01625, NumCode: 702, CharCode: SGD, Name: Сингапурский доллар, Nominal: 1, Value: 60.6764
+ID: R01670, NumCode: 972, CharCode: TJS, Name: Сомони, Nominal: 10, Value: 78.4029
+ID: R01675, NumCode: 764, CharCode: THB, Name: Батов, Nominal: 10, Value: 23.9218
+ID: R01700J, NumCode: 949, CharCode: TRY, Name: Турецких лир, Nominal: 10, Value: 20.1192
+ID: R01710A, NumCode: 934, CharCode: TMT, Name: Новый туркменский манат, Nominal: 1, Value: 22.4277
+ID: R01717, NumCode: 860, CharCode: UZS, Name: Узбекских сумов, Nominal: 10000, Value: 61.177
+ID: R01720, NumCode: 980, CharCode: UAH, Name: Гривен, Nominal: 10, Value: 18.902
+ID: R01760, NumCode: 203, CharCode: CZK, Name: Чешских крон, Nominal: 10, Value: 35.5544
+ID: R01770, NumCode: 752, CharCode: SEK, Name: Шведских крон, Nominal: 10, Value: 81.6987
+ID: R01775, NumCode: 756, CharCode: CHF, Name: Швейцарский франк, Nominal: 1, Value: 94.9752
+ID: R01805F, NumCode: 941, CharCode: RSD, Name: Сербских динаров, Nominal: 100, Value: 75.328
+ID: R01810, NumCode: 710, CharCode: ZAR, Name: Рэндов, Nominal: 10, Value: 43.6993
+ID: R01815, NumCode: 410, CharCode: KRW, Name: Вон, Nominal: 1000, Value: 57.1053
+ID: R01820, NumCode: 392, CharCode: JPY, Name: Иен, Nominal: 100, Value: 53.8758
+
+Курс доллара (USD):
+1 Доллар США = 78.497 RUB
+
+Валюты, отсортированные по курсу (по убыванию):
+XDR: 106.4977 RUB
+GBP: 105.7433 RUB
+CHF: 94.9752 RUB
+INR: 91.8119 RUB
+KGS: 89.7621 RUB
+EUR: 88.9481 RUB
+SEK: 81.6987 RUB
+USD: 78.497 RUB
+TJS: 78.4029 RUB
+NOK: 77.2852 RUB
+RSD: 75.328 RUB
+UZS: 61.177 RUB
+SGD: 60.6764 RUB
+KRW: 57.1053 RUB
+CAD: 56.7749 RUB
+JPY: 53.8758 RUB
+AUD: 50.4029 RUB
+IDR: 48.291 RUB
+NZD: 46.6233 RUB
+AZN: 46.1747 RUB
+MDL: 45.4328 RUB
+BGN: 45.4207 RUB
+ZAR: 43.6993 RUB
+CZK: 35.5544 RUB
+VND: 31.4466 RUB
+GEL: 28.702 RUB
+BYN: 26.1936 RUB
+THB: 23.9218 RUB
+TMT: 22.4277 RUB
+HUF: 21.8819 RUB
+QAR: 21.5651 RUB
+AED: 21.3743 RUB
+PLN: 20.8835 RUB
+AMD: 20.4339 RUB
+TRY: 20.1192 RUB
+UAH: 18.902 RUB
+RON: 17.4733 RUB
+EGP: 15.7799 RUB
+KZT: 15.3117 RUB
+BRL: 13.7876 RUB
+DKK: 11.9101 RUB
+CNY: 10.894 RUB
+HKD: 10.0316 RUB
+
+C:\Users\22300668>
