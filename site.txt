@@ -4,11 +4,13 @@ power shell
 
 https://github.com/tsenturion/top-python
 
-irm https://astral.sh/uv/install.ps1 | iex
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 
 https://code-basics.com/ru/languages/python
 pythontutor.ru
 https://leetcode.com/studyplan/
+
+easyoffer - для подготовки к собеседованиям
 
 https://developer.mozilla.org/ru/docs/Learn/Server-side/Django
 https://proglib.io/p/samouchitel-po-python-dlya-nachinayushchih-chast-14-funkcii-vysshego-poryadka-zamykaniya-i-dekoratory-2023-01-30
