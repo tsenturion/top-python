@@ -1,0 +1,21 @@
+📦 Курсы валют:
+
+ID: R01035, NumCode: 826, CharCode: GBP, Name: Р¤СѓРЅС‚ СЃС‚РµСЂР»РёРЅРіРѕРІ, Nominal: 1, Value: 105.9994 руб.
+ID: R01239, NumCode: 978, CharCode: EUR, Name: Р•РІСЂРѕ, Nominal: 1, Value: 89.2512 руб.
+ID: R01235, NumCode: 840, CharCode: USD, Name: Р”РѕР»Р»Р°СЂ РЎРЁРђ, Nominal: 1, Value: 78.6171 руб.
+ID: R01010, NumCode: 036, CharCode: AUD, Name: Австралийский доллар, Nominal: 1, Value: 50.598 руб.
+ID: R01020A, NumCode: 944, CharCode: AZN, Name: Азербайджанский манат, Nominal: 1, Value: 46.2454 руб.
+ID: R01100, NumCode: 975, CharCode: BGN, Name: Р‘РѕР»РіР°СЂСЃРєРёР№ Р»РµРІ, Nominal: 1, Value: 45.3454 руб.
+ID: R01150, NumCode: 704, CharCode: VND, Name: Р”РѕРЅРіРѕРІ, Nominal: 10000, Value: 31.4745 руб.
+ID: R01210, NumCode: 981, CharCode: GEL, Name: Р›Р°СЂРё, Nominal: 1, Value: 28.7532 руб.
+ID: R01090B, NumCode: 933, CharCode: BYN, Name: Р‘РµР»РѕСЂСѓСЃСЃРєРёР№ СЂСѓР±Р»СЊ, Nominal: 1, Value: 26.2424 руб.
+ID: R01135, NumCode: 348, CharCode: HUF, Name: Р¤РѕСЂРёРЅС‚РѕРІ, Nominal: 100, Value: 22.0333 руб.
+ID: R01230, NumCode: 784, CharCode: AED, Name: Р”РёСЂС…Р°Рј РћРђР­, Nominal: 1, Value: 21.407 руб.
+ID: R01060, NumCode: 051, CharCode: AMD, Name: РђСЂРјСЏРЅСЃРєРёС… РґСЂР°РјРѕРІ, Nominal: 100, Value: 20.4764 руб.
+ID: R01240, NumCode: 818, CharCode: EGP, Name: Р•РіРёРїРµС‚СЃРєРёС… С„СѓРЅС‚РѕРІ, Nominal: 10, Value: 15.8041 руб.
+ID: R01115, NumCode: 986, CharCode: BRL, Name: Р‘СЂР°Р·РёР»СЊСЃРєРёР№ СЂРµР°Р», Nominal: 1, Value: 13.9008 руб.
+ID: R01215, NumCode: 208, CharCode: DKK, Name: Р”Р°С‚СЃРєР°СЏ РєСЂРѕРЅР°, Nominal: 1, Value: 11.9283 руб.
+ID: R01200, NumCode: 344, CharCode: HKD, Name: Р“РѕРЅРєРѕРЅРіСЃРєРёР№ РґРѕР»Р»Р°СЂ, Nominal: 1, Value: 10.0418 руб.
+ID: R01270, NumCode: 356, CharCode: INR, Name: N/A, Nominal: 100, Value: 0.0 руб.
+
+💵 Курс доллара (USD): 78.6171 руб.
