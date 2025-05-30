@@ -42,8 +42,6 @@ def print_statistics(repos):
 
 def main():
     username = input("Введите имя пользователя GitHub: ").strip()
-    # Ваш GitHub токен:
-    
 
     headers = {"Authorization": f"token {token}"}
     repos = fetch_repos(username, headers, per_page=5)
