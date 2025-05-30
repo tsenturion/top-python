@@ -1,0 +1,26 @@
+Статус-код ответа: 200
+
+Ответ в формате JSON:
+{
+    "args": {},
+    "data": "{\"username\": \"student\", \"exam\": \"http_test\"}",
+    "files": {},
+    "form": {},
+    "headers": {
+        "Accept": "application/json",
+        "Accept-Encoding": "identity",
+        "Content-Length": "44",
+        "Content-Type": "application/json",
+        "Host": "httpbin.org",
+        "User-Agent": "Python-urllib/3.7",
+        "X-Amzn-Trace-Id": "Root=1-6839b577-78f7cc026060ba6e3511a49f"
+    },
+    "json": {
+        "exam": "http_test",
+        "username": "student"
+    },
+    "origin": "95.78.163.247",
+    "url": "https://httpbin.org/post"
+}
+
+? Сервер успешно получил отправленные данные.

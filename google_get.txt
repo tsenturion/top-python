@@ -1,0 +1,32 @@
+татус-код ответа: 200
+
+Заголовки ответа:
+Date: Fri, 30 May 2025 13:39:07 GMT
+Expires: -1
+Cache-Control: private, max-age=0
+Content-Type: text/html; charset=ISO-8859-1
+Content-Security-Policy-Report-Only: object-src 'none';base-uri 'self';script-src 'nonce-YtkP67G1IsRK7NgiQD3nAQ' 'st
+rict-dynamic' 'report-sample' 'unsafe-eval' 'unsafe-inline' https: http:;report-uri https://csp.withgoogle.com/csp/g
+ws/other-hp
+Accept-CH: Sec-CH-Prefers-Color-Scheme
+P3P: CP="This is not a P3P policy! See g.co/p3phelp for more info."
+Server: gws
+X-XSS-Protection: 0
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: AEC=AVh_V2gZZjCLPmXVvWzKH872bTA6pZQOq5wNcQkpADh-i650DycFAAamTg; expires=Wed, 26-Nov-2025 13:39:07 GMT; p
+ath=/; domain=.google.com; Secure; HttpOnly; SameSite=lax
+Set-Cookie: NID=524=QYm4YmhuHRNHR9TENQ1M9D5BJAhWVz60lIbYVVSsRoGHMQWph_wrgsCigli5wkYf4S6orPPMUQTqtT-3BL3blejZUnz9_8uP
+nU0ryqkePW-4YArq9l2Z8JXrZA-8mx_pB-9b7gk4MWmG5pmD81v4VPpTaqzo7nY6qYYXZ1P6CC7a6cg4wBWu8km7D3lDg_JiCMMi092vTAzMYsnxce0;
+ expires=Sat, 29-Nov-2025 13:39:07 GMT; path=/; domain=.google.com; HttpOnly
+Alt-Svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+Accept-Ranges: none
+Vary: Accept-Encoding
+Connection: close
+Transfer-Encoding: chunked
+
+Первые 500 символов HTML-контента:
+<!doctype html><html itemscope="" itemtype="http://schema.org/WebPage" lang="ru"><head><meta content="&#1055;&#1086;
+&#1080;&#1089;&#1082; &#1080;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1080;&#1080; &#1074; &#1080;&#1085;&
+#1090;&#1077;&#1088;&#1085;&#1077;&#1090;&#1077;: &#1074;&#1077;&#1073; &#1089;&#1090;&#1088;&#1072;&#1085;&#1080;&#
+1094;&#1099;, &#1082;&#1072;&#1088;&#1090;&#1080;&#1085;&#1082;&#1080;, &#1074;&#1080;&#1076;&#1077;&#1086; &#1080;
+&#1084;&#1085;&#1086;&#1075;&#1086;&
