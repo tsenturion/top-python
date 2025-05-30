@@ -1,0 +1,24 @@
+PS C:\Users\22300393\Pictures\top-python> & C:/Users/22300393/AppData/Local/Programs/Python/Python313/python.exe c:/Users/22300393/Pictures/top-python/uyty/zadanie5.py
+� Первые 10 стран:
+
+Название: Andorra, Код: AD, Столица: Andorra la Vella, Валюта: EUR, Языки: Catalan
+Название: United Arab Emirates, Код: AE, Столица: Abu Dhabi, Валюта: AED, Языки: Arabic
+Название: Afghanistan, Код: AF, Столица: Kabul, Валюта: AFN, Языки: Pashto, Uzbek, Turkmen
+Название: Antigua and Barbuda, Код: AG, Столица: Saint John's, Валюта: XCD, Языки: English
+Название: Anguilla, Код: AI, Столица: The Valley, Валюта: XCD, Языки: English
+Название: Albania, Код: AL, Столица: Tirana, Валюта: ALL, Языки: Albanian
+Название: Armenia, Код: AM, Столица: Yerevan, Валюта: AMD, Языки: Armenian, Russian
+Название: Angola, Код: AO, Столица: Luanda, Валюта: AOA, Языки: Portuguese
+Название: Antarctica, Код: AQ, Столица: None, Валюта: None, Языки: Нет данных
+Название: Argentina, Код: AR, Столица: Buenos Aires, Валюта: ARS, Языки: Spanish, Guarani
+
+� Статистика:
+Всего стран: 250
+Уникальных валют: 163
+Топ-3 языка:
+- English: 90 стран
+- French: 44 стран
+- Arabic: 25 стран
+
+Результаты сохранены в 'graphql_countries.txt'.
+PS C:\Users\22300393\Pictures\top-python>
