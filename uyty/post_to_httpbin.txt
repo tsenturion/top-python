@@ -1,0 +1,5 @@
+Ответ в формате JSON:
+{'args': {}, 'data': '', 'files': {}, 'form': {'exam': 'http_test', 'username': 'student'}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Content-Length': '31', 'Content-Type': 'application/x-www-form-urlencoded', 'Host': 'httpbin.org', 'User-Agent': 'python-requests/2.32.3', 'X-Amzn-Trace-Id': 'Root=1-6839ae91-691032e22acb762309fdffb0'}, 'json': None, 'origin': '95.78.163.247', 'url': 'https://httpbin.org/post'}
+
+Полученные сервером данные (form):
+{'exam': 'http_test', 'username': 'student'}
