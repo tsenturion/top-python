@@ -1,0 +1,25 @@
+Microsoft Windows [Version 10.0.17763.5329]
+(c) Корпорация Майкрософт (Microsoft Corporation), 2018. Все права защищены.
+
+C:\Users\22300728\top-python\uyty\работа 5>python graphql_countries.py
+Первые 10 стран:
+Andorra | Код: AD | Столица: Andorra la Vella | Валюта: EUR | Языки: Catalan
+United Arab Emirates | Код: AE | Столица: Abu Dhabi | Валюта: AED | Языки: Arabic
+Afghanistan | Код: AF | Столица: Kabul | Валюта: AFN | Языки: Pashto, Uzbek, Turkmen
+Antigua and Barbuda | Код: AG | Столица: Saint John's | Валюта: XCD | Языки: English
+Anguilla | Код: AI | Столица: The Valley | Валюта: XCD | Языки: English
+Albania | Код: AL | Столица: Tirana | Валюта: ALL | Языки: Albanian
+Armenia | Код: AM | Столица: Yerevan | Валюта: AMD | Языки: Armenian, Russian
+Angola | Код: AO | Столица: Luanda | Валюта: AOA | Языки: Portuguese
+Antarctica | Код: AQ | Столица: None | Валюта: None | Языки:
+Argentina | Код: AR | Столица: Buenos Aires | Валюта: ARS | Языки: Spanish, Guarani
+
+--- Статистика ---
+Общее количество стран: 250
+Количество уникальных валют: 163
+Топ-3 самых часто встречающихся языков:
+English: 90
+French: 44
+Arabic: 25
+
+C:\Users\22300728\top-python\uyty\работа 5>

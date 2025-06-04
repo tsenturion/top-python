@@ -1,0 +1,30 @@
+Microsoft Windows [Version 10.0.17763.5329]
+(c) Корпорация Майкрософт (Microsoft Corporation), 2018. Все права защищены.
+
+C:\Users\22300728\top-python\uyty\работа 3\3.2>python post_to_httpbin.py
+Status code: 200
+
+JSON response:
+{
+  "args": {},
+  "data": "{\"username\": \"student\", \"exam\": \"http_test\"}",
+  "files": {},
+  "form": {},
+  "headers": {
+    "Accept-Encoding": "identity",
+    "Content-Length": "44",
+    "Content-Type": "application/json",
+    "Host": "httpbin.org",
+    "X-Amzn-Trace-Id": "Root=1-6839b280-0961f45a1d93b15973926a60"
+  },
+  "json": {
+    "exam": "http_test",
+    "username": "student"
+  },
+  "origin": "95.78.163.247",
+  "url": "https://httpbin.org/post"
+}
+
+Данные успешно получены сервером!
+
+C:\Users\22300728\top-python\uyty\работа 3\3.2>
