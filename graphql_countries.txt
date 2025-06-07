@@ -1,0 +1,21 @@
+Название страны           Код    Столица              Валюта       Языки
+================================================================================
+Andorra                   AD     Andorra la Vella     EUR          Catalan
+United Arab Emirates      AE     Abu Dhabi            AED          Arabic
+Afghanistan               AF     Kabul                AFN          Pashto, Uzbek, Turkmen
+Antigua and Barbuda       AG     Saint John's         XCD          English
+Anguilla                  AI     The Valley           XCD          English
+Albania                   AL     Tirana               ALL          Albanian
+Armenia                   AM     Yerevan              AMD          Armenian, Russian
+Angola                    AO     Luanda               AOA          Portuguese
+Antarctica                AQ     —                    —            —
+Argentina                 AR     Buenos Aires         ARS          Spanish, Guarani
+
+========================================
+Статистика по странам:
+Общее количество стран: 250
+Количество уникальных валют: 159
+Топ-3 самых часто встречающихся языков:
+  English: 90 раз
+  French: 44 раз
+  Arabic: 25 раз
