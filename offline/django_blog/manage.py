@@ -3,10 +3,10 @@
 import os
 import sys
 
-
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_blog.settings')
+    os.environ['PATH'] = r'C:\sqlite;' + os.environ['PATH']
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
