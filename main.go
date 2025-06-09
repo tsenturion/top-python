@@ -2029,3 +2029,183 @@ func main() {
     result := somepkg.DoSomething()
     fmt.Println(result)
 }
+
+
+
+package main
+
+import "fmt"
+
+// Структура для хранения данных о сотруднике
+type Employee struct {
+}
+
+// Интерфейс для вывода информации
+type Displayable interface {
+
+}
+
+// Реализация метода Display для Employee
+func (e Employee) Display() {
+    
+}
+
+// Функция фильтрации сотрудников по возрасту и зарплате
+func FilterEmployees(employees []Employee, minAge int, minSalary int) []Employee {
+    
+    return filtered
+}
+
+func main() {
+    // Инициализация списка сотрудников
+    employees := []Employee{
+    }
+
+    // Параметры фильтрации
+    minAge := 
+    minSalary := 
+
+    // Фильтрация и вывод
+    filteredEmployees := 
+}
+
+
+func d(x int) int {
+    return x * x
+}
+
+
+func square(number int) int {
+    return number * number
+}
+
+
+func data(user string) {
+    // ...
+}
+
+
+func saveUserData(username string) {
+    // ...
+}
+
+
+import "myapp/processingdata"
+
+import "myapp/process"
+
+func  add (a int,b int)int{
+return a+b}
+
+
+func add(a int, b int) int {
+	return a + b
+}
+
+
+// Add возвращает сумму двух целых чисел.
+func Add(a, b int) int {
+	return a + b
+}
+
+
+// Эта функция делает сложение
+func Add(a, b int) int {
+	return a + b
+}
+
+
+func calculateDiscount(price float64) float64 {
+	if price > 100 {
+		// Скидка 10% применяется только к товарам дороже 100
+		return price * 0.9
+	}
+	return price
+}
+
+
+
+func double(x int) int {
+	// Умножаем x на 2
+	return x * 2
+}
+
+
+
+// Функция, которую мы хотим протестировать
+func Add(a, b int) int {
+	return a + b
+}
+
+
+
+import "testing"
+
+func TestAdd(t *testing.T) {
+	result := Add(2, 3)
+	expected := 5
+
+	if result != expected {
+		t.Errorf("Ожидали %d, но получили %d", expected, result)
+	}
+}
+
+
+func TestAdd(t *testing.T) {
+	Add(2, 3)
+}
+
+
+
+data, err := os.ReadFile("config.txt")
+if err != nil {
+	log.Fatalf("не удалось прочитать файл: %v", err)
+}
+fmt.Println(string(data))
+
+
+data, _ := os.ReadFile("config.txt")
+fmt.Println(string(data))
+
+
+
+func loadConfig(path string) ([]byte, error) {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return nil, fmt.Errorf("ошибка при загрузке %s: %w", path, err)
+	}
+	return data, nil
+}
+
+
+
+package main
+
+import (
+	"fmt"
+	"myapp/math"
+)
+
+func main() {
+	fmt.Println(math.Sum(2, 3))
+}
+
+
+package math
+
+func Sum(a, b int) int {
+	return a + b
+}
+
+
+package main
+
+import "fmt"
+
+func Sum(a, b int) int {
+	return a + b
+}
+
+func main() {
+	fmt.Println(Sum(2, 3))
+}
