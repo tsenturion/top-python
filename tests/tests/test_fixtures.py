@@ -135,3 +135,13 @@ def test_output(capsys):
     hello_world()
     captured = capsys.readouterr()
     assert captured.out == 'Hello, world!\n'
+
+
+# import pytest
+
+@pytest.fixture
+def result():
+    return sum([5, 9])
+
+def test_sum(result):
+    assert result == 14
