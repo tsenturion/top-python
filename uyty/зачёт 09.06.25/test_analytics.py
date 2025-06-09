@@ -5,6 +5,7 @@ from analytics import (
     count_orders_by_user,
     validate_order,
 )
+
 @pytest.fixture
 def sample_orders():
     return [
@@ -13,6 +14,7 @@ def sample_orders():
         {'id': 3, 'user': 'alice', 'amount': 100, 'status': 'delivered'},
         {'id': 4, 'user': 'charlie', 'amount': 50, 'status': 'canceled'},
     ]
+
 def test_filter_orders_correct(sample_orders):
     filtered = filter_orders(sample_orders, 'delivered')
     assert isinstance(filtered, list)
@@ -21,6 +23,7 @@ def test_filter_orders_correct(sample_orders):
 def test_filter_orders_incorrect_status_type(sample_orders):
     with pytest.raises(TypeError):
         filter_orders(sample_orders, 123)
+
 def test_calculate_total_revenue_ok(sample_orders):
     total = calculate_total_revenue(sample_orders)
     assert isinstance(total, float)
@@ -39,6 +42,7 @@ def test_calculate_total_revenue_invalid_order_missing_field():
     ]
     with pytest.raises(ValueError):
         calculate_total_revenue(orders)
+
 def test_count_orders_by_user_normal(sample_orders):
     result = count_orders_by_user(sample_orders)
     assert isinstance(result, dict)
@@ -57,6 +61,7 @@ def test_count_orders_by_user_missing_required_field():
     ]
     with pytest.raises(ValueError):
         count_orders_by_user(orders)
+        
 def test_validate_order_valid():
     order = {'id': 5, 'user': 'dave', 'amount': 100, 'status': 'pending'}
     assert validate_order(order) is True
