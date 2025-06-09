@@ -25,23 +25,23 @@ def sample_orders():
     ("shipped", 0, []),
 ])
 def test_filter_orders(sample_orders, status, expected_count, expected_ids):
-    """Тестирование фильтрации заказов по разным статусам"""
+  
     result = filter_orders(sample_orders, status)
     assert len(result) == expected_count
     assert [order["id"] for order in result] == expected_ids
 
 def test_filter_orders_invalid_status_type(sample_orders):
-    """Тест с неправильным типом статуса"""
+   
     with pytest.raises(TypeError):
         filter_orders(sample_orders, 123)
 
 # Тесты для calculate_total_revenue
 def test_calculate_total_revenue(sample_orders):
-    """Тест подсчета общей выручки"""
+   
     assert calculate_total_revenue(sample_orders) == 650
 
 def test_calculate_total_revenue_empty():
-    """Тест с пустым списком заказов"""
+   
     assert calculate_total_revenue([]) == 0
 
 @pytest.mark.parametrize("invalid_order", [
@@ -50,18 +50,18 @@ def test_calculate_total_revenue_empty():
     {"amount": "100"},
 ])
 def test_calculate_total_revenue_invalid(invalid_order):
-    """Тест с некорректными заказами"""
+  
     with pytest.raises(ValueError):
         calculate_total_revenue([invalid_order])
 
 # Тесты для count_orders_by_user
 def test_count_orders_by_user(sample_orders):
-    """Тест подсчета заказов по пользователям"""
+   
     result = count_orders_by_user(sample_orders)
     assert result == {"Alice": 2, "Bob": 1, "Charlie": 1}
 
 def test_count_orders_by_user_empty():
-    """Тест с пустым списком заказов"""
+    
     assert count_orders_by_user([]) == {}
 
 # Параметризованные тесты для validate_order
@@ -74,7 +74,7 @@ def test_count_orders_by_user_empty():
     ({"id": 1, "user": "Alice", "amount": "100", "status": "completed"}, False),  # Неправильный тип суммы
 ])
 def test_validate_order(order, is_valid):
-    """Тестирование валидации различных заказов"""
+    
     if is_valid:
         assert validate_order(order) is True
     else:
