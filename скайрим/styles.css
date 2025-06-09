@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+#menu-container {
+    margin-bottom: 20px;
+}
+
+#effects-menu {
+    display: none;
+    background-color: #f4f4f4;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+}
+
+#effects-menu button {
+    display: block;
+    margin: 5px 0;
+    padding: 10px;
+    background-color: #3c8dbc;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#effects-menu button:hover {
+    background-color: #6fa3d4;
+}
+
+#main-table, #selection-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.green-bg {
+    background-color: #d4f7d4; /* Светло-зеленый для положительных эффектов */
+}
+
+.red-bg {
+    background-color: #f7d4d4; /* Светло-красный для отрицательных эффектов */
+}
+
+.mixed-bg {
+    background-color: #fff3cd; /* Желтый для смешанных эффектов */
+}
+
+.hidden {
+    display: none;
+}
+
+button {
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

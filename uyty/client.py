@@ -1,55 +1,44 @@
 import socket
-import os
+import time
 
-def send_line(sock, line):
-    sock.sendall(f"{line}\n".encode('utf-8'))
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+socket.timeout(3)
 
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_socket.connect(('127.0.0.1', 9000))
+server_address = ("localhost", 12345)
+message_base = 'Hello, server! это пакет с id'
+max_attempts = 3
 
-command = input("Введите команду (UPLOAD / DOWNLOAD): ").strip().upper()
-filename = input("Введите имя файла: ").strip()
+for attempt in range(1, max_attempts + 1):
+    message_id = f'{attempt}'
+    message = f'{message_base} {message_id}'
+    try:
+        start_time = time.time()
 
-send_line(client_socket, command)
-send_line(client_socket, filename)
+        print(f"Попытка {attempt}: Отправка сообщения '{message}' на сервер {server_address}")
+        client_socket.sendto(message.encode(), server_address)
 
-if command == "UPLOAD":
-    if not os.path.exists(filename):
-        print("Файл не найден.")
-        client_socket.close()
-    else:
-        with open(filename, 'rb') as f:
-            while chunk := f.read(1024):
-                client_socket.sendall(chunk)
+        data, _ = client_socket.recvfrom(1024)
+        end_time = time.time()
+        delay = end_time - start_time
 
-        client_socket.shutdown(socket.SHUT_WR)  # Сообщаем серверу, что данные отправлены
+        print(f"ответ от сервера: {data.decode()}")
+        print(f"Задержка: {delay:.4f} секунд")
 
-        response = b''
-        while True:
-            part = client_socket.recv(1024)
-            if not part:
-                break
-            response += part
+        if data.decode() == "OK":
+            print(f"Сообщение '{message}' успешно отправлено и получено от сервера.")
+            break
+        elif data.decode() == "ERROR":
+            print(f"Сообщение '{message}' не удалось отправить или получить от сервера.")
+            break
 
-        print("Ответ сервера:", response.decode('utf-8'))
+    except socket.timeout:
+        print(f"Попытка {attempt}: Таймаут при отправке сообщения.")
+        print("Повторная попытка отправки...")
 
-elif command == "DOWNLOAD":
-    is_error = False
-    with open(f"загружено_{filename}", 'wb') as f:
-        while True:
-            data = client_socket.recv(1024)
-            if not data:
-                break
-            if data.startswith("ОШИБКА:".encode()):
-                print(data.decode('utf-8'))
-                is_error = True
-                break
-            f.write(data)
-    if not is_error:
-        print(f"Файл успешно сохранён как загружено_{filename}")
-
+    except Exception as e:
+        print(f"ошибка клиента: {e}")
+        break
 
 else:
-    print("Неизвестная команда.")
-
-client_socket.close()
+    print(f'сервер не ответил после {max_attempts} попыток')
+        
