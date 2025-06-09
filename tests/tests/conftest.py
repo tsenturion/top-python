@@ -3,6 +3,13 @@
 def df(scope='session'):
     conn = connect('sqlite:///memory')
     return conn
+
+@pytest.fixture(scope='session')
+def connection():
+    engine = create_engine(
+
+    )
+    return engine.connect()
 """
 
 """@pytest.fixture
@@ -32,3 +39,4 @@ def default_messages():
 def clean_messages(default_messages):
     print("[setup] clean_messages")
     return [msg for msg in default_messages if msg.strip()]
+
