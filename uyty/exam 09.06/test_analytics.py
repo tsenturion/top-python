@@ -1,7 +1,6 @@
 import pytest
 from analytics import filter_orders, calculate_total_revenue, count_orders_by_user, validate_order
 
-# fixture with examples 
 @pytest.fixture
 def sample_orders():
     return [
@@ -14,13 +13,13 @@ def sample_orders():
 
 
 def test_filter_orders_by_status(sample_orders, capsys):
-    print("\nTesting orders by ststus")
+    print("\nТестирование по статусу")
     filtered = filter_orders(sample_orders, "completed")
-    print(f"Orders found: {len(filtered)}")
-    print("Orders:", filtered)
+    print(f"Найдено заказов: {len(filtered)}")
+    print("ЗАказы:", filtered)
     assert len(filtered) == 3
     assert all(order["status"] == "completed" for order in filtered)
-    print("Status filtration works fine")
+    print("Фильтрация по статусу работает")
     
     with capsys.disabled():
         print("\nResult:")
@@ -28,105 +27,105 @@ def test_filter_orders_by_status(sample_orders, capsys):
             print(f"ID: {order['id']}, User: {order['user']}, Amount: {order['amount']}")
 
 def test_filter_orders_empty_result(sample_orders):
-    print("\nTesting filtration with empty value")
+    print("\nТестрирование филтрации с пустым значением")
     filtered = filter_orders(sample_orders, "shipped")
-    print(f"Orders found: {len(filtered)} (should be - 0)")
+    print(f"Найдено заказов: {len(filtered)} (should be - 0)")
     assert len(filtered) == 0
-    print("Filter returns empty value if there is no equals")
+    print("Фильтр вернёт пустое знаение если нет сходства")
 
 def test_filter_orders_invalid_status_type(sample_orders):
-    print("\nTest for wrong status")
+    print("\nТестирование неверного статуса")
     try:
         filter_orders(sample_orders, 123)
-        print("Not passed: no exceptions")
+        print("Не пройдено, нет исключений")
         assert False
     except TypeError as e:
-        print(f"Exception: {type(e).__name__}: {e}")
+        print(f"Исключение: {type(e).__name__}: {e}")
         assert True
 
 
 def test_calculate_total_revenue(sample_orders):
-    print("\nTesting amount of revenue")
+    print("\nТестрирование количество выручки")
     total = calculate_total_revenue(sample_orders)
     expected = 100 + 200 + 50 + 300 + 150
-    print(f"Revenue: {total} (expected - {expected})")
+    print(f"Выручка: {total} (ожидается - {expected})")
     assert total == expected
-    print("Sum is correct")
+    print("Сумма верна")
 
 def test_calculate_total_revenue_empty_list():
-    print("\nTest for empty revenue")
+    print("\nТест пустой выручки")
     total = calculate_total_revenue([])
-    print(f"Revenue: {total} (expected - 0)")
+    print(f"Выручка: {total} (ожидается - 0)")
     assert total == 0
-    print("For each list returns 0")
+    print("Для каждого списка возвращается 0")
 
 def test_calculate_total_revenue_negative_amount():
-    print("\nTesting negative sum")
+    print("\nТестирование отрицательной суммы")
     try:
         calculate_total_revenue([{"user": "Alice", "amount": -100, "status": "completed"}])
-        print("test is not passed: no exception")
+        print("Тест не пройден, нет исключений")
         assert False
     except ValueError as e:
-        print(f"Exception called: {type(e).__name__}: {e}")
+        print(f"Вызванно исключение: {type(e).__name__}: {e}")
         assert True
 
 def test_count_orders_by_user(sample_orders):
-    print("\nOrders by users")
+    print("\nЗаказы пользователей")
     counts = count_orders_by_user(sample_orders)
     expected = {"Alice": 2, "Bob": 2, "Charlie": 1}
-    print("Result:", counts)
-    print("Expected:", expected)
+    print("Результат:", counts)
+    print("Ожидаемо:", expected)
     assert counts == expected
-    print("count is correct")
+    print("Счёт верен")
 
 def test_count_orders_by_user_empty_list():
-    print("\nCount for empty values")
+    print("\nСчёт пустых значений")
     counts = count_orders_by_user([])
-    print("Result:", counts)
+    print("Результат:", counts)
     assert counts == {}
-    print("For empty list empty dict is returned")
+    print("За пустой список возвращается пустой словарь")
 #I'm gonna put Yipeee here, noone will see this anyway so
 #Yipeeee!
 def test_validate_order_valid():
-    print("\nTest for correct order")
+    print("\nТест на правильный заказ")
     order = {"id": 1, "user": "Alice", "amount": 100, "status": "completed"}
     result = validate_order(order)
-    print("Order:", order)
+    print("Заказ:", order)
     assert result is True
-    print("Valid order is found correctly")
+    print("Правильный заказ найден верно")
 
 def test_validate_order_missing_field():
-    print("\nTest on order validation with empty field")
+    print("\nТест на проверку на пустого значения заказа")
     order = {"id": 1, "user": "Alice", "status": "completed"}
     try:
         validate_order(order)
-        print("Not passed: no exception")
+        print("Тест не пройден, нет исключений")
         assert False
     except ValueError as e:
-        print(f"Exception: {type(e).__name__}: {e}")
+        print(f"Исключение: {type(e).__name__}: {e}")
         assert True
 
 def test_validate_order_invalid_user_type():
-    print("\nTest for validate order with invalid user")
+    print("\nТест на проверку заказов с неверными пользователями")
     order = {"id": 1, "user": 123, "amount": 100, "status": "completed"}
     try:
         validate_order(order)
-        print("Not passed: no exception")
+        print("Не пройден, нет исключений")
         assert False
     except TypeError as e:
-        print(f"Exception: {type(e).__name__}: {e}")
+        print(f"Исключение: {type(e).__name__}: {e}")
         assert True
 
 
 def test_validate_order_negative_amount():
-    print("\nTest for validation of order with negative value")
+    print("\nТест на проверку отрицательных значений")
     order = {"id": 1, "user": "Alice", "amount": -100, "status": "completed"}
     try:
         validate_order(order)
-        print("Not passed: not exception")
+        print("Не пройден, нет исключений")
         assert False
     except ValueError as e:
-        print(f"Exception: {type(e).__name__}: {e}")
+        print(f"Исключение: {type(e).__name__}: {e}")
         assert True
 
 
