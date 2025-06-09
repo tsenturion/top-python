@@ -20,6 +20,7 @@ def sample_orders():
 @pytest.fixture
 def empty_orders():
     return []
+    
 def test_filter_orders_by_status(sample_orders):
     filtered = filter_orders(sample_orders, "completed")
     assert len(filtered) == 2
@@ -31,6 +32,7 @@ def test_filter_orders_empty_result(sample_orders):
 def test_filter_orders_invalid_status_type(sample_orders):
     with pytest.raises(TypeError):
         filter_orders(sample_orders, 123)
+        
 def test_calculate_total_revenue(sample_orders):
     assert calculate_total_revenue(sample_orders) == 500
 def test_calculate_total_revenue_empty_list(empty_orders):
@@ -38,11 +40,13 @@ def test_calculate_total_revenue_empty_list(empty_orders):
 def test_calculate_total_revenue_negative_amount():
     with pytest.raises(ValueError):
         calculate_total_revenue([{"id": 1, "user": "Alice", "amount": -100, "status": "completed"}])
+        
 def test_count_orders_by_user(sample_orders):
     counts = count_orders_by_user(sample_orders)
     assert counts == {"Alice": 2, "Bob": 1, "Charlie": 1}
 def test_count_orders_by_user_empty_list(empty_orders):
     assert count_orders_by_user(empty_orders) == {}
+    
 def test_validate_order_correct():
     order = {"id": 1, "user": "Alice", "status": "completed", "amount": 100}
     assert validate_order(order) is True
