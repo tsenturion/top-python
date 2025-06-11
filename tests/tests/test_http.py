@@ -1,5 +1,5 @@
 import requests
-
+import pytest
 
 def get_fork_names(owner: str, repo: str, token: str) -> list:
     url = f"https://api.github.com/repos/{owner}/{repo}/forks"
@@ -126,7 +126,7 @@ def test_get_private_fork_names():
 
 @pytest.mark.vcr
 def test_get_private_fork_names():
-    asert get_private_fork_names('tsenturion') == ['one']
+    assert get_private_fork_names('tsenturion') == ['one']
 """class EmailSender:
     def send(self, message):
         print(f'Отправка email: {message}')
