@@ -11,3 +11,8 @@ uv add --dev pytest
 скопировать и добавить папки src, tests
 
 uv run pytest
+
+
+uv pip install --group dev
+uv pip install pytest pytest-cov
+uv run pytest --cov

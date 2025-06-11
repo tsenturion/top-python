@@ -1,5 +1,5 @@
 import pytest
-from app.analyzer import analyzer
+import app.analyzer as analyzer
 
 def test_contains_urgent(clean_messages):
     assert analyzer.contains_urgent(clean_messages) is True
