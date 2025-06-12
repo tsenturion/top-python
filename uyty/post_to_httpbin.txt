@@ -1,0 +1,10 @@
+PS C:\Users\22300393\Pictures\top-python> & C:/Users/22300393/AppData/Local/Programs/Python/Python313/python.exe c:/Users/22300393/Pictures/top-python/uyty/zadanie32.py
+Статус-код: 200
+
+Ответ в формате JSON:
+{'args': {}, 'data': '', 'files': {}, 'form': {'exam': 'http_test', 'username': 'student'}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Content-Length': '31', 'Content-Type': 'application/x-www-form-urlencoded', 'Hos
+t': 'httpbin.org', 'User-Agent': 'python-requests/2.32.3', 'X-Amzn-Trace-Id': 'Root=1-6839c30d-3908516f636541d82fbd11e4'}, 'json': None, 'origin': '45.144.54.184', 'url': 'https://httpbin.org/post'}
+
+Подтверждение полученных данных сервером:
+{'exam': 'http_test', 'username': 'student'}
+PS C:\Users\22300393\Pictures\top-python>
