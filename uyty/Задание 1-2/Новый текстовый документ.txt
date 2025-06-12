@@ -1,0 +1,16 @@
+PS C:\Users\22300668\top-python> & C:/Users/22300668/AppData/Local/Programs/Python/Python313/python.exe c:/Users/22300668/top-python/uyty/tcp_client.py
+Подключено к серверу.
+Клиент: 123
+Сервер: & C:/Users/22300668/AppData/Local/Programs/Python/Python313/python.exe c:/Users/22300668/top-python/uyty/tcp_client.py
+Клиент: 1456
+Сервер: & C:/Users/22300668/AppData/Local/Programs/Python/Python313/python.exe c:/Users/22300668/top-python/uyty/tcp_client.py
+Клиент: exit
+Клиент завершает соединение.
+PS C:\Users\22300668\top-python>
+PS C:\Users\22300668\top-python> & C:/Users/22300668/AppData/Local/Programs/Python/Python313/python.exe c:/Users/22300668/top-python/uyty/udp_echo_client.py
+Клиент: проверка
+Сервер: проверка
+Клиент: еще проверка
+Сервер: еще проверка
+Клиент:
+

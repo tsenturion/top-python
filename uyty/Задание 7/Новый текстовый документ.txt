@@ -1,0 +1,104 @@
+C:\Users\22300668>top-python\uyty\tvmaze_api_practice.py
+Введите название шоу: friends
+
+Результаты поиска:
+
+1. Friends
+   Год запуска: 1994-09-22
+   Жанры: Comedy, Romance
+   Описание: Six young (20-something) people from New York City (Manhattan), on their own and struggling to survive in the real world, find the companionship, comfort and support they get from each other to be the...
+
+2. Friends
+   Год запуска: 2002-02-04
+   Жанры: Drama, Romance
+   Описание: Left alone on a trip to Hong Kong, Tomoko finds herself the victim of a purse-snatching. The police arrest the man she points out, but it turns out to be the wrong person: a young Korean man named Ji ...
+
+3. Friends
+   Год запуска: 1979-03-25
+   Жанры: Drama, Comedy
+   Описание: A comedy-drama series as seen through the eyes of three 11-year-old children from different backgrounds with episodes focusing upon the trials and tribulations of adolescence, and involved subjects su...
+
+4. Friends
+   Год запуска: 2021-02-17
+   Жанры: Нет жанров
+   Описание: Reuniting old friends and introducing new acquaintances, cast members from Heart Signal 2 &amp; 3 are back in a brand new variety series and sparks are sure to fly! Invited to spend a very special win...
+
+5. Smiling Friends
+   Год запуска: 2020-04-01
+   Жанры: Comedy
+   Описание: Smiling Friends is a hit animated comedy co-created and starring Michael Cusack and Zach Hadel that follows the employees of a small company dedicated to bringing happiness to a bizarre yet colorful w...
+
+6. Angel's Friends
+   Год запуска: 2009-10-12
+   Жанры: Adventure, Children, Fantasy
+   Описание: Special school for the Angels is full of secrets! What happens if at the same table will be angels and devils? Raf, Uri, Sweet and Mickey - a company of angels. But to become a real team, they do not ...
+
+7. Fat Friends
+   Год запуска: 2000-10-12
+   Жанры: Drama
+   Описание: Fat Friends is an ITV drama (made by Tiger Aspect and Yorkshire Television), following a group of overweight people, their laughter and pain and addresses the absurdities of dieting in our modern age....
+
+8. LEGO Friends
+   Год запуска: 2012-05-05
+   Жанры: Comedy, Children
+   Описание: As a way to make friends, new girl in town Olivia volunteers to work at the Heartlake City World Petacular with four other girls....
+
+9. Super Friends
+   Год запуска: 1973-09-08
+   Жанры: Action, Adventure, Science-Fiction
+   Описание: 1973's Super Friends' premise was for Superman to team up with other DC Comics superheroes (Aquaman, Batman and Robin, and Wonder Woman (Diana Prince) with her magic lasso, telepathy and invisible jet...
+
+10. Isshuukan Friends.
+   Год запуска: 2014-04-07
+   Жанры: Drama, Comedy, Anime
+   Описание: Begins with Yuki, a boy who wants to become friends with his classmate and desk neighbor Kaori. However, she gently declines his friendship, saying, "But, my... Memories of my friends disappear in a w...
+
+Выбрано шоу: Friends (ID: 431)
+
+Сезоны:
+Сезон 1:
+  Начало: 1994-09-22
+  Окончание: 1995-05-18
+Сезон 2:
+  Начало: 1995-09-21
+  Окончание: 1996-05-16
+Сезон 3:
+  Начало: 1996-09-16
+  Окончание: 1997-05-15
+Сезон 4:
+  Начало: 1997-09-25
+  Окончание: 1998-05-07
+Сезон 5:
+  Начало: 1998-09-24
+  Окончание: 1999-05-20
+Сезон 6:
+  Начало: 1999-09-23
+  Окончание: 2000-05-18
+Сезон 7:
+  Начало: 2000-10-12
+  Окончание: 2001-05-17
+Сезон 8:
+  Начало: 2001-09-27
+  Окончание: 2002-05-16
+Сезон 9:
+  Начало: 2002-09-26
+  Окончание: 2003-05-15
+Сезон 10:
+  Начало: 2003-09-25
+  Окончание: 2004-05-06
+
+Всего эпизодов: 236
+
+Первые 5 эпизодов:
+Эпизод 1: The One Where Monica Gets a Roommate
+  Дата выхода: 1994-09-22
+Эпизод 2: The One With the Sonogram at the End
+  Дата выхода: 1994-09-29
+Эпизод 3: The One With the Thumb
+  Дата выхода: 1994-10-06
+Эпизод 4: The One With George Stephanopoulos
+  Дата выхода: 1994-10-13
+Эпизод 5: The One With the East German Laundry Detergent
+  Дата выхода: 1994-10-20
+
+C:\Users\22300668>
