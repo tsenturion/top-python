@@ -1,0 +1,148 @@
+Microsoft Windows [Version 10.0.17763.5458]
+(c) Корпорация Майкрософт (Microsoft Corporation), 2018. Все права защищены.
+
+C:\Users\22300457\top-python\uyty>python tvmaze_api_practice.py
+Введите название шоу для поиска: Friends
+
+?? Найденные шоу:
+
+[1] Friends (1994-09-22)
+   Жанры: Comedy, Romance
+   Описание: Six young (20-something) people from New York City (Manhattan), on their own and struggling to survive in the real world, find the companionship, comfort and support they get from each other to be the...
+
+[2] Friends (2002-02-04)
+   Жанры: Drama, Romance
+   Описание: Left alone on a trip to Hong Kong, Tomoko finds herself the victim of a purse-snatching. The police arrest the man she points out, but it turns out to be the wrong person: a young Korean man named Ji ...
+
+[3] Friends (1979-03-25)
+   Жанры: Drama, Comedy
+   Описание: A comedy-drama series as seen through the eyes of three 11-year-old children from different backgrounds with episodes focusing upon the trials and tribulations of adolescence, and involved subjects su...
+
+[4] Friends (2021-02-17)
+   Жанры:
+   Описание: Reuniting old friends and introducing new acquaintances, cast members from Heart Signal 2 &amp; 3 are back in a brand new variety series and sparks are sure to fly! Invited to spend a very special win...
+
+[5] Smiling Friends (2020-04-01)
+   Жанры: Comedy
+   Описание: Smiling Friends is a hit animated comedy co-created and starring Michael Cusack and Zach Hadel that follows the employees of a small company dedicated to bringing happiness to a bizarre yet colorful w...
+
+[6] Angel's Friends (2009-10-12)
+   Жанры: Adventure, Children, Fantasy
+   Описание: Special school for the Angels is full of secrets! What happens if at the same table will be angels and devils? Raf, Uri, Sweet and Mickey - a company of angels. But to become a real team, they do not ...
+
+[7] Fat Friends (2000-10-12)
+   Жанры: Drama
+   Описание: Fat Friends is an ITV drama (made by Tiger Aspect and Yorkshire Television), following a group of overweight people, their laughter and pain and addresses the absurdities of dieting in our modern age....
+
+[8] LEGO Friends (2012-05-05)
+   Жанры: Comedy, Children
+   Описание: As a way to make friends, new girl in town Olivia volunteers to work at the Heartlake City World Petacular with four other girls....
+
+[9] Super Friends (1973-09-08)
+   Жанры: Action, Adventure, Science-Fiction
+   Описание: 1973's Super Friends' premise was for Superman to team up with other DC Comics superheroes (Aquaman, Batman and Robin, and Wonder Woman (Diana Prince) with her magic lasso, telepathy and invisible jet...
+
+[10] Isshuukan Friends. (2014-04-07)
+   Жанры: Drama, Comedy, Anime
+   Описание: Begins with Yuki, a boy who wants to become friends with his classmate and desk neighbor Kaori. However, she gently declines his friendship, saying, "But, my... Memories of my friends disappear in a w...
+
+?? Выбрано шоу: Friends (ID: 431)
+
+?? Сезоны:
+  Сезон 1: 1994-09-22 — 1995-05-18
+  Сезон 2: 1995-09-21 — 1996-05-16
+  Сезон 3: 1996-09-16 — 1997-05-15
+  Сезон 4: 1997-09-25 — 1998-05-07
+  Сезон 5: 1998-09-24 — 1999-05-20
+  Сезон 6: 1999-09-23 — 2000-05-18
+  Сезон 7: 2000-10-12 — 2001-05-17
+  Сезон 8: 2001-09-27 — 2002-05-16
+  Сезон 9: 2002-09-26 — 2003-05-15
+  Сезон 10: 2003-09-25 — 2004-05-06
+
+?? Всего эпизодов: 236
+Первые 5 эпизодов:
+  - The One Where Monica Gets a Roommate (1994-09-22)
+  - The One With the Sonogram at the End (1994-09-29)
+  - The One With the Thumb (1994-10-06)
+  - The One With George Stephanopoulos (1994-10-13)
+  - The One With the East German Laundry Detergent (1994-10-20)
+
+C:\Users\22300457\top-python\uyty>python tvmaze_api_practice.py
+Введите название шоу для поиска: shemalles
+
+?? Найденные шоу:
+
+[1] Les Semailles et les Moissons (2001-10-22)
+   Жанры: Drama, War, History
+   Описание: ...
+
+?? Выбрано шоу: Les Semailles et les Moissons (ID: 53200)
+
+?? Сезоны:
+  Сезон 1: 2001-10-22 — 2001-10-23
+
+?? Всего эпизодов: 2
+Первые 5 эпизодов:
+  - Amelie (2001-10-22)
+  - Elisabeth (2001-10-23)
+
+C:\Users\22300457\top-python\uyty>python tvmaze_api_practice.py
+Введите название шоу для поиска: z
+
+?? Найденные шоу:
+
+[1] Generation Z (2024-10-13)
+   Жанры: Drama, Comedy, Horror
+   Описание: Set in the fictional town of Dambury, the kind of place with stark opportunities and not much to do. Grey, unassuming, forgotten. It's the last place you'd expect the apocalypse to begin… But when an ...
+
+[2] Control Z (2020-05-22)
+   Жанры: Drama
+   Описание: When a hacker begins releasing students secrets to the entire high school, the socially isolated but observant Sofia works to uncover his/her identity....
+
+[3] Z Nation (2014-09-12)
+   Жанры: Action, Horror, Science-Fiction
+   Описание: Z Nation starts three years after the zombie virus has gutted the country, a team of everyday heroes must transport the only known survivor of the plague from New York to California, where the last fu...
+
+[4] Reality Z (2020-06-10)
+   Жанры: Comedy, Action, Horror
+   Описание: An ode to horror, humor and pop culture, Reality Z narrates in ten episodes a zombie apocalypse that imprisons participants and producers of a reality show called Olimpo. During an elimination night o...
+
+[5] Z Cars (1962-01-02)
+   Жанры: Drama, Crime
+   Описание: Z Cars or Z-Cars was a British television drama series centred on the work of mobile uniformed police in the fictional town of Newtown, based on Kirkby, Merseyside. Produced by the BBC, it debuted in ...
+
+[6] Mazinger Z (1972-12-03)
+   Жанры: Drama, Action, Anime, Science-Fiction
+   Описание: The villainous Dr. Hell has amassed an army of mechanical beasts in his secret hideaway, the island of Bardos located in the Aegean Sea. He is capable of controlling mechanized beasts with his cane, a...
+
+[7] Command Z (2023-07-17)
+   Жанры: Comedy, Science-Fiction
+   Описание: "This is historic — literally."At least, that's what a digital Michael Cera says at the start of the trailer for Steven Soderbergh's upcoming sci-fi comedy series, "Command Z." The "Ocean's 11?-throug...
+
+[8] Generation Z (2019-06-07)
+   Жанры: Drama
+   Описание: A web series following 5 diverse teens whose lives begin to intersect when they end up in a therapy/support group. We see their journeys in the program, the situations that landed them there, and thei...
+
+[9] Революция Z (2012-10-25)
+   Жанры: Drama, Music, Romance
+   Описание: Революция Z follows the emotionally busy everyday life of a group of students who face a bunch of challenges and barriers to pursuing their musical dream. Friendship, love, competition, prejudice, int...
+
+[10] Generasjon Z (2018-12-04)
+   Жанры:
+   Описание: Meet seven young people who choose their own path. Despite being in the starting pit, they know very well what they want, and they do everything to achieve the dream. They have high expectations, both...
+
+?? Выбрано шоу: Generation Z (ID: 72049)
+
+?? Сезоны:
+  Сезон 1: 2024-10-13 — 2024-10-13
+
+?? Всего эпизодов: 6
+Первые 5 эпизодов:
+  - Episode 1 (2024-10-13)
+  - Episode 2 (2024-10-13)
+  - Episode 3 (2024-10-13)
+  - Episode 4 (2024-10-13)
+  - Episode 5 (2024-10-13)
+
+C:\Users\22300457\top-python\uyty>
