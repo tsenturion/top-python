@@ -53,6 +53,12 @@ Thread - класс, реализующий поток исполнения ко
 from concurrent.futures import ThreadPoolExecutor
     ThreadPool - многопоточная очередь задач
 
+    Future
+    future.done() - проверяет завершена ли задача
+    future.result() - возвращает результат выполнения задачи
+    future.exception() - возвращает исключение, если оно было
+    future.add_done_callback(fn) - добавить функцию, которая будет вызвана после завершения задачи
+
 Barrier - синхронизация потоков, когда все потоки должны дождаться друг друга
     wait(timeout=None) - ожидание завершения всех потоков
     BrokenBarrierError - исключение, когда все потоки не успели дождаться друг друга
@@ -770,7 +776,7 @@ def main():
 
     print(f"[{threading.current_thread().name}] Все напоминания завершены")
 
-    
+
 from concurrent.futures import ThreadPoolExecutor
 
 executor = ThreadPoolExecutor(max_workers=5)
@@ -803,6 +809,7 @@ with ThreadPoolExecutor(max_workers=3) as executor:
  
 for r in results:
     print(r)
+
 
 futures = []
 
@@ -845,6 +852,7 @@ with ThreadPoolExecutor(max_workers=4) as executor:
     for _ in range(4):
         executor.submit(worker, q)
 
+
 from threading import Barrier
 
 barrier = Barrier(parties=3, timeout=3)
@@ -883,6 +891,13 @@ for i in range(3):
 for t in threads:
     t.join()
 
+"""
+есть производитель , который кладёт задачи (строки) в очередь
+есть несколько потребителей, которые берут задачи из очереди и обрабатывают их
+производитель должен положить в очередь ограниченное количество задач. например, 10
+после завершения добавления задач производитель кладёт в очередь специальные маркеры завершения, чтобы сигнализировать потребителям о конце работы
+потребители должны завершить работу после получения маркера None
+"""
 
 """
 from queue import Queue
