@@ -1,63 +1,46 @@
 """
-производитель-потребитель
-общий список buffer, хранит максимум 5 элементов
-производитель добавляет в список числа от 1 до 20
-    если буфер заполнен, производитель ждет
-    после добавления числа производитель уведомляет потребителя
+напоминалка
+список напоминаний, в каждом
+    сообщение - строка
+    задержка в секундах
+для каждого напоминания создать Timer, который через указанное время выводит сообщение
 
-потребитель извлекает элементы из буфера
-    если буфер пуст, потребитель ждет до тех пор, пока не появится новый элемент (производитель добавляет)
-    после извлечения элемента потребитель уведомляет производителя
+сразу запустить все таймеры
+дождаться завершения
 
-threading.current_thread().name для отладки
+reminders = [
+    ("сообщение 1", 1),
+    ("сообщение 2", 2),
+    ("сообщение 3", 3),
+]
 """
-from threading import Thread, Condition
+from threading import Timer
 import threading
 import time
 import random
 
-buffer = []
-MAX_SIZE = 5
-
-condition = Condition()
-
-def producer():
-    for i in range(1, 21):
-        with condition:
-            while len(buffer) == MAX_SIZE:
-                print(f"Производитель [{threading.current_thread().name}] ожидает")
-                condition.wait()
-
-            buffer.append(i)
-            print(f"Производитель [{threading.current_thread().name}] добавил элемент {i} в {buffer}")
-            condition.notify()
-
-        time.sleep(random.uniform(0.2, 0.6))
-
-def consumer():
-    for _ in range(20):
-        with condition:
-            while not buffer:
-                print(f"Потребитель [{threading.current_thread().name}] ожидает")
-                condition.wait()
-
-            item = buffer.pop(0)
-            print(f"Потребитель [{threading.current_thread().name}] извлек из {buffer} элемент {item}")
-            condition.notify()
-
-        time.sleep(random.uniform(0.3, 0.7))
+def reminder(message, delay):
+    print(f"[{threading.current_thread().name}] Напоминание: {message}")
 
 def main():
-    t1 = Thread(target=producer, name="Producer")
-    t2 = Thread(target=consumer, name="Consumer")
+    reminders = [
+        ("сообщение 1", 1),
+        ("сообщение 2", 2),
+        ("сообщение 3", 3),
+    ]
+    
+    timers = []
 
-    t1.start()
-    t2.start()
+    for message, delay in reminders:
+        t = Timer(delay, reminder, args=(message, delay))
+        timers.append(t)
+        t.start()
+        print(f"[{threading.current_thread().name}] Напоминание создано: {message}, срабатывает через {delay} секунд")
 
-    t1.join()
-    t2.join()
+    for t in timers:
+        t.join()
 
-    print("Все потоки завершили работу")
+    print(f"[{threading.current_thread().name}] Все напоминания завершены")
 
 if __name__ == "__main__":
     main()
