@@ -415,6 +415,56 @@ thread
 взять ресурс, подождать
 вернуть ресурс, обновить общий счетчик
 """
+from threading import Lock, Thread, BoundedSemaphore, Semaphore, RLock
+import threading
+import random
+import time
+
+total_operations = 0
+total_operations_lock = Lock()
+
+rlock = RLock()
+semaphore = Semaphore(3)
+bounded_semaphore = BoundedSemaphore(5)
+
+def update_operations():
+    global total_operations
+    with total_operations_lock:
+        total_operations += 1
+
+
+def nested_function():
+    with rlock:
+        print(f"[{threading.current_thread().name}] Внутренняя функция с RLock")
+
+def function_with_rlock():
+    with rlock:
+        print(f"[{threading.current_thread().name}] Внешняя функция с RLock")
+        nested_function()
+
+def worker(employee_id):
+    with semaphore:
+        print(f"[{threading.current_thread().name}] Сотрудник {employee_id} ждет ресурс...")
+        with bounded_semaphore:
+            print(f"[{threading.current_thread().name}] Сотрудник {employee_id} получил ресурс")
+            time.sleep(random.uniform(0.5, 1.5))
+            update_operations()
+            function_with_rlock()
+            print(f"[{threading.current_thread().name}] Сотрудник {employee_id} вернул ресурс")
+
+def main():
+    threads = []
+    for i in range(1, 11):
+        t = Thread(target=worker, args=(i,), name=f"Сотрудник-{i}")
+        threads.append(t)
+        t.start()
+
+    for t in threads:
+        t.join()
+
+    print(f"Общее количество операций: {total_operations}")
+    print(f"Количество активных потоков: {threading.active_count()}")
+    print("Список активных потоков:", [t.name for t in threading.enumerate()])
 
 
 from threading import Condition
@@ -443,6 +493,56 @@ with condition:
 
 threading.current_thread().name для отладки
 """
+from threading import Thread, Condition
+import threading
+import time
+import random
+
+buffer = []
+MAX_SIZE = 5
+
+condition = Condition()
+
+def producer():
+    for i in range(1, 21):
+        with condition:
+            while len(buffer) == MAX_SIZE:
+                print(f"Производитель [{threading.current_thread().name}] ожидает")
+                condition.wait()
+
+            buffer.append(i)
+            print(f"Производитель [{threading.current_thread().name}] добавил элемент {i} в {buffer}")
+            condition.notify()
+
+        time.sleep(random.uniform(0.2, 0.6))
+
+def consumer():
+    for _ in range(20):
+        with condition:
+            while not buffer:
+                print(f"Потребитель [{threading.current_thread().name}] ожидает")
+                condition.wait()
+
+            item = buffer.pop(0)
+            print(f"Потребитель [{threading.current_thread().name}] извлек из {buffer} элемент {item}")
+            condition.notify()
+
+        time.sleep(random.uniform(0.3, 0.7))
+
+def main():
+    t1 = Thread(target=producer, name="Producer")
+    t2 = Thread(target=consumer, name="Consumer")
+
+    t1.start()
+    t2.start()
+
+    t1.join()
+    t2.join()
+
+    print("Все потоки завершили работу")
+
+
+
 from threading import Event
 event = Event()
 event.set()
