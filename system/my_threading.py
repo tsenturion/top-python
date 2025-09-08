@@ -411,6 +411,7 @@ thread
 вернуть ресурс, обновить общий счетчик
 """
 
+
 from threading import Condition
 
 condition = Condition
