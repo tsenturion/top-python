@@ -1,5 +1,5 @@
 """
-asyncio - асинхронный цикл событий
+asyncio - асинхронный цикл событий. Для ввода/вывода, с ожиданием
 
 event loop цикл событий
     ищет задачи для выполнения
@@ -7,9 +7,9 @@ event loop цикл событий
     переключается на следующую задачу
     возвращается к приостановленной задаче, когда данные готовы
 
-корутины coroutine
-    async def
-    await
+корутины coroutine - функции
+    async def - корутина
+    await - ожидание
 
 create_task - создает задачу и регистрирует ее в цикле событий
 
@@ -51,12 +51,45 @@ import asyncio
 async def hello():
     print("hello")
     await asyncio.sleep(1)
-    #await some_coroutine()
     print('пока')
 
 """coro = hello()
 asyncio.run(hello())"""
 
+async def main():
+    await some_coroutine()
+
+#asyncio.run(main())
+"""
+ручное создание
+loop = asyncio.new_event_loop()
+asyncio.set_event_loop(loop)
+loop.run_until_complete(main())
+
+asyncio.create_task(my_coroutine())
+
+loop = asyncio.new_event_loop()
+try:
+    loop.run_until_complete(main())
+finally:
+    loop.close()
+
+loop.call_later(3, print, "прошло 3 секунды")
+task = asyncio.create_task(some_coroutine())
+task.cancel()
+"""
+
+async def say_hello():
+    print('привет')
+
+#coro = say_hello()
+
+async def hello():
+    print("привет")
+    await asyncio.sleep(1)
+    print('пока')
+
+#asyncio.run(hello())
 
 async def func1():
     print("func1 start")
@@ -93,6 +126,8 @@ async def main():
 
 #asyncio.run(main())
 
+#task = asyncio.create_task(my_coroutine())
+
 async def job(n):
     await asyncio.sleep(1)
     print(f"готово: {n}")
@@ -114,20 +149,26 @@ async def main():
 
 #asyncio.run(main())
 
+"""
+асинхронная система загрузки и обработки данных 
+корутина-поставщик fetch_data. Имитация asyncio.sleep с разным времен
+корутина-обработчик process_data получает реультат загрузки и обрабатывает его. Подсчет символом
+все параллельно, с create_task
+gather чтобы дождаться всех задач
+"""
 async def say_hello():
     print("hello")
     await asyncio.sleep(1)
-    raise Exception
+    #raise Exception
     print("world")
     
-
 async def main():
     task = asyncio.create_task(say_hello())
     print("корутина запущена")
     await task
 
-
 #asyncio.run(main())
+
 
 async def say(word, delay):
     await asyncio.sleep(delay)
@@ -141,8 +182,8 @@ async def main():
     )
     print(results)
 
-
 #asyncio.run(main())
+
 
 async def task(name, delay):
     await asyncio.sleep(delay)
@@ -156,6 +197,7 @@ async def main():
         print(d.result())
 
 #asyncio.run(main())
+
 
 async def do_work(n):
     await asyncio.sleep(n)
@@ -200,27 +242,7 @@ async def main():
 
 
 #asyncio.run(main())
-"""
 
-
-ручное создание
-loop = asyncio.get_event_loop()
-asyncio.set_event_loop(loop)
-
-loop = asyncio.new_event_loop()
-try:
-    loop.run_until_complete(main())
-finally:
-    loop.close()
-
-asyncio.create_task(my_coroutine())
-
-
-loop.call_later(3, print, "прошло 3 секунды")
-
-task = asyncio.create_task(some_coroutine())
-task.cancel()
-"""
 
 """
 список серверов - асинхронные функции. ждет случайное время
