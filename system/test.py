@@ -1,63 +1,38 @@
 """
-есть производитель , который кладёт задачи (строки) в очередь
-есть несколько потребителей, которые берут задачи из очереди и обрабатывают их
-производитель должен положить в очередь ограниченное количество задач. например, 10
-после завершения добавления задач производитель кладёт в очередь специальные маркеры завершения, чтобы сигнализировать потребителям о конце работы
-потребители должны завершить работу после получения маркера None
+асинхронная система загрузки и обработки данных 
+корутина-поставщик fetch_data. Имитация asyncio.sleep с разным времен
+корутина-обработчик process_data получает реультат загрузки и обрабатывает его. Подсчет символом
+все параллельно, с create_task
+gather чтобы дождаться всех задач
 """
-from queue import Queue
-from threading import Timer, Thread
-import threading
-import time
+import asyncio
 import random
 
-def producer(task_queue: Queue, num_tasks: int, num_consumers: int):
-    for i in range(num_tasks):
-        task = f"Task {i + 1}"
-        print(f"[Producer] Produced task: {task}")
-        task_queue.put(task)
-        time.sleep(random.uniform(0.5, 1.5))
+async def fetch_data(name):
+    delay = random.uniform(0.5, 2)
+    print(f"[FETCH] Загрузка {name} с задержкой {delay:.2f} секунд")
+    await asyncio.sleep(delay)
+    data = f"данные_{name}_{random.randint(1, 100)}"
+    print(f"[FETCH] Загрузка {name} завершена: {data}")
+    return data
 
-    for _ in range(num_consumers):
-        task_queue.put(None)
-    print("[Producer] Producer finished.")
+async def process_data(data):
+    print(f"[PROCESS] Обработка данных: {data}")
+    await asyncio.sleep(random.uniform(0.5, 2))
+    result = len(data)
+    print(f"[PROCESS] Обработка данных завершена: {result} символов")
+    return result
 
-def consumer(task_queue: Queue):
-    while True:
-        task = task_queue.get()
-        if task is None:
-            print(f"[{threading.current_thread().name}] Consumer finished.")
-            task_queue.task_done()
-            break
+async def main():
+    sources = ["source1", "source2", "source3"]
+    tasks = [asyncio.create_task(fetch_data(source)) for source in sources]
 
-        print(f"[{threading.current_thread().name}] Consumed task: {task}")
-        time.sleep(random.uniform(0.5, 1.5))
-        print(f"[{threading.current_thread().name}] Finished task: {task}")
-        task_queue.task_done()
+    results = await asyncio.gather(*tasks)
+    process_tasks = [asyncio.create_task(process_data(data)) for data in results]
+    processed = await asyncio.gather(*process_tasks)
 
-def main():
-    num_tasks = 10
-    num_consumers = 3
-    task_queue = Queue()
-
-    prod_thread = Thread(target=producer, args=(task_queue, num_tasks, num_consumers))
-
-    cons_threads = [
-        Thread(target=consumer, args=(task_queue,), name=f"Consumer {i + 1}")
-        for i in range(num_consumers)
-    ]
-
-    prod_thread.start()
-    for t in cons_threads:
-        t.start()
-
-    task_queue.join()
-
-    prod_thread.join()
-    for t in cons_threads:
-        t.join()
-
-    print("[Main] All tasks completed.")
+    print(f"Всего задач: {len(tasks)}")
+    print(f"Общее количество символов: {sum(processed)}")
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
