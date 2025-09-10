@@ -1,46 +1,63 @@
 """
-напоминалка
-список напоминаний, в каждом
-    сообщение - строка
-    задержка в секундах
-для каждого напоминания создать Timer, который через указанное время выводит сообщение
-
-сразу запустить все таймеры
-дождаться завершения
-
-reminders = [
-    ("сообщение 1", 1),
-    ("сообщение 2", 2),
-    ("сообщение 3", 3),
-]
+есть производитель , который кладёт задачи (строки) в очередь
+есть несколько потребителей, которые берут задачи из очереди и обрабатывают их
+производитель должен положить в очередь ограниченное количество задач. например, 10
+после завершения добавления задач производитель кладёт в очередь специальные маркеры завершения, чтобы сигнализировать потребителям о конце работы
+потребители должны завершить работу после получения маркера None
 """
-from threading import Timer
+from queue import Queue
+from threading import Timer, Thread
 import threading
 import time
 import random
 
-def reminder(message, delay):
-    print(f"[{threading.current_thread().name}] Напоминание: {message}")
+def producer(task_queue: Queue, num_tasks: int, num_consumers: int):
+    for i in range(num_tasks):
+        task = f"Task {i + 1}"
+        print(f"[Producer] Produced task: {task}")
+        task_queue.put(task)
+        time.sleep(random.uniform(0.5, 1.5))
+
+    for _ in range(num_consumers):
+        task_queue.put(None)
+    print("[Producer] Producer finished.")
+
+def consumer(task_queue: Queue):
+    while True:
+        task = task_queue.get()
+        if task is None:
+            print(f"[{threading.current_thread().name}] Consumer finished.")
+            task_queue.task_done()
+            break
+
+        print(f"[{threading.current_thread().name}] Consumed task: {task}")
+        time.sleep(random.uniform(0.5, 1.5))
+        print(f"[{threading.current_thread().name}] Finished task: {task}")
+        task_queue.task_done()
 
 def main():
-    reminders = [
-        ("сообщение 1", 1),
-        ("сообщение 2", 2),
-        ("сообщение 3", 3),
+    num_tasks = 10
+    num_consumers = 3
+    task_queue = Queue()
+
+    prod_thread = Thread(target=producer, args=(task_queue, num_tasks, num_consumers))
+
+    cons_threads = [
+        Thread(target=consumer, args=(task_queue,), name=f"Consumer {i + 1}")
+        for i in range(num_consumers)
     ]
-    
-    timers = []
 
-    for message, delay in reminders:
-        t = Timer(delay, reminder, args=(message, delay))
-        timers.append(t)
+    prod_thread.start()
+    for t in cons_threads:
         t.start()
-        print(f"[{threading.current_thread().name}] Напоминание создано: {message}, срабатывает через {delay} секунд")
 
-    for t in timers:
+    task_queue.join()
+
+    prod_thread.join()
+    for t in cons_threads:
         t.join()
 
-    print(f"[{threading.current_thread().name}] Все напоминания завершены")
+    print("[Main] All tasks completed.")
 
 if __name__ == "__main__":
     main()
