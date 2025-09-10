@@ -181,7 +181,7 @@ async def main():
 
     print(f"Всего задач: {len(tasks)}")
     print(f"Общее количество символов: {sum(processed)}")
-    
+
 async def say_hello():
     print("hello")
     await asyncio.sleep(1)
@@ -224,6 +224,178 @@ async def main():
 
 #asyncio.run(main())
 
+
+async def say_hello():
+    print("hello")
+    await asyncio.sleep(1)
+    print("hello again")
+
+async def say_bye():
+    print("bye")
+    await asyncio.sleep(1)
+    print("bye again")
+
+async def main():
+    await asyncio.gather(say_hello(), say_bye())
+
+#asyncio.run(main())
+
+
+async def do_work(number):
+    print(f"начало задачи {number}")
+    await asyncio.sleep(2)
+    print(f"Задача {number} завершена")
+
+async def main():
+    tasks = [asyncio.create_task(do_work(n)) for n in range(1, 4)]
+    await asyncio.gather(*tasks)
+
+#asyncio.run(main())
+
+
+async def hello():
+    print("привет")
+    await asyncio.sleep(1)
+    print("пока")
+
+# loop = asyncio.get_event_loop()
+# loop.run_until_complete(hello())
+# loop.close()
+
+
+async def task1():
+    await asyncio.sleep(2)
+    print("задача 1 завершена")
+
+async def task2():
+    await asyncio.sleep(1)
+    print("задача 2 завершена")
+
+async def main():
+    t1 = asyncio.create_task(task1())
+    t2 = asyncio.create_task(task2())
+
+    print("обе задачи запущены")
+
+    await t1
+    await t2
+
+# asyncio.run(main())
+
+async def do_work(name, delay):
+    await asyncio.sleep(delay)
+    print(f"{name} завершена")
+    return name
+
+async def main():
+    result1 = await do_work("задача 1", 2)
+    result2 = await do_work("задача 2", 1)
+    print(f"результаты: {result1}, {result2}")
+
+#asyncio.run(main())
+
+async def main():
+    task1 = asyncio.create_task(do_work("задача 1", 2))
+    task2 = asyncio.create_task(do_work("задача 2", 1))
+    print("задачи запущены")
+    result1 = await task1
+    result2 = await task2
+    print(f"результаты: {result1}, {result2}")
+
+#asyncio.run(main())
+
+async def main():
+    results = await asyncio.gather(
+        do_work("задача 1", 2),
+        do_work("задача 2", 1),
+    )
+    print(results)
+
+#asyncio.run(main())
+
+async def main_sequential():
+    print("последовательное выполенение:")
+    await do_work("задача 1", 2)
+    await do_work("задача 2", 1)
+
+async def main_with_tasks():
+    print("запуск задач вручную:")
+    task1 = asyncio.create_task(do_work("задача 1", 2))
+    task2 = asyncio.create_task(do_work("задача 2", 1))
+    await task1
+    await task2
+
+async def main_with_gather():
+    print("запуск задач с gather:")
+    await asyncio.gather(
+        do_work("задача 1", 2),
+        do_work("задача 2", 1),
+    )
+
+"""asyncio.run(main_sequential())
+asyncio.run(main_with_tasks())
+asyncio.run(main_with_gather())"""
+
+async def main():
+    await main_sequential()
+    await main_with_tasks()
+    await main_with_gather()
+    
+asyncio.run(main())
+
+"""
+Часть 1. Последовательное выполнение (await)
+Напишите функцию async def do_work(name, delay), которая:
+печатает сообщение о начале работы;
+делает await asyncio.sleep(delay);
+печатает сообщение о завершении;
+возвращает имя задачи.
+Напишите функцию async def sequential_demo(), которая вызывает do_work("A", 2) и do_work("B", 1) последовательно с помощью await.
+Замерьте общее время выполнения этой функции (используйте time.perf_counter).
+
+Вопрос:
+Сколько времени заняла программа?
+Почему выполнение заняло именно столько времени?
+
+Часть 2. Запуск через create_task
+Напишите функцию async def tasks_demo(), в которой:
+создайте две задачи task1 и task2 через asyncio.create_task;
+сразу после запуска выведите сообщение «Задачи запущены»;
+дождитесь завершения обеих задач через await task1 и await task2.
+Замерьте общее время выполнения.
+
+Вопрос:
+Чем отличается вывод программы от последовательного запуска?
+Почему общее время меньше?
+
+Часть 3. Использование asyncio.gather
+Напишите функцию async def gather_demo(), которая запускает do_work("A", 2) и do_work("B", 1) с помощью asyncio.gather.
+Замерьте время выполнения и сравните его с предыдущими частями.
+
+Вопрос:
+
+Чем gather отличается от ручного создания задач?
+В каких случаях gather удобнее?
+
+Часть 4. задание
+Добавьте третью задачу do_work("C", 3).
+Сравните выполнение при:
+последовательном await,
+ручном create_task,
+использовании gather.
+Постройте таблицу:
+
+Метод	Общее время выполнения	Порядок завершения задач
+await	
+create_task
+gather
+
+Часть 5. Вопросы
+Почему await в последовательном варианте не дал конкурентности?
+В чём разница между create_task и gather?
+Почему asyncio.run обычно вызывается только один раз в программе?
+Как вы объясните словами: «где именно происходит асинхронность»?
+"""
 
 async def do_work(n):
     await asyncio.sleep(n)
@@ -375,14 +547,14 @@ async def trigger():
     await asyncio.sleep(1)
     event.set()
 
-await asyncio.gather(waiter(), trigger())
+"""await asyncio.gather(waiter(), trigger())
 
 
 queue = asyncio.PriorityQueue()
 await queue.put((1, "низкий приоритет"))
 await queue.put((0, "высокий приоритет"))
 
-item = await queue.get()
+item = await queue.get()"""
 
 
 """
