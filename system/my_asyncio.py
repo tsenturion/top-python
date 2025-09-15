@@ -477,9 +477,6 @@ asyncio.run(main())
 Как вы объясните словами: «где именно происходит асинхронность»?
 """
 
-
-
-
 async def do_work(n):
     await asyncio.sleep(n)
     return f"задача {n} завершена"
@@ -658,3 +655,16 @@ Class Order
 
 5 клиентов на кухню
 """
+
+async def worker(name, delay):
+    await asyncio.sleep(delay)
+    print(f"Задача {name} завершилась")
+
+async def main():
+    async with asyncio.TaskGroup() as tg:
+        tg.create_task(worker("A", 2))
+        tg.create_task(worker("B", 2))
+
+asyncio.run(main())
+
+        
