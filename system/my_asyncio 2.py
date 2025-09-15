@@ -157,3 +157,40 @@ compute_division(a, b) — выполняет деление a / b с искус
 Для каждой пойманной ошибки выведите сообщение с её описанием.
 Убедитесь, что при падении нескольких задач вы видите все ошибки, а не только первую.
 """
+
+async def fetch_url(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            response.raise_for_status()
+            text = await response.text()
+            print(f'Получен ответ от {url}: длина {len(text)}')
+
+async def compute_division(a, b):
+    await asyncio.sleep(0.5)
+    result = a / b
+    print(f'Результат деления {a} / {b}: {result}')
+    return result
+
+async def main():
+    urls = [
+        "https://httpbin.org/get",
+        "https://httpbin.org/status/404",
+        "https://nonexistent.domain",
+    ]
+
+    try:
+        async with asyncio.TaskGroup() as tg:
+            for url in urls:
+                tg.create_task(fetch_url(url))
+
+            tg.create_task(compute_division(11, 2))
+            tg.create_task(compute_division(11, 0))
+            tg.create_task(compute_division(10, 0))
+
+    except* aiohttp.ClientError as e:
+        print(f"Ошибка сети или HTTP: {e}")
+
+    except* ZeroDivisionError as e:
+        print(f"Ошибка деления на ноль: {e}")
+
+asyncio.run(main())
