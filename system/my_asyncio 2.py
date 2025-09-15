@@ -193,4 +193,110 @@ async def main():
     except* ZeroDivisionError as e:
         print(f"Ошибка деления на ноль: {e}")
 
+#asyncio.run(main())
+
+
+async def worker():
+    try:
+        print("Начинаю работу")
+        await asyncio.sleep(5)
+        print("Работа завершена")
+    except asyncio.CancelledError:
+        print("Работа отменена")
+        raise
+
+async def main():
+    task = asyncio.create_task(worker())
+    await asyncio.sleep(1)
+    task.cancel()
+    try:
+        await task
+    except asyncio.CancelledError:
+        print("Задача отменена")
+    
+#asyncio.run(main())
+
+
+async def worker_with_cleanup():
+    try:
+        print("открываю ресурс")
+        await asyncio.sleep(10)
+        print("работа выполнена")
+    except asyncio.CancelledError:
+        raise
+
+    finally:
+        print("задача отменена, закрываю реусрс")
+
+async def fetch(session, url):
+    try:
+        async with session.get(url) as response:
+            response.raise_for_status()
+            for i in range(10):
+                await asyncio.sleep(1)
+                print(f"запрос {url} выполняется {i} раз")
+            print(f"запрос {url} завершен")
+
+    finally:
+        print(f"закрываю соединение с {url}")
+
+async def main():
+    urls = [
+        "https://httpbin.org/delay/3",
+        "https://httpbin.org/status/404",
+        "https://httpbin.org/delay/5",
+    ]
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with asyncio.TaskGroup() as tg:
+                for url in urls:
+                    tg.create_task(fetch(session, url))
+
+    except* aiohttp.ClientError as e:
+        for exc in e.exceptions:
+            print(f"Ошибка сети или HTTP: {exc}")
+
+    except* asyncio.CancelledError as e:
+        print("Оставшиеся задачи отменены")
+
 asyncio.run(main())
+
+
+"""
+Вы создаёте программу, которая:
+Загружает данные с нескольких URL (некоторые URL корректные, некоторые вызывают ошибки).
+Параллельно выполняет вычисления (например, деление чисел, где могут возникнуть ошибки деления на ноль).
+Использует TaskGroup для управления всеми задачами.
+Корректно собирает все ошибки в ExceptionGroup.
+Гарантирует, что при падении одной задачи остальные корректно отменяются, а ресурсы освобождаются.
+urls = [
+    "https://httpbin.org/get",        # корректный
+    "https://httpbin.org/status/404", # вызовет ошибку 404
+    "https://httpbin.org/delay/5",    # имитация долгой загрузки
+]
+
+
+Создайте функцию async fetch_url(session, url), которая:
+Загружает страницу с помощью aiohttp.
+Если URL возвращает ошибку, она выбрасывается наружу (не ловим внутри).
+В блоке finally закрываем соединение (или выводим сообщение о завершении).
+
+Создайте функцию async compute_division(a, b), которая:
+Выполняет a / b.
+Если b == 0, выбрасывается ZeroDivisionError.
+Использует await asyncio.sleep(...) для имитации долгих вычислений.
+В блоке finally печатает, что вычисление завершено.
+
+В main() используйте asyncio.TaskGroup для запуска:
+Задач на загрузку URL.
+Задач на вычисления (например, деление нескольких чисел, где есть деление на ноль).
+Оберните TaskGroup в блок try/except* для обработки ошибок:
+except* aiohttp.ClientError → вывод ошибок HTTP.
+except* ZeroDivisionError → вывод ошибок деления на ноль.
+except* asyncio.CancelledError → вывод, что оставшиеся задачи были отменены.
+
+Убедитесь, что:
+Если одна задача падает, остальные отменяются.
+В finally каждой задачи всегда выполняется очистка/закрытие ресурсов.
+Все ошибки собираются и выводятся после завершения TaskGroup.
+"""
