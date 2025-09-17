@@ -64,6 +64,8 @@ async def main():
         async with aiohttp.ClientSession() as session:
             async with asyncio.TaskGroup() as tg:
                 tasks = [tg.create_task(fetch(session, url)) for url in urls]
+                for task in tasks:
+                    print("длина ответа:", len(task.result()))
     except Exception as e:
         print(f"Ошибка: {e}")
     else:
@@ -444,7 +446,7 @@ async def main():
                 print(f"Ошибка: {exc}")
                 print(type(exc))
 
-asyncio.run(main())
+#asyncio.run(main())
 
 """
 Загружать данные с нескольких URL параллельно.
@@ -521,7 +523,33 @@ async def main():
     finally:
         print('[Finally] Выполнение закончено. Все ресурсы освобождены.')
 
-asyncio.run(main())
+#asyncio.run(main())
  
+#fan out fan in
+async def fetch(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            response.raise_for_status()
+            return await response.text()
 
- 
+async def main():
+    urls = [
+        "https://httpbin.org/get",
+        "https://httpbin.org/delay/2",
+        "https://httpbin.org/status/404",
+    ]
+
+    try:
+        async with asyncio.TaskGroup() as tg:
+            tasks = [tg.create_task(fetch(url)) for url in urls]
+
+    except* aiohttp.ClientError as e:
+        print(f"Ошибка сети или HTTP: {e}")
+
+    for task in tasks:
+        if task.done() and not task.cancelled() and task.exception() is None:
+            print("Результат:", len(task.result()))
+
+#asyncio.run(main())
+
+#done, pending = await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
