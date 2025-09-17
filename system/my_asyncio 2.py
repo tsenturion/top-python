@@ -393,9 +393,67 @@ async def fetch(url):
         finally:
             print(f"закрываю соединение с {url}")
 
-async with asyncio.timeout(6):
-    async with asyncio.TaskGroup() as tg:
-        tg.create_task(fetch("https://httpbin.org/delay/5"))
-        tg.create_task(fetch("https://httpbin.org/get"))
-        tg.create_task(compute_division(10, 0))
-        tg.create_task(compute_division(10, 0))
+# async with asyncio.timeout(6):
+#     async with asyncio.TaskGroup() as tg:
+#         tg.create_task(fetch("https://httpbin.org/delay/5"))
+#         tg.create_task(fetch("https://httpbin.org/get"))
+#         tg.create_task(compute_division(10, 0))
+#         tg.create_task(compute_division(10, 0))
+
+async def long_task(name):
+    for i in range(10):
+        await asyncio.sleep(1)
+        print(f"{name} выполняется {i} раз")
+
+async def main():
+    async with asyncio.timeout(15):
+        async with asyncio.TaskGroup() as tg:
+            tg.create_task(long_task("Первая задача"))
+            tg.create_task(long_task("Вторая задача"))
+
+#asyncio.run(main())
+
+async def fetch(session, url):
+    async with asyncio.timeout(3):
+        async with session.get(url) as response:
+            response.raise_for_status()
+            return await response.text()
+
+async def main():
+    urls = [
+        "https://httpbin.org/delay/5",
+        "https://httpbin.org/delay/2",
+    ]
+    async with aiohttp.ClientSession() as session:
+        try:
+            async with asyncio.timeout(10):
+                async with asyncio.TaskGroup() as tg:
+                    for url in urls:
+                        tg.create_task(fetch(session, url))
+
+        # except* asyncio.TimeoutError as e:
+        #     for exc in e.exceptions:
+        #         print(f"Таймаут подзадачи: {exc}")
+
+        # except* asyncio.exceptions.CancelledError:
+        #     print("Оставшиеся задачи отменены")
+
+        except* Exception as e:
+            print(type(e))
+            for exc in e.exceptions:
+                print(f"Ошибка: {exc}")
+                print(type(exc))
+
+asyncio.run(main())
+
+"""
+Загружать данные с нескольких URL параллельно.
+Выполнять вычисления (например, деление чисел, где может возникнуть ZeroDivisionError).
+Использовать локальные таймауты для каждой подзадачи (например, 3 секунды).
+Использовать глобальный таймаут для всей группы задач (например, 10 секунд).
+Обрабатывать ошибки через ExceptionGroup:
+aiohttp.ClientError для сетевых ошибок.
+ZeroDivisionError для вычислений.
+asyncio.TimeoutError для превышения таймаута подзадачи.
+Гарантировать, что после отмены задач выполняется finally, чтобы закрыть соединения или завершить вычисления.
+"""
