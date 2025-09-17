@@ -553,3 +553,81 @@ async def main():
 #asyncio.run(main())
 
 #done, pending = await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
+
+async def producer():
+    for i in range(5):
+        await asyncio.sleep(1)
+        print(f"Производитель: {i}")
+        yield i
+
+async def processor(aiter):
+    async for item in aiter:
+        await asyncio.sleep(0.5)
+        result = item * 2
+        print(f"Процессор: {result}")
+        yield result
+
+async def consumer(aiter):
+    async for item in aiter:
+        print(f"Потребитель: {item}")
+
+async def main():
+    data = producer()
+    processed = processor(data)
+    await consumer(processed)
+
+#asyncio.run(main())
+
+import asyncio
+
+async def producer(queue):
+    for i in range(5):
+        await asyncio.sleep(1)
+        print(f"Производитель: {i}")
+        await queue.put(i)
+    await queue.put(None)
+
+async def processor(in_q, out_q):
+    while True:
+        item = await in_q.get()
+        if item is None:
+            await out_q.put(None)
+            break
+        result = item * 2
+        await asyncio.sleep(0.5)
+        print(f"Процессор: {result}")
+        await out_q.put(result)
+
+async def consumer(queue):
+    while True:
+        item = await queue.get()
+        if item is None:
+            break
+        print(f"Потребитель: {item}")
+
+async def main():
+    q1 = asyncio.Queue()
+    q2 = asyncio.Queue()
+
+    async with asyncio.TaskGroup() as tg:
+        tg.create_task(producer(q1))
+        tg.create_task(processor(q1, q2))
+        tg.create_task(consumer(q2))
+
+#asyncio.run(main())
+
+"""
+async with asyncio.TaskGroup() as tg:
+    tg.create_task(producer(q1)
+    for _ in range(3):
+        tg.create_task(processor(q1, q2))
+    tg.create_task(consumer(q2))
+"""
+
+async def safe_fetch(url):
+    try: 
+        async with asyncio.timeout(3):
+            return await fetch(url)
+    except asyncio.TimeoutError:
+        print(f"Запрос {url} превысил время ожидания")
+        return None
