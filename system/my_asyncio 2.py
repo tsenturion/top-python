@@ -353,4 +353,49 @@ async def main():
     except* asyncio.CancelledError as e:
         print("Оставшиеся задачи отменены")
 
-asyncio.run(main())
+#asyncio.run(main())
+
+
+"""
+asyncio.timeout()
+
+async with asyncio.timeout(5):
+    await some_coroutine()
+
+try:
+    data = await fetch(url)
+"""
+
+async def fetch(url):
+    async with aiohttp.ClientSession() as session:
+        async with asyncio.timeout(3):
+            async with session.get(url) as response:
+                return await response.text()
+
+"""
+try:
+    data = await fetch("https://httpbin.org/delay/5")
+except asyncio.TimeoutError:
+    print("Время ожидания истекло")
+
+async with asyncio.timeout(4):
+    async with asyncio.TaskGroup() as tg:
+        tg.create_task(fetch("https://httpbin.org/delay/5"))
+        tg.create_task(fetch("https://httpbin.org/get"))
+"""
+
+async def fetch(url):
+    async with aiohttp.ClientSession() as session:
+        try:
+            async with asyncio.timeout(3):
+                async with session.get(url) as response:
+                    return await response.text()
+        finally:
+            print(f"закрываю соединение с {url}")
+
+async with asyncio.timeout(6):
+    async with asyncio.TaskGroup() as tg:
+        tg.create_task(fetch("https://httpbin.org/delay/5"))
+        tg.create_task(fetch("https://httpbin.org/get"))
+        tg.create_task(compute_division(10, 0))
+        tg.create_task(compute_division(10, 0))
