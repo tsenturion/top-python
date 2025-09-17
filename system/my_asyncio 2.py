@@ -259,7 +259,7 @@ async def main():
     except* asyncio.CancelledError as e:
         print("Оставшиеся задачи отменены")
 
-asyncio.run(main())
+#asyncio.run(main())
 
 
 """
@@ -274,7 +274,6 @@ urls = [
     "https://httpbin.org/status/404", # вызовет ошибку 404
     "https://httpbin.org/delay/5",    # имитация долгой загрузки
 ]
-
 
 Создайте функцию async fetch_url(session, url), которая:
 Загружает страницу с помощью aiohttp.
@@ -300,3 +299,58 @@ except* asyncio.CancelledError → вывод, что оставшиеся за�
 В finally каждой задачи всегда выполняется очистка/закрытие ресурсов.
 Все ошибки собираются и выводятся после завершения TaskGroup.
 """
+
+async def fetch_url(session, url):
+    try:
+        async with session.get(url) as response:
+            response.raise_for_status()
+            for i in range(5):
+                await asyncio.sleep(1)
+                print(f"запрос {url} выполняется {i} раз")
+            print(f"запрос {url} завершен")
+
+    finally:
+        print(f"закрываю соединение с {url}")
+
+async def compute_division(a, b):
+    try:
+        await asyncio.sleep(2)
+        result = a / b
+        print(f"вычисление {a} / {b} завершено с результатом {result}")
+    finally:
+        print(f"вычисление {a} / {b} завершено")
+
+async def main():
+    urls = [
+        "https://httpbin.org/get",        # корректный
+        "https://httpbin.org/status/404", # вызовет ошибку 404
+        "https://httpbin.org/delay/5",    # имитация долгой загрузки
+    ]
+
+    divisions = [
+        (10, 2),
+        (5, 0),
+        (10, 0),
+    ]
+
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with asyncio.TaskGroup() as tg:
+                for url in urls:
+                    tg.create_task(fetch_url(session, url))
+
+                for a, b in divisions:
+                    tg.create_task(compute_division(a, b))
+
+    except* aiohttp.ClientError as e:
+        for exc in e.exceptions:
+            print(f"Ошибка сети или HTTP: {exc}")
+
+    except* ZeroDivisionError as e:
+        for exc in e.exceptions:
+            print(f"Ошибка деления на ноль: {exc}")
+            
+    except* asyncio.CancelledError as e:
+        print("Оставшиеся задачи отменены")
+
+asyncio.run(main())
