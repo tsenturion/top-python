@@ -631,3 +631,39 @@ async def safe_fetch(url):
     except asyncio.TimeoutError:
         print(f"Запрос {url} превысил время ожидания")
         return None
+
+#semaphore = asyncio.Semaphore(3)
+"""
+async with semaphore:
+    #...
+"""
+
+async def worker(name, semaphore):
+    async with semaphore:
+        print(f"Начало работы {name}")
+        await asyncio.sleep(2)
+        print(f"Завершение работы {name}")
+
+async def main():
+    semaphore = asyncio.Semaphore(2)
+    async with asyncio.TaskGroup() as tg:
+        for i in range(5):
+            tg.create_task(worker(f"Worker {i}", semaphore))
+
+#asyncio.run(main())
+
+async def fetch(url, session, semaphore):
+    async with semaphore:
+        print(f"Запрашиваю {url}")
+        async with session.get(url) as response:
+            await asyncio.sleep(1)
+            return await response.text()
+
+async def main():
+    urls = [f"https://httpbin.org/delay/1?i={i}" for i in range(10)]
+    semaphore = asyncio.Semaphore(3)
+    async with aiohttp.ClientSession() as session:
+        async with asyncio.TaskGroup() as tg:
+            tasks = [tg.create_task(fetch(url, session, semaphore)) for url in urls]
+
+asyncio.run(main())
