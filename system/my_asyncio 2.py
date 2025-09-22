@@ -949,4 +949,81 @@ async def main():
     for c in consumers:
         c.cancel()
 
-asyncio.run(main())
+#asyncio.run(main())
+
+async def producer(queue):
+    for i in range(100):
+        print(f"Производитель добавил {i} в очередь")
+        await queue.put(i)
+        await asyncio.sleep(0.01)
+
+async def consumer(queue):
+    while True:
+        item = await queue.get()
+        await asyncio.sleep(0.1)
+        print(f"Потребитель получил {item} из очереди")
+        queue.task_done()
+
+async def main():
+    queue = asyncio.Queue(maxsize=10)
+    await asyncio.gather(
+        producer(queue),
+        consumer(queue),
+    )
+
+#asyncio.run(main())
+
+semaphore = asyncio.Semaphore(3)
+
+async def fetch(url):
+    async with semaphore:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url) as resp:
+                return await resp.text()
+
+async def process(item):
+    try:
+        async with asyncio.timeout(1):
+            await asyncio.sleep(2)
+    except asyncio.TimeoutError:
+        print(f"Время ожидания истекло для {item}")
+
+queue = asyncio.Queue(maxsize=5)
+event = asyncio.Event()
+
+async def producer():
+    for i in range(10):
+        await queue.put(i)
+        print(f"Производитель добавил {i} в очередь")
+        if queue.full():
+            print("Очередь заполнена")
+            await event.wait()
+            event.clear()
+
+async def consumer():
+    while True:
+        item = await queue.get()
+        print(f"Потребитель получил {item} из очереди")
+        await asyncio.sleep(0.1)
+        event.set()
+        queue.task_done()
+
+
+"""
+асинхронная обработка данных с управлением backpressure
+
+производитель-потребитель
+
+производители генерируют "данные-1"... со случайной задержкой
+    если очередь заполнена, то потребитель ждет
+
+потребители извлекают данные из очереди и обрабатывают их за случайное время
+    lock для общего счетчика обработанных данных
+
+event для сигнализации об окончании заполнения очереди производителями
+потребители после обработки всех элементов очереди завершатся
+
+condition при освобождении места в очереди уведомлять ожидающих потребителей
+
+итоговая статистика
+"""

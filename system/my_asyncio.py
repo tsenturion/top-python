@@ -47,6 +47,8 @@ asyncio.Barrier - барьер
 
 LifoQueue - стек
 PriorityQueue - очередь с приоритетами
+
+backpressure 
 """
 import asyncio
 async def hello():
