@@ -824,7 +824,7 @@ async def main():
     for c in consumers:
         c.cancel()
 
-asyncio.run(main())
+#asyncio.run(main())
 
 """
 асинхронная обработка данных через очередь 
@@ -881,3 +881,72 @@ async def main():
         c.cancel()
 
     print("Все задачи выполнены.")
+
+counter = 0
+lock = asyncio.Lock()
+
+async def increment(name):
+    global counter
+    for _ in range(5):
+        async with lock:
+            value = counter
+            await asyncio.sleep(0.1)
+            counter = value + 1
+            print(f"{name} увеличил счетчик на 1 ({counter})")
+
+async def main():
+    await asyncio.gather(
+        increment("Поток 1"),
+        increment("Поток 2"),
+    )
+
+#asyncio.run(main())
+
+event = asyncio.Event()
+
+async def waiter(name):
+    print(f"{name} ожидает события...")
+    await event.wait()
+    print(f"{name} получил событие!")
+
+async def setter():
+    await asyncio.sleep(2)
+    print("Событие готово!")
+    event.set()
+
+async def main():
+    await asyncio.gather(
+        waiter("Поток 1"),
+        waiter("Поток 2"),
+        setter(),
+    )
+
+#asyncio.run(main())
+
+
+queue = []
+condition = asyncio.Condition()
+
+async def producer():
+    for i in range(5):
+        async with condition:
+            queue.append(i)
+            print(f"Производитель добавил {i} в очередь")
+            condition.notify()
+        await asyncio.sleep(1)
+
+async def consumer(name):
+    while True:
+        async with condition:
+            await condition.wait_for(lambda: len(queue) > 0)
+            item = queue.pop(0)
+            print(f"Потребитель {name} получил {item} из очереди")
+        await asyncio.sleep(0.4)
+
+async def main():
+    consumers = [asyncio.create_task(consumer(f"Потребитель-{i+1}")) for i in range(3)]
+    await producer()
+    for c in consumers:
+        c.cancel()
+
+asyncio.run(main())
