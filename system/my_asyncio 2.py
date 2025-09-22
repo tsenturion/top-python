@@ -727,6 +727,38 @@ semaphore = asyncio.Semaphore(3)
 async def fetch_url(session, url):
     async with semaphore:
         async with session.get(url) as resp:
-            test = await resp.text()
+            text = await resp.text()
             print(f"Загржуено: {url} (длина {len(text)})")
             return text
+
+async def process_text(text):
+    words = re.findall(r"\w+", text.lower())
+    await asyncio.sleep(0.01)
+    print(f"Обработка текста: {len(words)} слов")
+    return len(words)
+
+async def main():
+    urls = [
+        "https://httpbin.org/delay/2",
+        "https://httpbin.org/delay/3",
+        #"https://httpbin.org/status/404",
+        "https://httpbin.org/delay/1",
+        #"https://not-exist.domain",
+        'https://httpbin.org/delay/5',
+        'https://github.com',
+    ]
+
+    async with aiohttp.ClientSession() as session:
+        tasks = [asyncio.create_task(fetch_url(session, url)) for url in urls]
+
+        process_tasks = []
+        for task in tasks:
+            text = await task
+            process_tasks.append(asyncio.create_task(process_text(text)))
+
+        results = await asyncio.gather(*process_tasks, return_exceptions=True)
+
+    total_words = sum(results)
+    print(f"Всего слов: {total_words}")
+
+asyncio.run(main())
