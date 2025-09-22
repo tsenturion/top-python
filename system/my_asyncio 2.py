@@ -761,4 +761,85 @@ async def main():
     total_words = sum(results)
     print(f"Всего слов: {total_words}")
 
+#asyncio.run(main())
+
+
+async def producer(queue):
+    for i in range(5):
+        await queue.put(i)
+        print(f"Производитель положил: {i}")
+        await asyncio.sleep(0.5)
+
+async def consumer(queue):
+    while True:
+        item = await queue.get()
+        print(f"Потребитель получил: {item}")
+        await asyncio.sleep(1)
+        queue.task_done()
+
+async def main():
+    queue = asyncio.Queue(maxsize=3)
+
+    producer_task = asyncio.create_task(producer(queue))
+    consumer_task = asyncio.create_task(consumer(queue))
+
+    await producer_task
+    await queue.join()
+    consumer_task.cancel()
+
+#asyncio.run(main())
+
+
+import random
+
+async def producer(queue, name):
+    for i in range(3):
+        item = f"{name}-{i}"
+        await queue.put(item)
+        print(f"Производитель {name} положил: {item}")
+        await asyncio.sleep(random.uniform(0.1, 1))
+
+async def consumer(queue, name):
+    while True:
+        item = await queue.get()
+        print(f"Потребитель {name} получил: {item}")
+        await asyncio.sleep(random.uniform(0.1, 1))
+        queue.task_done()
+
+async def main():
+    queue = asyncio.Queue()
+
+    producers = [
+        asyncio.create_task(producer(queue, f"Производитель {i + 1}"))
+        for i in range(2)
+    ]
+
+    consumers = [
+        asyncio.create_task(consumer(queue, f"Потребитель {i + 1}"))
+        for i in range(3)
+    ]
+
+    await asyncio.gather(*producers)
+    await queue.join()
+    for c in consumers:
+        c.cancel()
+
 asyncio.run(main())
+
+"""
+асинхронная обработка данных через очередь 
+
+producer consumer
+2-3 производителя генерируют "данные-1"...
+кладут в очередь с задержкой
+
+потребители извлекают и обрабатывают данные с задержкой
+
+очередь maxsize=5
+
+join
+task_done
+cancel
+
+итоговая статистика
+"""

@@ -30,9 +30,10 @@ asyncio.Queue - очередь задач
     await queue.put(item) - добавить в очередь
     item = await queue.get() - получить из очереди
     queue.qsize() - размер очереди
-    queue.empty() - очередь пуста
-    queue.full() - очередь полна
     queue.task_done() - задача выполнена
+    await queue.join() - ожидает завершения всех задач
+
+    queue.empty() - очередь пуста queue.full() - очередь полна - не используем
 
 asyncio.Lock - блокировка
 
