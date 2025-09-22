@@ -1,135 +1,56 @@
+"""
+Вам нужно реализовать асинхронную программу, которая:
+Загружает содержимое с нескольких URL-адресов (например, страницы https://httpbin.org/delay/X, где X — это задержка).
+Одновременно выполняет не более трёх запросов. Для ограничения используйте asyncio.Semaphore.
+
+Для каждого успешно завершённого запроса выводит сообщение вида:
+Успешно загружено: <url>, длина ответа = <число символов>
+
+Если при загрузке возникает ошибка (aiohttp.ClientError или таймаут), нужно обработать её и вывести сообщение:
+Ошибка при загрузке: <url>, причина: <текст ошибки>
+
+После завершения всех запросов программа должна вывести общее количество успешно обработанных URL и количество ошибок.
+"""
 
 import asyncio
+import aiohttp
 import random
 import time
 
-"""
-Часть 1. Последовательное выполнение (await)
-Напишите функцию async def do_work(name, delay), которая:
-печатает сообщение о начале работы;
-делает await asyncio.sleep(delay);
-печатает сообщение о завершении;
-возвращает имя задачи.
-Напишите функцию async def sequential_demo(), которая вызывает do_work("A", 2) и do_work("B", 1) последовательно с помощью await.
-Замерьте общее время выполнения этой функции (используйте time.perf_counter).
-
-Вопрос:
-Сколько времени заняла программа?
-Почему выполнение заняло именно столько времени?
-"""
-async def do_work(name, delay):
-    print(f"Начало работы с {name}")
-    await asyncio.sleep(delay)
-    print(f"Завершение работы с {name}")
-    return name
-
-async def sequential_demo():
-    start = time.perf_counter()
-    await do_work("A", 2)
-    await do_work("B", 1)
-    end = time.perf_counter()
-    print(f"Время выполнения: {end - start:.2f} секунд")
-
-#asyncio.run(sequential_demo())
-"""
-Часть 2. Запуск через create_task
-Напишите функцию async def tasks_demo(), в которой:
-создайте две задачи task1 и task2 через asyncio.create_task;
-сразу после запуска выведите сообщение «Задачи запущены»;
-дождитесь завершения обеих задач через await task1 и await task2.
-Замерьте общее время выполнения.
-
-Вопрос:
-Чем отличается вывод программы от последовательного запуска?
-Почему общее время меньше?
-"""
-async def tasks_demo():
-    start = time.perf_counter()
-    task1 = asyncio.create_task(do_work("A", 2))
-    task2 = asyncio.create_task(do_work("B", 1))
-    print("Задачи запущены")
-    await task1
-    await task2
-    end = time.perf_counter()
-    print(f"Время выполнения: {end - start:.2f} секунд")
-
-#asyncio.run(tasks_demo())
-"""
-Часть 3. Использование asyncio.gather
-Напишите функцию async def gather_demo(), которая запускает do_work("A", 2) и do_work("B", 1) с помощью asyncio.gather.
-Замерьте время выполнения и сравните его с предыдущими частями.
-
-Вопрос:
-
-Чем gather отличается от ручного создания задач?
-В каких случаях gather удобнее?
-"""
-async def gather_demo():
-    start = time.perf_counter()
-    await asyncio.gather(
-        do_work("A", 2),
-        do_work("B", 1)
-    )
-    end = time.perf_counter()
-    print(f"Время выполнения: {end - start:.2f} секунд")
-
-#asyncio.run(gather_demo())
-"""
-Часть 4. задание
-Добавьте третью задачу do_work("C", 3).
-Сравните выполнение при:
-последовательном await,
-ручном create_task,
-использовании gather.
-Постройте таблицу:
-
-Метод	Общее время выполнения	Порядок завершения задач
-await	
-create_task
-gather
-"""
-async def sequential_three():
-    start = time.perf_counter()
-    await do_work("A", 2)
-    await do_work("B", 1)
-    await do_work("C", 3)
-    end = time.perf_counter()
-    print(f"Время выполнения: {end - start:.2f} секунд")
-
-async def tasks_three():
-    start = time.perf_counter()
-    t1 = asyncio.create_task(do_work("A", 2))
-    t2 = asyncio.create_task(do_work("B", 1))
-    t3 = asyncio.create_task(do_work("C", 3))
-    print("Задачи запущены")
-    await t1
-    await t2
-    await t3
-    end = time.perf_counter()
-    print(f"Время выполнения: {end - start:.2f} секунд")
-
-async def gather_demo():
-    start = time.perf_counter()
-    await asyncio.gather(
-        do_work("A", 2),
-        do_work("B", 1),
-        do_work("C", 3)
-    )
-    end = time.perf_counter()
-    print(f"Время выполнения: {end - start:.2f} секунд")
+async def fetch_url(session, url, semaphore):
+    async with semaphore:
+        try:
+            async with session.get(url) as response:
+                response.raise_for_status()
+                text = await response.text()
+                print(f"Успешно загружено: {url}, длина ответа = {len(text)}")
+                return True
+        except aiohttp.ClientError as e:
+            print(f"Ошибка при загрузке: {url}, причина: {e}")
+            return False
+        except asyncio.TimeoutError:
+            print(f"Ошибка при загрузке: {url}, причина: таймаут")
+            return False
 
 async def main():
-    await sequential_three()
-    await tasks_three()
-    await gather_demo()
+    urls = [
+        "https://httpbin.org/delay/2",
+        "https://httpbin.org/delay/3",
+        "https://httpbin.org/status/404",
+        "https://httpbin.org/delay/1",
+        "https://not-exist.domain",
+        'https://httpbin.org/delay/5',
+        'https://github.com',
+    ]
+
+    semaphore = asyncio.Semaphore(3)
+
+    async with aiohttp.ClientSession() as session:
+        tasks = [fetch_url(session, url, semaphore) for url in urls]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+
+    sucsess = sum(1 for result in results if result)
+    errors = len(results) - sucsess
+    print(f"Успешно загружено: {sucsess}, ошибка: {errors}")
 
 asyncio.run(main())
-"""
-Часть 5. Вопросы
-Почему await в последовательном варианте не дал конкурентности?
-В чём разница между create_task и gather?
-Почему asyncio.run обычно вызывается только один раз в программе?
-Как вы объясните словами: «где именно происходит асинхронность»?
-"""
-
-
