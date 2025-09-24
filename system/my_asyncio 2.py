@@ -1089,3 +1089,106 @@ async def main():
     print(f"Итоговая статистика:")
     for name, count in stats.items():
         print(f"{name}: обработано {count} элементов")
+
+"""
+import requests
+resp = requests.get("https://www.google.com")
+print(resp.text)
+"""
+
+#import aiohttp
+async def main():
+    async with aiohttp.ClientSession() as session:
+        async with session.get("https://www.google.com") as resp:
+            text = await resp.text()
+            print(text)
+
+#asyncio.run(main())
+
+
+sem = asyncio.Semaphore(3)
+
+async def fetch(session, url):
+    async with sem:
+        try: 
+            async with session.get(url, timeout=5) as response:
+                data = await response.json()
+        except asyncio.ClientError as e:
+            print(f"Ошибка клиента: {e}")
+        except asyncio.TimeoutError:
+            print(f"Таймаут для {url}")
+        
+
+async def main():
+    urls = [
+        "https://www.google.com",
+        "https://www.yandex.ru",
+        "https://www.python.org"
+    ]
+
+    async with aiohttp.ClientSession() as session:
+        tasks = [asyncio.create_task(fetch(session, url)) for url in urls]
+        results = await asyncio.gather(*tasks)
+        for r in results:
+            print(len(r))
+
+#asyncio.run(main())
+
+import httpx
+
+async def main():
+    async with httpx.AsyncClient() as client:
+        response = await client.get("https://www.google.com")
+        print(response.text)
+
+#asyncio.run(main())
+
+async def fetch(client, url):
+    r = await client.get(url)
+    return r.text
+
+async def main():
+    urls = [
+        "https://www.google.com",
+        "https://www.yandex.ru",
+        "https://www.python.org"
+    ]
+    timeout = httpx.Timeout(5.0, connect=10.0)
+
+    async with httpx.AsyncClient(timeout=timeout) as client:
+        tasks = [fetch(client, url) for url in urls]
+        results = await asyncio.gather(*tasks)
+        for r in results:
+            print(len(r))
+
+asyncio.run(main())
+
+"""
+Вам нужно написать программу, которая будет скачивать содержимое нескольких веб-страниц и сравнивать скорость выполнения при использовании:
+Синхронного клиента requests.
+Асинхронного клиента aiohttp.
+Асинхронного клиента httpx.
+Список адресов возьмите следующий:
+
+urls = [
+    "https://httpbin.org/delay/2",
+    "https://httpbin.org/delay/3",
+    "https://httpbin.org/delay/1",
+    "https://httpbin.org/delay/2",
+    "https://httpbin.org/delay/3",
+]
+
+Реализовать три функции:
+fetch_requests(urls) — выполняет загрузку всех страниц синхронно через requests.
+fetch_aiohttp(urls) — выполняет загрузку всех страниц параллельно через aiohttp.
+fetch_httpx(urls) — выполняет загрузку всех страниц параллельно через httpx.
+
+Для каждой функции измерить время выполнения (time.time() или asyncio.get_event_loop().time()).
+Сравнить результаты: какой способ оказался самым быстрым.
+
+Обработать возможные ошибки:
+таймаут,
+сетевые ошибки (ClientError у aiohttp, httpx.RequestError у httpx).
+
+Итоговый вывод должен содержать таблицу или список
+"""
