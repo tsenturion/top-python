@@ -1161,7 +1161,7 @@ async def main():
         for r in results:
             print(len(r))
 
-asyncio.run(main())
+#asyncio.run(main())
 
 """
 Вам нужно написать программу, которая будет скачивать содержимое нескольких веб-страниц и сравнивать скорость выполнения при использовании:
@@ -1192,3 +1192,87 @@ fetch_httpx(urls) — выполняет загрузку всех страни�
 
 Итоговый вывод должен содержать таблицу или список
 """
+
+import requests
+#import aiohttp
+#import httpx
+#import asyncio
+import time
+
+def fetch_requests(urls):
+    start_time = time.time()
+    results = []
+    for url in urls:
+        try:
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()
+            text = response.text
+            results.append(len(text))
+            print(f"requests Загружено {url}: {len(text)}")
+
+        except requests.exceptions.RequestException as e:
+            print(f"Ошибка запроса {url}: {e}")
+    end_time = time.time()
+    return end_time - start_time, results
+
+async def fetch_one_aiohttp(session, url):
+    try:
+        async with session.get(url, timeout=10) as response:
+            response.raise_for_status()
+            text = await response.text()
+            print(f"aiohttp Загружено {url}: {len(text)}")
+            return len(text)
+    except aiohttp.ClientError as e:
+        print(f"Ошибка запроса {url}: {e}")
+    except asyncio.TimeoutError:
+        print(f"Таймаут для {url}")
+
+async def fetch_aiohttp(urls):
+    start_time = time.time()
+    async with aiohttp.ClientSession() as session:
+        tasks = [fetch_one_aiohttp(session, url) for url in urls]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+        end_time = time.time()
+        return end_time - start_time, results
+
+async def fetch_one_httpx(client, url):
+    try:
+        response = await client.get(url, timeout=10)
+        response.raise_for_status()
+        text = response.text
+        print(f"httpx Загружено {url}: {len(text)}")
+        return len(text)
+
+    except httpx.RequestError as e:
+        print(f"Ошибка запроса {url}: {e}")
+    except asyncio.TimeoutError:
+        print(f"Таймаут для {url}")
+    except httpx.HTTPStatusError as e:
+        print(f"httpx ошибка при загрузке {url}: {e}")
+
+async def fetch_httpx(urls):
+    start_time = time.time()
+    async with httpx.AsyncClient() as client:
+        tasks = [fetch_one_httpx(client, url) for url in urls]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+    end_time = time.time()
+    return end_time - start_time, results
+
+async def main():
+    urls = [
+        "https://httpbin.org/delay/2",
+        "https://httpbin.org/delay/3",
+        "https://httpbin.org/delay/1",
+        "https://httpbin.org/delay/2",
+        "https://httpbin.org/delay/3",
+    ]
+
+    time_requests, _ = fetch_requests(urls)
+    time_aiohttp, _ = await fetch_aiohttp(urls)
+    time_httpx, _ = await fetch_httpx(urls)
+
+    print(f"Время выполнения requests: {time_requests:.2f} секунд")
+    print(f"Время выполнения aiohttp: {time_aiohttp:.2f} секунд")
+    print(f"Время выполнения httpx: {time_httpx:.2f} секунд")
+
+#asyncio.run(main())
