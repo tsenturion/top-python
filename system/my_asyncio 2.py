@@ -1276,3 +1276,26 @@ async def main():
     print(f"Время выполнения httpx: {time_httpx:.2f} секунд")
 
 #asyncio.run(main())
+
+"""
+aiohttp.ClientConnectorError
+aiohttp.ClientPayloadError
+aiohttp.ClientResponseError
+try:
+    async with session.get(url, timeout=10) as response:
+        data = await response.json()
+except aiohttp.ClientError as e:
+    print(f"Ошибка клиента {url}: {e}")
+
+except asyncio.TimeoutError:
+    print(f"Таймаут для {url}")
+
+async with aiohttp.ClientSession(headers={"User-Agent": "Mozilla/5.0"}) as session:
+    async with session.get(url, timeout=10) as response:
+
+async def download_file(session, url, filename):
+    async with session.get(url) as response:
+        with open(filename, "wb") as f:
+            while chunk := await response.content.read(1024):
+                f.write(chunk)
+"""
