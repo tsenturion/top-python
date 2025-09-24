@@ -1299,3 +1299,126 @@ async def download_file(session, url, filename):
             while chunk := await response.content.read(1024):
                 f.write(chunk)
 """
+
+from tenacity import retry, stop_after_attempt, wait_fixed
+
+@retry(stop=stop_after_attempt(3), wait=wait_fixed(2))
+async def fetch(client, url):
+    print("запускаю")
+    r = await client.get(url)
+    r.raise_for_status()
+    return r.text
+
+async def main():
+    async with httpx.AsyncClient() as client:
+        text = await fetch(client, "https://httpbin.org/status/500")
+        print(text)
+
+#asyncio.run(main())
+
+# async with httpx.AsyncClient() as client:
+#     r1 = await client.get("https://httpbin.org/cookies/set?foo=bar")
+#     r2 = await client.get("https://httpbin.org/cookies")
+#     print(r2.json()["cookies"])
+
+# headers = {"User-Agent": "Mozilla/5.0"}
+# async with httpx.AsyncClient(headers=headers) as client:
+#     r = await client.get("https://httpbin.org/headers")
+#     print(r.json())
+
+# auth = ("логин", "пароль")
+# async with httpx.AsyncClient(auth=auth) as client:
+#     r = await client.get("https://httpbin.org/basic-auth/логин/пароль")
+#     print(r.status_code)
+
+async def download(url, filename):
+    async with httpx.AsyncClient() as client:
+        async with client.stream("GET", url) as response:
+            with open(filename, "wb") as f:
+                async for chunk in response.aiter_bytes():
+                    f.write(chunk)
+
+# limits = httpx.Limits(max_connections=10, max_keepalive_connections=5)
+# async with httpx.AsyncClient(limits=limits) as client:
+#     ...
+
+#from myapp import app
+
+async def test_app():
+    async with https.AsyncClient(app=app, base_url="http://test") as client:
+        r = await client.get("/")
+        assert r.status_code == 200
+
+"""
+https.ConnectError
+httpx.TimeoutException
+httpx.HTTPStatusError
+
+try:
+    async with httpx.AsyncClient() as client:
+        r = await client.get(url)
+        r.raise_for_status()
+except httpx.HTTPStatusError as e:
+    print(f"httpx ошибка при загрузке {url}: {e}")
+"""
+
+
+"""
+Вам необходимо реализовать небольшой асинхронный API-сервис с использованием библиотеки aiohttp.
+Сервис должен предоставлять следующие возможности:
+Эндпоинт / (GET)
+Возвращает приветственное сообщение в формате JSON, например:
+{ "message": "Добро пожаловать в наш сервис!" }
+
+Эндпоинт /items (GET)
+Возвращает список всех элементов (данные можно хранить в обычном Python-списке в памяти).
+Формат ответа:
+{ "items": ["item1", "item2", "item3"] }
+
+Эндпоинт /items (POST)
+Принимает JSON с полем "name" и добавляет элемент в список.
+Пример запроса:
+{ "name": "новый_элемент" }
+
+Пример ответа:
+{ "message": "Элемент успешно добавлен" }
+
+Эндпоинт /items/{id} (GET)
+Возвращает элемент по индексу (например, /items/0 → item1).
+Если элемент не найден, возвращает ошибку 404 и JSON с сообщением.
+Эндпоинт /items/{id} (DELETE)
+Удаляет элемент по индексу.
+Возвращает сообщение об успешном удалении или ошибку, если индекс не существует.
+
+Рекомендации по реализации:
+Запуск aiohttp-сервера
+Подумайте, как мы запускали сервер на aiohttp на лекции.
+Вспомните, что используется web.Application() и функция web.run_app(...).
+
+Маршруты
+Маршруты (эндпоинты) в aiohttp добавляются через app.router.add_get(...), add_post(...), add_delete(...).
+Вспомните, что внутри обработчика запроса мы используем async def.
+
+Возврат JSON-ответа
+aiohttp имеет специальную функцию web.json_response(...).
+Подумайте, как можно вернуть словарь Python в виде JSON.
+
+Хранение данных
+Данные можно хранить в обычном Python-списке, например items = [].
+Для простоты храните его прямо в глобальной области видимости.
+
+POST-запрос (добавление элемента)
+Для извлечения данных из POST-запроса используйте await request.json().
+Подумайте, как из полученного словаря достать поле "name".
+
+GET по индексу (/items/{id})
+Чтобы получить индекс из URL, используйте request.match_info["id"].
+Не забудьте преобразовать его в int.
+
+Обработка ошибок (404)
+Если индекс выходит за пределы списка, верните web.json_response({"error": "Элемент не найден"}, status=404).
+
+DELETE-запрос
+Используйте del items[index] для удаления.
+Не забудьте обработать ситуацию, если индекс неверный.
+"""
