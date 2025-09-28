@@ -11,7 +11,7 @@ writelines(lines)
 """file = open('txts/region.txt', 'r')
 #код
 file.close()"""
-
+import re
 reg = -1
 nat = []
 amount = 0

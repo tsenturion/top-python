@@ -1,6 +1,6 @@
 import os
 
-IGNORED_DIRS = {'.git', '.vscode', '__pycache__'}
+IGNORED_DIRS = {'.git', '.vscode', '__pycache__', '.idea', '.pytest_cache', '.venv'}
 IGNORED_FILE_EXTENSIONS = {'.user'}
 
 def save_directory_structure(root_path, output_file, indent=0):
