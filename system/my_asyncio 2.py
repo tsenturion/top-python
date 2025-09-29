@@ -1545,4 +1545,127 @@ async def main():
         results = await asyncio.gather(*tasks)
         print(results)
 
-asyncio.run(main())
+#asyncio.run(main())
+
+from aiohttp import WSMsgType, WSCloseCode
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+async def connect_websocket(session, url):
+    return await session.ws_connect(
+        url,
+        heartbeat=30.0,
+        timeout=10.0
+    )
+
+async def handle_messages(ws, outgoing_queue):
+    async def receive_messages():
+        async for msg in ws:
+            if msg.type == WSMsgType.TEXT:
+                logger.info(f"Получено сообщение: {msg.data}")
+
+            elif msg.type == WSMsgType.BINARY:
+                logger.info(f"Получено бинарное сообщение: {len(msg.data)} байт")
+
+            elif msg.type == WSMsgType.CLOSED:
+                logger.info("Соединение закрыто")
+                break
+
+            elif msg.type == WSMsgType.ERROR:
+                logger.error("Ошибка соединения", ws.exception())
+                break
+
+    async def send_messages():
+        while not ws.closed:
+            try:
+                msg = await asyncio.wait_for(outgoing_queue.get(), timeout=1.0)
+                if not ws.closed:
+                    await ws.send_str(msg)
+                    logger.info(f"Отправлено сообщение: {msg}")
+            except asyncio.TimeoutError:
+                continue
+
+    await with asyncio.TaskGroup() as tg:
+        tg.create_task(receive_messages())
+        tg.create_task(send_messages())
+
+async def maintain_websocket(url, shutdown_event):
+    sesion = None
+    retry_delay = 1.0
+    max_retry_delay = 60.0
+    outgoing_queue = asyncio.Queue()
+
+    try:
+        sessoin = aiohttp.ClientSession()
+
+        while not shutdown_event.is_set():
+            try:
+                logger.info(f"Подключение к {url}")
+                ws = await connect_websocket(session, url)
+                logger.info(f"Соединение установлено")
+
+                retry_delay = 1.0
+
+                await handle_messages(ws, outgoing_queue)
+
+                if not ws.closed:
+                    await ws.close(code=WSCloseCode.GOING_AWAY, message="Соединение закрыто")
+
+            except aiohttp.WSServerHandshakeError as e:
+                logger.error(f"Ошибка handshake: {e}")
+            except aiohttp.ClientError as e:
+                logger.error(f"Ошибка клиента: {e}")
+            except asyncio.TimeoutError:
+                logger.error(f"Таймаут соединения превышен")
+            except Exception as e:
+                logger.error(f"Произошла ошибка: {e}", exc_info=True)
+
+            if shutdown_event.is_set():
+                break
+            
+            logger.info(f"Переподключение через {retry_delay} секунд")
+            try:
+                await asyncio.wait_for(shutdown_event.wait(), timeout=retry_delay)
+                break
+            except asyncio.TimeoutError:
+                pass
+
+            retry_delay = min(retry_delay * 2, max_retry_delay)
+
+    finally:
+        if session:
+            await session.close()
+        logger.info("Соединение с сервером закрыто")
+
+
+async def main():
+    shutdown_event = asyncio.Event()
+
+    def signal_handler():
+        logger.info("Получено сигнал завершения")
+        shutdown_event.set()
+
+    loop = asyncio.get_event_loop()
+    for sig in {signal.SIGINT, signal.SIGTERM}:
+        loop.add_signal_handler(
+            sig,
+            functools.partial(signal_handler)
+        )
+    
+    url = "ws://localhost:8088/ws"
+
+    try:
+        await maintain_websocket(url, shutdown_event)
+    finally:
+        logger.info("Завершение работы")
+
+async def producer(outgoing_queue, shutdown_event):
+    counter = 0
+
+    while not shutdown_event.is_set():
+        await asyncio.sleep(5)
+        message = f"Сообщение {counter}"
+        await outgoing_queue.put(message)
+        counter += 1
