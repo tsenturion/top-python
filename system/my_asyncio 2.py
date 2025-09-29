@@ -1422,3 +1422,54 @@ DELETE-запрос
 Используйте del items[index] для удаления.
 Не забудьте обработать ситуацию, если индекс неверный.
 """
+
+from aiohttp import web
+
+items = []
+
+async def get_items(request):
+    return web.json_response({"items": items})
+
+
+async def get_item(request):
+    try:
+        item_id = int(request.match_info["id"])
+        item = items[item_id]
+        return web.json_response({"id": item_id, "item": item})
+    except (IndexError, ValueError):
+        return web.json_response({"error": "Элемент не найден"}, status=404)
+
+
+async def add_item(request):
+    try:
+        data = await request.json()
+        name = data.get("name")
+        if not name:
+            return web.json_response({"error": "Поле 'name' обязательно"}, status=400)
+        items.append(name)
+        return web.json_response({"message": "Элемент успешно добавлен", 'id': len(items) - 1})
+
+    except Exception as e:
+        return web.json_response({"error": str(e)}, status=400)
+
+
+async def delete_item(request):
+    try:
+        item_id = int(request.match_info["id"])
+        deleted = items.pop(item_id)
+        return web.json_response({"message": f"Элемент {deleted} успешно удален"})
+    except (IndexError, ValueError):
+        return web.json_response({"error": "Элемент не найден"}, status=404)
+
+
+async def init_app():
+    app = web.Application()
+    app.router.add_get('/items', get_items)
+    app.router.add_get('/items/{id}', get_item)
+    app.router.add_post('/items', add_item)
+    app.router.add_delete('/items/{id}', delete_item)
+
+    return app
+
+# if __name__ == '__main__':
+#     web.run_app(init_app(), host='127.0.0.1', port=8088)
