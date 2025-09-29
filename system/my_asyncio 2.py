@@ -1473,3 +1473,76 @@ async def init_app():
 
 # if __name__ == '__main__':
 #     web.run_app(init_app(), host='127.0.0.1', port=8088)
+
+"""
+таймаут на операцию
+таймаут на всю задачу
+таймауты на уровне клиента или сервера
+"""
+
+async def fetch_data():
+    print('начинаем загрузку данных')
+    await asyncio.sleep(2)
+    print('загрузка данных завершена')
+
+async def main():
+    try:
+        async with asyncio.timeout(1):
+            await fetch_data()
+    except asyncio.TimeoutError:
+        print('загрузка данных превысила 1 секунду')
+
+# asyncio.run(main())
+
+async def fetch_page(url):
+    timeout = aiohttp.ClientTimeout(total=5)
+    async with aiohttp.ClientSession(timeout=timeout) as session:
+        async with session.get(url) as response:
+            if response.status == 200:
+                return await response.text()
+            else:
+                return None
+
+async def main():
+    try:
+        html = await fetch_page('https://example.com')
+        print("страница загружена")
+    except asyncio.TimeoutError:
+        print("загрузка страницы превысила 5 секунд")
+
+# asyncio.run(main())
+
+async def fetch_page(session, url):
+    async with session.get(url) as response:
+        return await response.text()
+
+
+async def main():
+    connection = aiohttp.TCPConnector(limit=10)
+    async with aiohttp.ClientSession(connector=connection) as session:
+        urls = ['https://example.com'] * 20
+        tasks = [fetch_page(session, url) for url in urls]
+        results = await asyncio.gather(*tasks)
+        print(f"загружено страниц: {len(results)}")
+
+#asyncio.run(main())
+
+async def fetch_with_timeout(session, url):
+    try:
+        async with asyncio.timeout(5):
+            async with session.get(url) as response:
+                return await response.text()
+    except asyncio.TimeoutError:
+        return 'timeout'
+
+async def main():
+    connection = aiohttp.TCPConnector(limit=10)
+    timeout = aiohttp.ClientTimeout(connect=2, sock_read=3)
+
+    async with aiohttp.ClientSession(connector=connection, timeout=timeout) as session:
+        urls = ['https://example.com'] * 15
+        tasks = [fetch_with_timeout(session, url) for url in urls]
+        results = await asyncio.gather(*tasks)
+        print(results)
+
+asyncio.run(main())
