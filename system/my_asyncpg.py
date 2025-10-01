@@ -105,5 +105,56 @@ async def main():
         print(e)
     finally:
         await conn.close()
+#asyncio.run(main())
+
+async def main():
+    pool = await asyncpg.create_pool(
+        user="postgres",
+        database="postgres",
+        password="admin",
+        host="localhost",
+        max_size=5,
+        min_size=2
+    )
+
+    async with pool.acquire() as conn:
+        rows = await conn.fetch("SELECT id, name, age FROM students;")
+        print(rows)
+
+    await pool.close()
+
+#asyncio.run(main())
+
+async def fetch_users(pool):
+    async with pool.acquire() as conn:
+        return await conn.fetch("SELECT id, username, email FROM users;")
+
+
+async def fetch_students(pool):
+    async with pool.acquire() as conn:
+        return await conn.fetch("SELECT id, name, age FROM students;")
+
+
+async def main():
+    pool = await asyncpg.create_pool(
+        user="postgres",
+        database="postgres",
+        password="admin",
+        host="localhost",
+        max_size=5,
+        min_size=2,
+        timeout=3.0
+    )
+
+    users_task = asyncio.create_task(fetch_users(pool))
+    orders_task = asyncio.create_task(fetch_students(pool))
+
+    users = await users_task
+    orders = await orders_task
+
+    print(users)
+    print(orders)
+
+    await pool.close()
 
 asyncio.run(main())
