@@ -1772,5 +1772,3 @@ async def main():
     print(f"Среднее время отклика: {avg_time:.2f} секунд")
 
 
-if __name__ == "__main__":
-    asyncio.run(main())
