@@ -1587,7 +1587,7 @@ async def handle_messages(ws, outgoing_queue):
             except asyncio.TimeoutError:
                 continue
 
-    await with asyncio.TaskGroup() as tg:
+    async with asyncio.TaskGroup() as tg:
         tg.create_task(receive_messages())
         tg.create_task(send_messages())
 
@@ -1714,3 +1714,63 @@ URLS = [
 сохраните успешные ответы в JSON-файл,
 выведите статистику (успехи, ошибки, среднее время отклика).
 """
+
+# import asyncio
+# impot aiohttp
+# import time
+import json
+
+URLS = [
+    "https://jsonplaceholder.typicode.com/posts/1",
+    "https://jsonplaceholder.typicode.com/posts/2",
+    "https://jsonplaceholder.typicode.com/posts/3",
+    "https://jsonplaceholder.typicode.com/posts/4",
+    "https://jsonplaceholder.typicode.com/posts/5",
+    "https://jsonplaceholder.typicode.com/posts/6",
+    "https://jsonplaceholder.typicode.com/posts/7",
+    "https://jsonplaceholder.typicode.com/posts/8",
+    "https://jsonplaceholder.typicode.com/posts/9",
+    "https://jsonplaceholder.typicode.com/posts/10",
+]
+
+async def fetch(session, url):
+    start_time = time.perf_counter()
+    try:
+        async with session.get(url) as response:
+            response.raise_for_status()
+            data = await response.json()
+            elapsed = time.perf_counter() - start_time
+            return {"url": url, "data": data, "elapsed": elapsed, 'error': None}
+    except aiohttp.TimeoutError:
+        elapsed = time.perf_counter() - start_time
+        return {"url": url, "data": None, "elapsed": elapsed, 'error': 'Timeout'}
+    except aiohttp.ClientError as e:
+        elapsed = time.perf_counter() - start_time
+        return {"url": url, "data": None, "elapsed": elapsed, 'error': str(e)}
+
+
+async def main():
+    connector = aiohttp.TCPConnector(limit=5)
+    timeout = aiohttp.ClientTimeout(total=5, connect=2)
+    
+    async with aiohttp.ClientSession(connector=connector, timeout=timeout) as session:
+        tasks = [asyncio.create_task(fetch(session, url)) for url in URLS]
+        results = await asyncio.gather(*tasks)
+
+    sucesses = [r for r in results if r['error'] is None]
+    errors = [r for r in results if r['error'] is not None]
+    
+    total_sucesses = len(sucesses)
+    total_errors = len(errors)
+    avg_time = sum(r['elapsed'] for r in sucesses) / total_sucesses if total_sucesses > 0 else 0
+
+    with open('results.json', 'w', encoding='utf-8') as f:
+        json.dump([r['data'] for r in sucesses], f, indent=4, ensure_ascii=False)
+
+    print(f"Успешных запросов: {total_sucesses}")
+    print(f"Ошибок: {total_errors}")
+    print(f"Среднее время отклика: {avg_time:.2f} секунд")
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
