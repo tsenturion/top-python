@@ -15,4 +15,4 @@ async def divide(a, b):
 
 
 async def insert_user(conn, name):
-    await conn.execute("INSERT INTO users (name) VALUES ($1)", name)
+    await conn.execute("INSERT INTO users (username) VALUES ($1)", name)
