@@ -252,3 +252,51 @@ async def main():
     finally:
         await pool.close()
         print("\nПул соединений закрыт.")
+
+"""
+async with conn.transaction():
+
+begin
+commit
+rollback
+"""
+
+async def main():
+    conn = await asyncpg.connect(
+        user="postgres",
+        database="postgres",
+        host="localhost",
+        password="admin"
+    )
+
+    async with conn.transaction():
+        await conn.execute("INSERT INTO students (name, age) VALUES ($1, $2);", 'Алиса', 20)
+        await conn.execute("INSERT INTO students (name, age) VALUES ($1, $2);", 'Боб', 22)
+
+    print("Тестовые данные добавлены.")
+    await conn.close()
+
+#asyncio.run(main())
+
+"""
+tr = conn.transaction()
+await tr.start()
+try:
+    await conn.execute("INSERT INTO students (name, age) VALUES ($1, $2);", 'Алиса', 20)
+    await conn.execute("INSERT INTO students (name, age) VALUES ($1, $2);", 'Боб', 22)
+    await tr.commit()
+    print("Тестовые данные добавлены.")
+
+except Exception as e:
+    await tr.rollback()
+    print(f"Ошибка при добавлении данных: {e}")
+"""
+
+# batch = """
+# INSERT INTO students (name, age) VALUES ("Алиса", 20);
+# INSERT INTO students (name, age) VALUES ("Боб", 22);
+# INSERT INTO students (name, age) VALUES ("Елена", 19);
+# """
+
+# await conn.execute(batch)
+# print("Тестовые данные добавлены одним батчем.")
