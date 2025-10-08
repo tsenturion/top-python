@@ -1,6 +1,18 @@
 import asyncio
 import asyncpg
+import pytest
+from unittest.mock import AsyncMock, patch
 
+
+async def fetch_data():
+    return [5, 15, 25, 3]
+
+async def process_data():
+    try:
+        data = await fetch_data()
+        return [x for x in data if x > 10]
+    except TimeoutError:
+        return []
 
 async def add_with_delay(a, b, delay=0.5):
     await asyncio.sleep(delay)
