@@ -49,9 +49,10 @@ async def pool():
         await conn.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,
-            username TEXT NOT NULL                           
+            name TEXT NOT NULL                           
         )
         """)
+        await conn.execute("TRUNCATE users")
               
     yield p
     await p.close()
@@ -59,11 +60,27 @@ async def pool():
 @pytest.mark.asyncio
 async def test_insert_user(pool):
     async with pool.acquire() as conn:
-        await conn.execute("TRUNCATE users")       
         await insert_user(pool, "John Doe")
-        result = await conn.fetch("SELECT id FROM users WHERE username = $1", "John Doe")
-    assert len(result) == 1
+        result = await conn.fetch("SELECT * FROM users WHERE name = $1", "John Doe")
+        assert len(result) == 1
+        assert 'John Doe' in result[0]["name"]
 
+
+@pytest.mark.asyncio
+async def test_multiple_inserts(pool):
+    async with pool.acquire() as conn:
+        await insert_user(conn, "John Doe")
+        await insert_user(conn, "Jane Doe2")
+        await insert_user(conn, "Jane Doe3")
+        result = await conn.fetch("SELECT * FROM users")
+        assert len(result) == 3
+
+
+@pytest.mark.asyncio
+async def test_insert_empty_name(pool):
+    async with pool.acquire() as conn:
+        with pytest.raises(asyncpg.exceptions.NotNullViolationError):
+            await insert_user(conn, None)
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("a, b, expected", [
