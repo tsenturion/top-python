@@ -427,6 +427,23 @@ make_sound(dog)
 
 # Полиморфизм избавляет от этого.
 
+"""if type(animal) == Cat:
+    animal.bark()
+
+elif type(animal) == Dog:
+    animal.meow()
+    
+animal.speak()  # Полиморфный вызов
+
+if type(obj) == A:
+    ...
+    
+elif type(obj) == B:
+    ...
+    
+
+
+"""
 
 
 # =============================================================================
@@ -536,6 +553,19 @@ for animal in animals:
 # Можно добавлять новые классы,
 # почти не меняя существующий код.
 
+class EmailNotification:
+    def send(self):
+        print("Отправка email")
+        
+        
+class SmsNotification:
+    def send(self):
+        print("Отправка SMS")
+        
+
+def process_notification(notification):
+    notification.send()
+
 
 
 # =============================================================================
@@ -577,6 +607,9 @@ cow.speak()
 
 print(10 + 5)
 print("a" + "b")
+
+# __add__ для чисел выполняет сложение,
+# а для строк — конкатенацию.
 
 # Один оператор +
 # работает по-разному.
@@ -760,6 +793,21 @@ class Door:
         print("Дверь открыта")
 
 
+class CardPayment:
+    def pay(self):
+        print("Оплата картой")
+
+
+class PayPalPayment:
+    def pay(self):
+        print("Оплата через PayPal")
+        
+        
+class CryproPayment:
+    def pay(self):
+        print("Оплата криптовалютой")
+
+
 
 # =============================================================================
 # SECTION 57. ОДИН ИНТЕРФЕЙС OPEN
@@ -841,6 +889,17 @@ process_notification(email)
 process_notification(sms)
 
 # Это очень распространенный паттерн.
+
+def process_payment(payment_method):
+    payment_method.pay()
+    
+card = CardPayment()
+paypal = PayPalPayment()
+crypto = CryproPayment()
+
+process_payment(card)
+process_payment(paypal)
+process_payment(crypto)
 
 
 
@@ -935,6 +994,24 @@ process_notification(sms)
 
 # Это характерный для Python подход.
 
+class Bird:
+    def fly(self):
+        print("Птица летит")
+
+
+class Airplane:
+    def fly(self):
+        print("Самолет летит")
+
+
+def make_fly(thing):
+    thing.fly()
+    
+bird = Bird()
+plane = Airplane()
+
+make_fly(bird)
+make_fly(plane)    
 
 
 # =============================================================================
@@ -995,6 +1072,24 @@ print(True)
 # Переопределение методов —
 # центральный механизм полиморфизма.
 
+class Animal:
+    def speak(self):
+        print("Животное издает звук")
+
+
+class Cat(Animal):
+    def speak(self):
+        print("Мяу")
+        
+        
+class Dog(Animal):
+    def speak(self):
+        print("Гав")
+
+animals = [Cat(), Dog()]
+
+for animal in animals:
+    animal.speak()
 
 
 # =============================================================================
