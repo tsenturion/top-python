@@ -246,6 +246,68 @@ truck.start_engine()
 # Метод определен один раз,
 # но используется в нескольких классах.
 
+class Animal:
+    def eat(self):
+        print("Животное ест")
+        
+        
+class Dog(Animal):
+    def bark(self):
+        print("Собака лает")
+        
+        
+class Cat(Animal):
+    def meow(self):
+        print("Кошка мяукает")
+        
+
+dog = Dog()
+cat = Cat()
+
+dog.eat()
+dog.bark()
+cat.eat()
+cat.meow()
+
+
+class Employee:
+
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary
+
+    def show_info(self):
+        print(f"Имя: {self.name}, Зарплата: {self.salary}")
+        
+
+class Manager(Employee):
+    
+    def __init__(self, name, salary, language):
+        super().__init__(name, salary)
+        self.language = language
+
+    def manage(self):
+        print(f"{self.name} управляет командой")
+
+manager = Manager("Ivan", 100000, "Python")
+manager.show_info()
+manager.manage()
+
+
+class Flyable:
+    def fly(self):
+        print("Полет")
+        
+class Swimmable:
+    def swim(self):
+        print("Плавание")
+        
+class Duck(Flyable, Swimmable):
+    pass
+
+duck = Duck()
+duck.fly()
+duck.swim()
 
 
 # =============================================================================
@@ -592,7 +654,7 @@ print(isinstance(dog, LivingBeing))
 
 # В Python все классы наследуются от object.
 
-class Example:
+class Example(object):
     pass
 
 
@@ -601,7 +663,6 @@ example = Example()
 print(isinstance(example, object))
 
 # object — корень всей системы классов Python.
-
 
 
 # =============================================================================
