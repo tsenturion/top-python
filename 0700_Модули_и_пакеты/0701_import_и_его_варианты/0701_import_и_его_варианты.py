@@ -5,6 +5,7 @@
 import math
 #from math import *
 from math import pi
+import sys
 
 import numpy as np
 import pandas as pd
@@ -19,3 +20,6 @@ if __name__ == '__main__':
     print(pi)
     print(np.pi)
     tools.hello()   
+    
+    
+print(sys.path)
