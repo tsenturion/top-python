@@ -53,6 +53,7 @@
 - https://education.yandex.ru/handbook/python
 - https://stepik.org/catalog/131?free=true
 - https://education.yandex.ru/handbook/algorithms
+- https://karpov.courses/#Free
 - https://leetcode.com/
 - https://chromewebstore.google.com/detail/leetcode-to-russian/omcekcjkhekdifemjbknfbijiabbjhmm?hl=ru&pli=1
 - https://yandex.cloud/ru/training/training-pro
