@@ -59,6 +59,7 @@
 - https://yandex.cloud/ru/training/training-pro
 - https://stepik.org/course/209514/syllabus
 - https://leetcode.com/studyplan/top-interview-150/
+- https://github.com/justxor/pythonroamap2026
 
 ---
 
