@@ -65,6 +65,7 @@
 
 ## Полезные инструменты
 
+- https://llmgame.scalex.dev/
 - https://app.diagrams.net/
 - https://miro.com/
 - https://mermaid.js.org/
