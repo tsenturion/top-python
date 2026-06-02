@@ -66,6 +66,7 @@
 ## Полезные инструменты
 
 - https://llmgame.scalex.dev/
+- https://nodatanogrowth.com/test-tasks
 - https://app.diagrams.net/
 - https://miro.com/
 - https://mermaid.js.org/
