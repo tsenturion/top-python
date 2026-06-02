@@ -66,7 +66,7 @@
 ## Полезные инструменты
 
 - https://llmgame.scalex.dev/
-- https://nodatanogrowth.com/test-tasks
+- https://nodatanogrowth.com/test-tasks https://ai-uchi.ru/news/igra-permission-fatigue-ai-agenty/
 - https://app.diagrams.net/
 - https://miro.com/
 - https://mermaid.js.org/
