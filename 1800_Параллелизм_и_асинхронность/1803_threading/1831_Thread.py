@@ -48,3 +48,15 @@ for thread in threads:
     thread.join()
 
 print("Главный поток завершен")
+
+counter = 0
+
+def worker():
+    global counter
+    for _ in range(100000):
+        counter += 1
+        
+thread = threading.Thread(target=worker)
+thread.start()
+thread.join()
+print(f"Значение счетчика: {counter}")
