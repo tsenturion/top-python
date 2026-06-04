@@ -1,5 +1,6 @@
 """
 1303_Protocol_и_Generic
+https://docs.python.org/3/library/typing.html#protocols
 """
 
 def process(stream):
