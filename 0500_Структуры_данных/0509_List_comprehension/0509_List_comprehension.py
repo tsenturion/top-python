@@ -3,6 +3,10 @@
 """
 # [выражение for элемент in итератор]
 # [выражение for элемент in итератор if условие]
+type BookInfo = dict[str, str | int | float | list[str]]
+
+type Books = list[BookInfo]
+
 def filter_books_by_rating(
     books: Books,
     min_rating: float
@@ -60,3 +64,32 @@ def find_books_by_author(
 #     return result
 
 
+squares_old = []
+for x in range(10):
+    if x % 2 == 0:
+        squares_old.append(x * x)
+        
+sqares_new = [
+    x * x 
+    for x in range(10) 
+    if x % 2 == 0
+]
+
+print(squares_old)
+print(sqares_new)        
+
+pairs_old = []
+for x in range(3):
+    for y in range(3):
+        if x != y:
+            pairs_old.append((x, y))
+            
+pairs_new = [
+    (x, y)
+    for x in range(3)
+    for y in range(3)
+    if x != y
+]
+
+print(pairs_old)
+print(pairs_new)
